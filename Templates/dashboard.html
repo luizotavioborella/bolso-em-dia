@@ -16,13 +16,15 @@
             {% endfor %}
         {% endwith %}
 
-        <h1>Olá, {{ usuario }}!</h1>
-        <p>Bem-vindo(a) ao Bolso em Dia.</p>
+        <div class="saudacao">
+            <h1>Olá, {{ usuario }}!</h1>
+            <p>Bem-vindo(a) ao Bolso em Dia.</p>
+        </div>
 
-        <nav>
-            <a href="{{ url_for('perfil') }}">Meu perfil</a>
-            <a href="{{ url_for('logout') }}">Sair</a>
-        </nav>
+        <div class="botoes-dashboard">
+            <a href="{{ url_for('perfil') }}" class="botao botao-verde">Meu perfil</a>
+            <a href="{{ url_for('logout') }}" class="botao botao-vermelho">Sair</a>
+        </div>
     </main>
 </body>
 </html>

@@ -80,6 +80,29 @@ main {
     margin-bottom: 14px;
 }
 
+.requisitos {
+    text-align: left;
+    color: var(--cinza-escuro);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+#req-especial, #req-numero, #req-minuscula, #req-maiuscula, #req-caracteres {
+    text-align: left;
+    color: var(--cinza-escuro);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+#req-especial{
+    margin-bottom: 14px;
+}
+
+.cumprido{
+    text-decoration: line-through;
+}
+
 form {
     display: flex;
     flex-direction: column;

@@ -327,3 +327,26 @@ button {
     font-size: 13px;
     font-weight: 600;
 }
+
+
+/* BOTÕES DA DASHBOARD */
+
+.botoes-dashboard {
+    display: flex;
+    justify-content: left;
+    gap: 15px;
+    margin: 25px;
+}
+
+.botoes-dashboard .botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.saudacao{
+    margin: 25px;
+}

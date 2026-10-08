@@ -9,6 +9,7 @@ import fdb
 # diferente da forma ensinada em sala de aula, porém o grupo se adaptou melhor
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 # cria a aplicação do Flask
 app = Flask(__name__)
 
@@ -17,7 +18,7 @@ app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 # define as informações necessárias para acessar o banco de dados
 host = "localhost"  # indica que o banco está no próprio computador
-database = r"C:\Users\Aluno\Downloads\BOLSO_EM_DIA\BOLSO_EM_DIA\BANCO.FDB"  # caminho do arquivo do banco
+database = r"D:\Desktop\BOLSO_EM_DIA\BANCO.FDB"  # caminho do arquivo do banco
 user = "sysdba"  # usuário utilizado para acessar o banco Firebird
 password = "sysdba"  # senha do usuário do banco
 
@@ -76,13 +77,10 @@ def validar_senha(senha):
         validacao = False
         return validacao
 
+
 @app.route('/') # rota responsável por carregar a página inicial
 def index():
     return render_template('index.html')
-
-@app.route('/final_cadastro') # rota responsável por carregar a tela da última etapa do cadastro
-def final_cadastro():
-    return render_template('final_cadastro.html')
 
 @app.route('/pagina_cadastro') # rota responsável por carregar a tela da primeira etapa do cadastro
 def pagina_cadastro():
@@ -213,7 +211,7 @@ def cadastrar_informacoes():
         session.pop('cadastro', None)
 
         # após o registro de todos os dados, redirecionamos o usuário para a página final do processo de cadastro
-        return redirect(url_for('final_cadastro'))
+        return render_template('final_cadastro.html')
 
     # caso o sistema não consiga realizar o código de try por algum erro, except será executado para mostrar o erro e redirecionar para alguma página
     except Exception as e:
@@ -453,6 +451,7 @@ def editar_usuario():
             adicional = request.form['adicional']
             min_pacotes = request.form['min_pacotes']
 
+
             # verifica se e-mail, telefone ou CPF já pertencem a outro usuário (<> id -> diferente do id do usuário que está editando)
             cursor.execute("""SELECT 1 FROM USUARIO WHERE (upper(EMAIL) = ? OR TELEFONE = ? OR CPF = ?) AND ID_USUARIO <> ? """, (email.upper(), telefone, cpf, id_usuario))
 
@@ -483,9 +482,6 @@ def editar_usuario():
                     # a senha nova é criptografada
                     senha_cripto = generate_password_hash(senha_nova)
 
-                    # e inserida no historico de senhas, para que as próximas não sejam iguais a ela
-                    cursor.execute("""INSERT INTO HISTORICO_SENHA (ID_USUARIO, SENHA) VALUES (?, ?)""", (id_usuario, senha_cripto,))
-
                 # caso a senha não seja validada (False)
                 else:
                     # flash mostra uma mensagem de alerta e a página é reiniciada
@@ -497,8 +493,11 @@ def editar_usuario():
                 senha_cripto = usuario[5]
 
             # agora, atualizamos todos os dados do usuário no banco de dados
-            cursor.execute("""UPDATE USUARIO SET NOME_COMPLETO = ?, EMAIL = ?, DATA_NASCIMENTO = ?, TELEFONE = ?, CPF = ?, SENHA = ?, VALOR_DIARIA = ?, ADICIONAL = ?, MIN_PACOTES = ?
-                           WHERE ID_USUARIO = ?""", (nome, email, data_nasc, telefone, cpf, senha_cripto, valor_diaria, adicional, min_pacotes, id_usuario,))
+            cursor.execute("""UPDATE USUARIO SET NOME_COMPLETO = ?, EMAIL = ?, DATA_NASCIMENTO = ?, TELEFONE = ?, CPF = ?, SENHA = ?, VALOR_DIARIA = ?, ADICIONAL = ?, MIN_PACOTES = ? WHERE ID_USUARIO = ?""",(nome, email, data_nasc, telefone, cpf, senha_cripto, valor_diaria, adicional, min_pacotes, id_usuario,))
+
+            # registra a nova senha no histórico somente quando ela foi alterada
+            if senha_nova:
+                cursor.execute("""INSERT INTO HISTORICO_SENHA (ID_USUARIO, SENHA) VALUES (?, ?)""",(id_usuario, senha_cripto,))
 
             # con.commit é utilizado para salvar alguma alteração realizada no banco
             con.commit()
@@ -511,10 +510,11 @@ def editar_usuario():
         else:
             return render_template("editar.html", usuario=usuario)
 
-    # caso o sistema não consiga realizar o código de try por algum erro, except será executado para mostrar o erro e redirecionar para alguma página
+# caso o sistema não consiga realizar o código de try por algum erro, except será executado para mostrar o erro e redirecionar para alguma página
     except Exception as e:
-        flash(f"Ocorreu um erro: {e}", "error")
         con.rollback()
+        print("ERRO AO EDITAR USUÁRIO:", repr(e))
+        flash(f"Ocorreu um erro: {e}", "error")
         return redirect(url_for('dashboard'))
 
     # ao final do tratamento, devemos fechar o cursor
