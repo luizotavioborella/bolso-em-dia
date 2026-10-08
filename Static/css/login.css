@@ -1,0 +1,134 @@
+body {
+    min-height: 100vh;
+    background-image: url("../Uploads/fundo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 85px 18px 40px;
+}
+
+.login {
+    width: 430px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza);
+    border-radius: 19px;
+    padding: 24px 26px 22px;
+    text-align: center;
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.12);
+}
+
+.logo {
+    width: 175px;
+    margin: 0 auto 7px;
+}
+
+.login h1 {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.descricao {
+    color: var(--cinza-escuro);
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 20px;
+}
+
+.login form {
+    width: 100%;
+}
+
+.login .campo {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--cinza);
+    border-radius: 10px;
+    padding: 0 13px;
+    margin-bottom: 9px;
+    background-color: var(--branco);
+}
+
+.login .campo img {
+    width: 21px;
+    height: 21px;
+    object-fit: contain;
+    margin-right: 12px;
+}
+
+.login .campo input {
+    width: 100%;
+    border: none;
+    outline: none;
+    color: var(--cinza-escuro);
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.login .campo input::placeholder {
+    color: var(--cinza-escuro);
+}
+
+.entrar {
+    width: 100%;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 11px;
+    border: none;
+    border-radius: 9px;
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.entrar img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.cadastrar {
+    margin-top: 13px;
+    font-size: 12px;
+}
+
+.cadastrar strong {
+    color: var(--azul-cinzento-escuro);
+}
+
+.cadastrar a {
+    color: var(--verde-escuro);
+    font-weight: 700;
+}
+
+@media (max-width: 500px) {
+    body {
+        padding-top: 45px;
+    }
+
+    .login {
+        width: 100%;
+        max-width: 410px;
+        padding: 22px 18px 20px;
+    }
+
+    .logo {
+        width: 155px;
+    }
+
+    .login h1 {
+        font-size: 27px;
+    }
+
+    .descricao {
+        font-size: 13px;
+    }
+}

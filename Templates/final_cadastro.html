@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro concluído</title>
+    <link rel="icon" href="{{ url_for('static', filename='uploads/logo-escuro.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="pagina-concluida">
+        <div class="passos">
+            <img src="static/uploads/passo3.png" alt="Etapas do cadastro">
+            <div class="textos-passos">
+                <p class="texto1">Criar conta</p>
+                <p class="texto2">Adicionar informações</p>
+                <p class="texto3">Cadastro concluído</p>
+            </div>
+        </div>
+
+        <div class="cadastro-concluido">
+            <img class="check-sucesso" src="static/uploads/check.png" alt="Cadastro concluído">
+            <h1>Cadastro concluído com sucesso!</h1>
+            <a class="ir-login" href="{{ url_for('pagina_login') }}">Ir para Login</a>
+        </div>
+    </main>
+</body>
+</html>

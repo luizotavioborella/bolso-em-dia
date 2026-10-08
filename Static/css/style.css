@@ -1,0 +1,369 @@
+body {
+    background-image: url("../Uploads/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 38px;
+    padding-bottom: 35px;
+}
+
+.passos {
+    width: 430px;
+    max-width: 90%;
+    margin-bottom: 17px;
+}
+
+.passos img {
+    width: 100%;
+}
+
+.textos-passos {
+    position: relative;
+    height: 25px;
+    margin-top: 6px;
+}
+
+.textos-passos p {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    color: var(--verde-escuro);
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.texto1 {
+    left: 6%;
+}
+
+.texto2 {
+    left: 50%;
+}
+
+.texto3 {
+    left: 94%;
+}
+
+.container {
+    width: 460px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza);
+    border-radius: 18px;
+    padding: 16px 23px 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.13);
+}
+
+.logo {
+    width: 160px;
+    margin: 0 auto 4px;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 31px;
+    margin-bottom: 3px;
+}
+
+.subtitulo {
+    text-align: center;
+    color: var(--cinza-escuro);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--cinza);
+    border-radius: 10px;
+    background-color: var(--branco);
+    margin-bottom: 7px;
+}
+
+.campo img {
+    width: 19px;
+    height: 19px;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+
+.campo input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 13px;
+    color: var(--cinza-mais-escuro);
+    padding-right: 13px;
+}
+
+.campo input::placeholder {
+    color: var(--cinza-mais-escuro);
+}
+
+.botoes {
+    display: flex;
+    margin-top: 6px;
+}
+
+.botoes button,
+.botoes .cancelar {
+    width: 50%;
+    height: 40px;
+    border: none;
+    border-radius: 9px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--branco);
+}
+
+.cancelar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--vermelho);
+    color: var(--branco);
+    margin-right: 4px;
+    text-decoration: none;
+}
+
+.continuar {
+    background-color: var(--verde-escuro);
+    margin-left: 4px;
+}
+
+.cancelar:hover,
+.continuar:hover,
+.cadastrar:hover {
+    opacity: 0.9;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="date"] {
+    appearance: none;
+}
+
+.container-informacoes {
+    width: 525px;
+    padding: 20px 27px 24px;
+}
+
+.container-informacoes .logo {
+    width: 170px;
+    margin-bottom: 9px;
+}
+
+.container-informacoes h1 {
+    font-size: 29px;
+    margin-bottom: 4px;
+}
+
+.container-informacoes .subtitulo {
+    margin-bottom: 22px;
+}
+
+.campo-info {
+    height: 46px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--cinza);
+    border-radius: 10px;
+    background-color: var(--branco);
+    margin-bottom: 13px;
+    overflow: hidden;
+}
+
+.icone-info {
+    width: 68px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cinza-claro);
+}
+
+.icone-info img {
+    width: 22px;
+    height: 22px;
+}
+
+.texto-icone {
+    color: var(--cinza-escuro);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.campo-info input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding-left: 14px;
+    padding-right: 11px;
+    font-size: 13px;
+    color: var(--cinza-mais-escuro);
+}
+
+.campo-info input::placeholder {
+    color: var(--cinza-escuro);
+}
+
+.botoes-info {
+    margin-top: 8px;
+}
+
+.voltar,
+.cadastrar {
+    width: 50%;
+    height: 42px;
+    border-radius: 9px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.voltar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--azul-cinzento-escuro);
+    background-color: var(--branco);
+    border: 1px solid var(--cinza);
+    margin-right: 4px;
+    text-decoration: none;
+}
+
+.cadastrar {
+    border: none;
+    color: var(--branco);
+    background-color: var(--verde-escuro);
+    margin-left: 4px;
+}
+
+.pagina-concluida {
+    padding-top: 40px;
+}
+
+.cadastro-concluido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 32px;
+}
+
+.check-sucesso {
+    width: 105px;
+    margin-bottom: 20px;
+}
+
+.cadastro-concluido h1 {
+    color: var(--verde-escuro);
+    font-size: 32px;
+    margin-bottom: 26px;
+}
+
+.ir-login {
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--azul-cinzento-escuro);
+    background-color: var(--branco);
+    border: 1px solid var(--cinza);
+    border-radius: 9px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.ir-login:hover,
+.voltar:hover {
+    opacity: 0.9;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    main {
+        padding-top: 25px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .passos {
+        width: 100%;
+        max-width: 430px;
+        margin-bottom: 14px;
+    }
+
+    .textos-passos p {
+        font-size: 9px;
+    }
+
+    .container,
+    .container-informacoes {
+        width: 100%;
+        max-width: 460px;
+        padding: 17px 15px;
+    }
+
+    .logo,
+    .container-informacoes .logo {
+        width: 145px;
+    }
+
+    .container h1,
+    .container-informacoes h1 {
+        font-size: 26px;
+    }
+
+    .subtitulo {
+        font-size: 11px;
+    }
+
+    .campo,
+    .campo-info {
+        height: 43px;
+    }
+
+    .campo input,
+    .campo-info input {
+        font-size: 12px;
+    }
+
+    .botoes,
+    .botoes-info {
+        flex-direction: column;
+    }
+
+    .botoes button,
+    .voltar,
+    .cadastrar {
+        width: 100%;
+        margin: 5px 0 0;
+    }
+
+    .cancelar {
+        order: 2;
+    }
+}

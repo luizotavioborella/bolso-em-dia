@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolso em dia</title>
+    <link rel="icon" href="{{ url_for('static', filename='uploads/logo-escuro.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+    <main class="login">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {%  for category, message in messages %}
+                        <div class="flash {{ category }}">{{  message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <img class="logo" src="static/uploads/logo.png" alt="Logo Bolso em Dia">
+
+        <h1>Fazer Login</h1>
+        <p class="descricao">Acesse sua conta para continuar cuidando<br> das suas finanças</p>
+
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="campo">
+                <img src="static/uploads/usuario.png" alt="Ícone de usuário">
+                <input id="email" type="text" name="login" placeholder="E-mail, telefone ou CPF" required>
+            </div>
+
+            <div class="campo">
+                <img src="static/uploads/cadeado.png" alt="Ícone de cadeado">
+                <input id="senha" type="password" name="senha" placeholder="Senha" required>
+            </div>
+
+            <button class="entrar" type="submit">
+                <span>Entrar</span>
+                <img src="static/uploads/seta-direita.png" alt="Ícone de seta">
+            </button>
+        </form>
+
+        <div class="cadastrar">
+            <strong>Não tem cadastro?</strong>
+            <a href="{{ url_for('pagina_cadastro') }}">Cadastre-se</a>
+        </div>
+
+    </main>
+
+</body>
+</html>
+
+</body>
+</html>

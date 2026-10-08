@@ -1,0 +1,1460 @@
+body {
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* BANNER */
+
+#banner {
+    position: relative;
+    min-height: 680px;
+    overflow: hidden;
+    background:
+        linear-gradient(270deg, rgba(0, 0, 0, 0.90) 20.56%, rgba(0, 46, 5, 0.90) 58.94%),
+        url("../Uploads/banner.png") center/cover no-repeat;
+    background-blend-mode: multiply;
+}
+
+#banner header {
+    position: relative;
+    z-index: 20;
+    width: 100%;
+    min-height: 100px;
+    padding: 14px 45px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-header {
+    margin-right: auto;
+}
+
+.logo-header img {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+}
+
+.logo-header:hover,
+.menu-desktop a:hover,
+.menu-mobile a:hover {
+    text-decoration: none;
+}
+
+.menu-desktop {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.menu-desktop > a {
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.menu-desktop .btn-login,
+.menu-desktop .btn-cadastro {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.menu-desktop .btn-login {
+    width: 125px;
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.menu-desktop .btn-cadastro {
+    width: 190px;
+    background-color: var(--branco);
+    color: var(--verde-escuro);
+}
+
+.menu-mobile {
+    display: none;
+}
+
+.hero {
+    min-height: 580px;
+}
+
+.hero h1 {
+    position: relative;
+    z-index: 3;
+    width: 330px;
+    margin: 38px 0 0 5%;
+    color: var(--branco);
+    font-size: 52px;
+    line-height: 1.26;
+    font-weight: 800;
+}
+
+.notebook {
+    position: absolute;
+    z-index: 2;
+    width: 760px;
+    right: 9%;
+    top: 100px;
+}
+
+.celular {
+    position: absolute;
+    z-index: 10;
+    width: 315px;
+    left: 65%;
+    top: 170px;
+}
+
+/* INÍCIO */
+
+#inicio {
+    padding: 60px 4%;
+    background-color: var(--verde-clarinho);
+}
+
+.quadro-inicio {
+    width: 100%;
+    max-width: 1180px;
+    min-height: 400px;
+    margin: 0 auto;
+    padding: 50px 35px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: var(--branco);
+    border: 1px solid rgba(0, 0, 0, 0.17);
+    border-radius: 20px;
+    box-shadow: 0 0 60px rgba(215, 217, 220, 0.45);
+}
+
+.quadro-inicio > h2 {
+    width: 30%;
+    color: var(--azul-cinzento-escuro);
+    font-size: 30px;
+    line-height: 1.25;
+    font-weight: 800;
+}
+
+.frase-tabela {
+    width: 70%;
+    max-width: 680px;
+}
+
+.frase-tabela > p {
+    margin-bottom: 22px;
+    color: var(--azul-cinzento-escuro);
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.tabela {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.titulo-mobile-tabela {
+    display: none;
+}
+
+.parte-superior,
+.linha-tabela {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+}
+
+.parte-superior {
+    background-color: var(--cinza-claro);
+}
+
+.linha-tabela {
+    position: relative;
+    background-color: var(--branco);
+    border-bottom: 1px solid var(--cinza-claro);
+}
+
+.linha-tabela:last-child {
+    border-bottom: none;
+}
+
+.parte-superior p,
+.linha-tabela .data,
+.linha-tabela .descricao-despesa,
+.linha-tabela .valor {
+    margin: 0;
+    color: var(--cinza-escuro);
+    font-size: 12px;
+}
+
+.parte-superior p {
+    font-weight: 600;
+}
+
+/* As larguras abaixo deixam a coluna alinhada sem esticar a etiqueta colorida. */
+.parte-superior p:nth-child(1),
+.linha-tabela .data {
+    width: 98px;
+    flex-shrink: 0;
+}
+
+.parte-superior p:nth-child(2) {
+    width: 132px;
+    flex-shrink: 0;
+}
+
+.linha-tabela .categoria {
+    width: 98px;
+    min-height: 26px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.parte-superior p:nth-child(3),
+.linha-tabela .descricao-despesa {
+    flex: 1;
+    min-width: 125px;
+}
+
+.parte-superior p:nth-child(4),
+.linha-tabela .valor {
+    width: 98px;
+    flex-shrink: 0;
+}
+
+.parte-superior p:nth-child(5),
+.linha-tabela .acoes {
+    width: 92px;
+    flex-shrink: 0;
+}
+
+.linha-tabela .valor {
+    color: var(--verde-medio);
+    font-weight: 700;
+}
+
+.categoria {
+    padding: 3px 7px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.categoria img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.alimentacao {
+    background-color: var(--verde-clarinho);
+    color: var(--verde-escuro);
+}
+
+.moradia {
+    background-color: var(--amarelo-claro);
+    color: var(--amarelo-escuro);
+}
+
+.lazer {
+    background-color: var(--roxo-clarinho);
+    color: var(--roxo);
+}
+
+.transporte {
+    background-color: var(--vermelho-clarinho);
+    color: var(--vermelho);
+}
+
+.outros {
+    background-color: var(--cinza-claro);
+    color: var(--cinza-mais-escuro);
+}
+
+.saude {
+    background-color: var(--rosa-clarinho);
+    color: var(--rosa);
+}
+
+.acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.acoes img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* COMO FUNCIONA */
+
+#como_funciona {
+    min-height: 320px;
+    padding: 24px 30px 55px;
+    background-color: var(--branco-acinzentado);
+}
+
+#como_funciona > h2 {
+    margin-bottom: 42px;
+    text-align: center;
+    font-size: 31px;
+    line-height: 38px;
+    font-weight: 800;
+}
+
+.passos-home {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.passo {
+    width: 265px;
+    height: 135px;
+    padding: 0 20px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--verde-escuro);
+    border-radius: 20px;
+}
+
+.passo span {
+    width: 66px;
+    height: 66px;
+    flex: 0 0 66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--branco);
+    border-radius: 50%;
+    color: var(--verde-escuro);
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.passo h3 {
+    color: var(--branco);
+    font-size: 15px;
+    line-height: 26px;
+    font-weight: 800;
+}
+
+/* POR QUÊ */
+
+#porque {
+    min-height: 820px;
+    background-color: var(--branco-acinzentado);
+}
+
+.escuro {
+    position: relative;
+    z-index: 1;
+    min-height: 450px;
+    padding: 25px 9%;
+    display: flex;
+    align-items: center;
+    background-color: var(--verde-escuro);
+    border-radius: 250px 0 0 0;
+}
+
+.conteudo-escuro {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    transform: translateY(-55px);
+}
+
+.conteudo-escuro h2,
+.conteudo-escuro p {
+    width: 50%;
+}
+
+.conteudo-escuro h2 {
+    color: var(--branco);
+    font-size: 52px;
+    line-height: 1.26;
+    font-weight: 800;
+}
+
+.conteudo-escuro p {
+    color: var(--verde-clarinho);
+    font-size: 31px;
+    line-height: 38px;
+}
+
+.claro {
+    position: relative;
+    z-index: 2;
+    min-height: 700px;
+    margin-top: -210px;
+    padding: 155px 8% 80px 54%;
+    overflow: hidden;
+    background-color: var(--verde);
+    border-radius: 0 250px 0 0;
+}
+
+.celulares-final {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.celular-cadastro {
+    position: absolute;
+    z-index: 3;
+    width: 400px;
+    left: 10px;
+    top: 60px;
+}
+
+.celular-dashboard {
+    position: absolute;
+    z-index: 2;
+    width: 400px;
+    left: 235px;
+    top: 115px;
+}
+
+.conteudo-claro {
+    position: relative;
+    z-index: 5;
+}
+
+.conteudo-claro h2 {
+    color: var(--branco);
+    font-size: 30px;
+    line-height: 50px;
+    font-weight: 800;
+}
+
+.conteudo-claro p {
+    max-width: 560px;
+    margin-top: 22px;
+    color: var(--verde-clarinho);
+    font-size: 15px;
+    line-height: 26px;
+}
+
+.btn-cadastro-final {
+    width: 270px;
+    height: 62px;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--verde-clarinho);
+    border-radius: 10px;
+    color: var(--verde-escuro);
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.btn-cadastro-final:hover {
+    text-decoration: none;
+    opacity: 0.92;
+}
+
+/* RODAPÉ */
+
+footer {
+    min-height: 160px;
+    padding: 25px 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--verde-clarinho);
+}
+
+.logo-rodape {
+    width: 250px;
+    margin: 0 auto;
+}
+
+.logo-frase p,
+.contatos p {
+    color: var(--azul-cinzento-escuro);
+}
+
+.logo-frase p {
+    text-align: center;
+    font-size: 12px;
+    line-height: 17px;
+}
+
+.contatos {
+    text-align: right;
+}
+
+.contatos strong {
+    color: var(--azul-cinzento-escuro);
+    font-size: 15px;
+}
+
+.contatos p {
+    font-size: 12px;
+    line-height: 17px;
+}
+
+/* TABLET - 768px até 1024px */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #banner {
+        min-height: 660px;
+        background-position: center center;
+    }
+
+    #banner header {
+        min-height: 88px;
+        padding: 10px 22px;
+    }
+
+    .logo-header img {
+        width: 74px;
+        height: 74px;
+    }
+
+    .menu-desktop {
+        gap: 12px;
+    }
+
+    .menu-desktop > a {
+        font-size: 12px;
+    }
+
+    .menu-desktop .btn-login,
+    .menu-desktop .btn-cadastro {
+        height: 42px;
+        font-size: 12px;
+    }
+
+    .menu-desktop .btn-login {
+        width: 92px;
+    }
+
+    .menu-desktop .btn-cadastro {
+        width: 132px;
+    }
+
+    .hero {
+        min-height: 500px;
+        position: relative;
+    }
+
+    .hero h1 {
+        width: 295px;
+        margin: 42px 0 0 5%;
+        font-size: 38px;
+        line-height: 1.2;
+    }
+
+    .notebook {
+        width: 315px;
+        top: 310px;
+        right: 18px;
+    }
+
+    .celular {
+        display: none;
+    }
+
+    #inicio {
+        padding: 50px 20px;
+    }
+
+    .quadro-inicio {
+        padding: 35px 24px;
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .quadro-inicio > h2,
+    .frase-tabela {
+        width: 100%;
+    }
+
+    .quadro-inicio > h2 {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .frase-tabela > p {
+        font-size: 15px;
+    }
+
+    .tabela {
+        max-width: 680px;
+    }
+
+    .parte-superior,
+    .linha-tabela {
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+
+    .parte-superior p,
+    .linha-tabela .data,
+    .linha-tabela .descricao-despesa,
+    .linha-tabela .valor {
+        font-size: 10px;
+    }
+
+    .parte-superior p:nth-child(1),
+    .linha-tabela .data {
+        width: 98px;
+    }
+
+    .parte-superior p:nth-child(2) {
+        width: 120px;
+    }
+
+    .linha-tabela .categoria {
+        width: 98px;
+        margin-right: 20px;
+    }
+
+    .parte-superior p:nth-child(4),
+    .linha-tabela .valor {
+        width: 95px;
+    }
+
+    .parte-superior p:nth-child(5),
+    .linha-tabela .acoes {
+        width: 70px;
+    }
+
+    .categoria {
+        font-size: 8px;
+        padding: 4px 7px;
+    }
+
+    .acoes {
+        gap: 12px;
+    }
+
+    .acoes img {
+        width: 18px;
+        height: 18px;
+    }
+
+    #como_funciona {
+        padding: 38px 24px 70px;
+    }
+
+    .passos-home {
+        flex-wrap: wrap;
+        gap: 22px;
+    }
+
+    .passo {
+        width: 45%;
+        max-width: 285px;
+    }
+
+    .escuro {
+        min-height: 500px;
+        padding: 70px 7%;
+        border-radius: 205px 0 0 0;
+    }
+
+    .conteudo-escuro {
+        transform: translateY(-25px);
+    }
+
+    .conteudo-escuro h2 {
+        font-size: 40px;
+    }
+
+    .conteudo-escuro p {
+        font-size: 18px;
+        line-height: 1.35;
+    }
+
+    .claro {
+        min-height: 620px;
+        margin-top: -155px;
+        padding: 130px 6% 60px 52%;
+        border-radius: 0 200px 0 0;
+    }
+
+    .celular-cadastro {
+        width: 330px;
+        left: -18px;
+        top: 105px;
+    }
+
+    .celular-dashboard {
+        width: 295px;
+        left: 160px;
+        top: 150px;
+    }
+
+    .conteudo-claro h2 {
+        font-size: 30px;
+        line-height: 1.2;
+    }
+
+    .conteudo-claro p {
+        font-size: 17px;
+        line-height: 1.4;
+    }
+
+    .btn-cadastro-final {
+        width: 270px;
+        height: 56px;
+        font-size: 15px;
+    }
+
+    footer {
+        min-height: 128px;
+    }
+
+    .logo-rodape {
+        width: 205px;
+    }
+}
+
+/* CELULAR - regras comuns para telas abaixo de 768px */
+
+@media (max-width: 767px) {
+    #banner {
+        min-height: 690px;
+        background-position: center center;
+    }
+
+    #banner header {
+        min-height: 80px;
+        padding: 11px 18px;
+    }
+
+    .logo-header img {
+        width: 46px;
+        height: 46px;
+    }
+
+    .menu-desktop {
+        display: none;
+    }
+
+    .menu-mobile {
+        display: block;
+        position: relative;
+    }
+
+    .menu-mobile summary {
+        width: 36px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        cursor: pointer;
+    }
+
+    .menu-mobile summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .menu-mobile summary img {
+        width: 36px;
+        height: auto;
+    }
+
+    .menu-mobile-conteudo {
+        width: 132px;
+        padding: 8px;
+        position: absolute;
+        top: 38px;
+        right: 0;
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background-color: var(--branco);
+        border: 1px solid var(--cinza);
+        border-radius: 5px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.20);
+    }
+
+    .menu-mobile-conteudo > a {
+        padding: 4px;
+        color: var(--azul-cinzento-escuro);
+        text-align: center;
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    .menu-mobile-conteudo .link-login-mobile {
+        margin: 3px 10px 0;
+        padding: 7px 5px;
+        background-color: var(--verde-escuro);
+        border-radius: 5px;
+        color: var(--branco);
+    }
+
+    .menu-mobile-conteudo .link-cadastro-mobile {
+        margin: 0 2px;
+        padding: 6px 5px;
+        border: 1px solid var(--verde-escuro);
+        border-radius: 5px;
+        color: var(--verde-escuro);
+    }
+
+    .hero {
+        min-height: 612px;
+    }
+
+    .hero h1 {
+        width: 295px;
+        max-width: calc(100% - 34px);
+        margin: 0 auto;
+        padding-top: 88px;
+        text-align: center;
+        font-size: 31px;
+        line-height: 1.18;
+    }
+
+    .notebook {
+        width: 300px;
+        top: 385px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .celular {
+        display: none;
+    }
+
+    #inicio {
+        padding: 40px 10px 45px;
+    }
+
+    .quadro-inicio {
+        width: 100%;
+        min-height: auto;
+        padding: 26px 5px 8px;
+        display: block;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .quadro-inicio > h2 {
+        width: 100%;
+        margin-bottom: 30px;
+        padding: 0 8px;
+        text-align: left;
+        font-size: 23px;
+        line-height: 1.15;
+    }
+
+    .frase-tabela {
+        width: 100%;
+    }
+
+    .frase-tabela > p {
+        margin-bottom: 22px;
+        padding: 0 8px;
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+    .tabela {
+        width: 100%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 0 10px 10px;
+        overflow: hidden;
+        background-color: var(--branco);
+        border: 1px solid var(--cinza);
+        border-radius: 12px;
+        box-shadow: 0 4px 7px rgba(0, 0, 0, 0.18);
+    }
+
+    .titulo-mobile-tabela {
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: none;
+    }
+
+    .titulo-mobile-tabela img {
+        width: 46px;
+        height: 46px;
+        padding: 10px;
+        background-color: var(--verde-clarinho);
+        border-radius: 12px;
+        object-fit: contain;
+    }
+
+    .titulo-mobile-tabela strong {
+        color: #000000;
+        font-size: 19px;
+        line-height: 1.1;
+    }
+
+    .parte-superior {
+        display: none;
+    }
+
+    .linha-tabela {
+        width: 100%;
+        min-height: 58px;
+        padding: 11px 7px 9px;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+        position: relative;
+        border-bottom: 1px solid var(--cinza-claro);
+    }
+
+    /* No protótipo mobile aparecem seis despesas. */
+    .linha-tabela:nth-child(n+9) {
+        display: none;
+    }
+
+    .linha-tabela .data {
+        width: 38%;
+        padding: 0;
+        flex-shrink: 0;
+        color: var(--cinza-escuro);
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .linha-tabela .descricao-despesa {
+        width: 39%;
+        min-width: 0;
+        padding: 0 4px;
+        color: var(--cinza-escuro);
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .linha-tabela .valor {
+        width: 23%;
+        padding: 0;
+        flex-shrink: 0;
+        color: var(--verde-medio);
+        text-align: right;
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    .linha-tabela .categoria {
+        width: auto;
+        min-height: 21px;
+        margin: 0;
+        padding: 2px 7px;
+        position: absolute;
+        left: 8px;
+        top: 38px;
+        font-size: 10px;
+        line-height: 14px;
+    }
+
+    .linha-tabela .categoria img {
+        width: 12px;
+        height: 12px;
+    }
+
+    .linha-tabela .acoes {
+        display: none;
+    }
+
+    #como_funciona {
+        padding: 45px 18px 115px;
+    }
+
+    #como_funciona > h2 {
+        margin-bottom: 30px;
+        text-align: left;
+        font-size: 25px;
+        line-height: 1.2;
+    }
+
+    .passos-home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+
+    .passo {
+        width: 100%;
+        max-width: 320px;
+        height: 135px;
+        padding: 15px;
+        gap: 12px;
+        border-radius: 13px;
+    }
+
+    .passo span {
+        width: 46px;
+        height: 46px;
+        flex-basis: 54px;
+        font-size: 25px;
+    }
+
+    .passo h3 {
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+    #porque {
+        min-height: auto;
+    }
+
+    .escuro {
+        min-height: 500px;
+        padding: 120px 20px 50px;
+        display: block;
+        border-radius: 165px 0 0 0;
+    }
+
+    .conteudo-escuro {
+        display: block;
+        transform: none;
+    }
+
+    .conteudo-escuro h2,
+    .conteudo-escuro p {
+        width: 100%;
+    }
+
+    .conteudo-escuro h2 {
+        max-width: 250px;
+        font-size: 29px;
+        line-height: 1.13;
+    }
+
+    .conteudo-escuro p {
+        max-width: 285px;
+        margin-top: 35px;
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .claro {
+        min-height: auto;
+        margin-top: 0;
+        padding: 145px 30px 0;
+        display: block;
+        border-radius: 0 165px 0 0;
+    }
+
+    .conteudo-claro {
+        width: 100%;
+    }
+
+    .conteudo-claro h2 {
+        max-width: 300px;
+        font-size: 30px;
+        line-height: 1.28;
+    }
+
+    .conteudo-claro p {
+        max-width: 300px;
+        margin-top: 24px;
+        font-size: 18px;
+        line-height: 1.32;
+    }
+
+    .btn-cadastro-final {
+        width: 100%;
+        max-width: 270px;
+        height: 62px;
+        margin-top: 35px;
+        font-size: 23px;
+        border-radius: 10px;
+    }
+
+    .celulares-final {
+        width: calc(100% + 60px);
+        height: 450px;
+        min-height: 0;
+        margin: 42px -30px 0;
+        position: relative;
+        left: auto;
+        top: auto;
+        bottom: auto;
+        overflow: hidden;
+    }
+
+    .celular-cadastro {
+        width: 330px;
+        left: -45px;
+        top: auto;
+        bottom: -40px;
+    }
+
+    .celular-dashboard {
+        width: 315px;
+        left: 28%;
+        top: auto;
+        bottom: -15px;
+    }
+
+    footer {
+        min-height: 180px;
+        padding: 24px 15px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 22px;
+        text-align: center;
+    }
+
+    .logo-rodape {
+        width: 115px;
+    }
+
+    .logo-frase p {
+        font-size: 8px;
+    }
+
+    .contatos {
+        text-align: center;
+    }
+
+    .contatos strong {
+        font-size: 8px;
+    }
+
+    .contatos p {
+        font-size: 8px;
+    }
+}
+
+/* MOBILE L - até 425px */
+
+@media (min-width: 376px) and (max-width: 425px) {
+    .logo-header img {
+        width: 64px;
+        height: 56px;
+    }
+
+    .menu-mobile summary {
+        width: 40px;
+        height: 36px;
+    }
+
+    .menu-mobile summary img {
+        width: 32px;
+    }
+
+    .hero h1 {
+        width: 330px;
+        padding-top: 88px;
+        font-size: 31px;
+    }
+
+    .notebook {
+        width: 305px;
+        top: 385px;
+    }
+
+    .titulo-mobile-tabela strong {
+        font-size: 19px;
+    }
+}
+
+/* MOBILE M - até 375px */
+
+@media (min-width: 321px) and (max-width: 375px) {
+    #banner header {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .logo-header img {
+        width: 46px;
+        height: 46px;
+    }
+
+    .menu-mobile summary {
+        width: 36px;
+        height: 36px;
+    }
+
+    .menu-mobile summary img {
+        width: 32px;
+    }
+
+    .hero h1 {
+        width: 295px;
+        padding-top: 92px;
+        font-size: 29px;
+    }
+
+    .notebook {
+        width: 285px;
+        top: 395px;
+    }
+
+    .titulo-mobile-tabela {
+        min-height: 76px;
+    }
+
+    .titulo-mobile-tabela img {
+        width: 46px;
+        height: 46px;
+        padding: 9px;
+    }
+
+    .titulo-mobile-tabela strong {
+        font-size: 19px;
+    }
+
+    .linha-tabela .data {
+        width: 37%;
+        font-size: 12px;
+    }
+
+    .linha-tabela .descricao-despesa {
+        width: 40%;
+        font-size: 12px;
+    }
+
+    .linha-tabela .valor {
+        width: 23%;
+        font-size: 12px;
+    }
+
+    .linha-tabela .categoria {
+        font-size: 8px;
+    }
+
+    .claro {
+        min-height: auto;
+        padding: 170px 28px 0;
+    }
+
+    .conteudo-claro h2 {
+        font-size: 31px;
+    }
+
+    .conteudo-claro p {
+        font-size: 17px;
+    }
+
+    .btn-cadastro-final {
+        height: 60px;
+        font-size: 19px;
+    }
+
+    .celulares-final {
+        width: calc(100% + 48px);
+        height: 430px;
+        margin: 38px -24px 0;
+    }
+
+    .celular-cadastro {
+        width: 315px;
+        left: -44px;
+        bottom: -38px;
+    }
+
+    .celular-dashboard {
+        width: 340px;
+        left: 26%;
+        bottom: -15px;
+    }
+}
+
+/* MOBILE S - até 320px */
+
+@media (max-width: 320px) {
+    #banner {
+        min-height: 650px;
+    }
+
+    #banner header {
+        min-height: 65px;
+        padding: 9px 12px;
+    }
+
+    .logo-header img {
+        width: 46px;
+        height: 46px;
+    }
+
+    .menu-mobile summary {
+        width: 34px;
+        height: 31px;
+    }
+
+    .menu-mobile summary img {
+        width: 32px;
+    }
+
+    .menu-mobile-conteudo {
+        width: 98px;
+    }
+
+    .hero h1 {
+        width: 270px;
+        padding-top: 82px;
+        font-size: 23px;
+    }
+
+    .notebook {
+        width: 255px;
+        top: 370px;
+    }
+
+    #inicio {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .quadro-inicio {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .quadro-inicio > h2 {
+        font-size: 23px;
+    }
+
+    .tabela {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    .titulo-mobile-tabela {
+        min-height: 70px;
+        gap: 8px;
+    }
+
+    .titulo-mobile-tabela img {
+        width: 46px;
+        height: 46px;
+        padding: 8px;
+    }
+
+    .titulo-mobile-tabela strong {
+        font-size: 17px;
+    }
+
+    .linha-tabela {
+        min-height: 60px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .linha-tabela .data {
+        width: 36%;
+        font-size: 10px;
+    }
+
+    .linha-tabela .descricao-despesa {
+        width: 41%;
+        font-size: 10px;
+    }
+
+    .linha-tabela .valor {
+        width: 23%;
+        font-size: 10px;
+    }
+
+    .linha-tabela .categoria {
+        left: 5px;
+        top: 40px;
+        padding: 2px 6px;
+        font-size: 8px;
+    }
+
+    .linha-tabela .categoria img {
+        width: 12px;
+        height: 12px;
+    }
+
+    #como_funciona {
+        padding-left: 10px;
+        padding-right: 15px;
+    }
+
+    #como_funciona > h2 {
+        font-size: 19px;
+    }
+
+    .passo {
+        height: 128px;
+    }
+
+    .passo h3 {
+        font-size: 15px;
+    }
+
+    .escuro {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .conteudo-escuro h2 {
+        font-size: 23px;
+    }
+
+    .claro {
+        min-height: auto;
+        padding: 130px 18px 0;
+    }
+
+    .conteudo-claro h2 {
+        font-size: 25px;
+    }
+
+    .conteudo-claro p {
+        font-size: 15px;
+    }
+
+    .btn-cadastro-final {
+        height: 58px;
+        margin-top: 30px;
+        font-size: 19px;
+    }
+
+    .celulares-final {
+        width: calc(100% + 36px);
+        height: 400px;
+        margin: 34px -18px 0;
+    }
+
+    .celular-cadastro {
+        width: 295px;
+        left: -42px;
+        bottom: -34px;
+    }
+
+    .celular-dashboard {
+        width: 315px;
+        left: 24%;
+        bottom: -16px;
+    }
+}

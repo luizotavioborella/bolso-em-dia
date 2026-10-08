@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início | Bolso em Dia</title>
+    <link rel="icon" href="{{ url_for('static', filename='uploads/logo-escuro.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+</head>
+<body>
+    <main>
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% for categoria, mensagem in mensagens %}
+                <p class="mensagem {{ categoria }}">{{ mensagem }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <h1>Olá, {{ usuario }}!</h1>
+        <p>Bem-vindo(a) ao Bolso em Dia.</p>
+
+        <nav>
+            <a href="{{ url_for('perfil') }}">Meu perfil</a>
+            <a href="{{ url_for('logout') }}">Sair</a>
+        </nav>
+    </main>
+</body>
+</html>
