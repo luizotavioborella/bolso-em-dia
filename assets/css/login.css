@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Sora, Helvetica, sans-serif;
+}
+
+:root {
+    --cor-cinza: #BBBBBB;
+    --cor-verde-escuro: #1A5947;
+    --cor-cinza-escuro: #6D6D6D;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url("../img/fundo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 115px;
+}
+
+.login {
+    width: 326px;
+    background-color: white;
+    border: 1px solid var(--cor-cinza);
+    border-radius: 18px;
+    padding: 14px 17px 15px;
+    text-align: center;
+}
+
+.logo {
+    width: 125px;
+    height: auto;
+    margin-bottom: 2px;
+}
+
+h1 {
+    font-size: 22px;
+    color: #222222;
+    margin-bottom: 2px;
+}
+
+.descricao {
+    color: var(--cor-cinza);
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 14px;
+}
+
+form {
+    width: 100%;
+}
+
+.campo {
+    width: 100%;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--cor-cinza);
+    border-radius: 8px;
+    padding: 0 9px;
+    margin-bottom: 5px;
+}
+
+.campo img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    margin-right: 9px;
+}
+
+.campo input {
+    width: 100%;
+    border: none;
+    outline: none;
+    color: var(--cor-cinza-escuro);
+    font-size: 10px;
+}
+
+.campo input::placeholder {
+    color: var(--cor-cinza-escuro);
+}
+
+.entrar {
+    width: 100%;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 7px;
+    border: none;
+    border-radius: 7px;
+    background-color: var(--cor-verde-escuro);
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.entrar img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+}
+
+.cadastrar {
+    margin-top: 7px;
+    font-size: 9px;
+}
+
+.cadastrar strong {
+    color: #333333;
+}
+
+.cadastrar a {
+    color: var(--cor-verde-escuro);
+    font-weight: bold;
+}
+
+@media (max-width: 500px) {
+
+    body {
+        padding-top: 50px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .login {
+        width: 100%;
+        max-width: 326px;
+    }
+}
