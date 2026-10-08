@@ -1,1 +1,0 @@
-# Bolso-em-Dia
