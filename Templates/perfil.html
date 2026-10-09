@@ -11,6 +11,9 @@
 <body>
     <div class="pagina-perfil">
         <aside class="menu-lateral">
+            <!-- criamos um link para voltar à página de dashboard -->
+            <!-- a seta será exibida somente em dispositivos móveis -->
+            <a href="{{ url_for('dashboard') }}" class="seta-voltar">‹</a>
             <img class="logo-perfil" src="static/uploads/logo-horizontal.png" alt="Bolso em Dia">
 
             <nav class="navegacao-perfil">

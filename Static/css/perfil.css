@@ -328,6 +328,10 @@ body {
     text-decoration: none;
 }
 
+.seta-voltar {
+    display: none;
+}
+
 /* TABLET - 768px até 1024px */
 @media (min-width: 767px) and (max-width: 1024px) {
     .menu-lateral {
@@ -467,14 +471,17 @@ body {
         background-color: var(--branco);
     }
 
-    .menu-lateral::before {
-        content: "‹";
+    .seta-voltar {
+        display: block;
         position: absolute;
         left: 18px;
         top: 28px;
+
         color: var(--azul-cinzento-escuro);
         font-size: 34px;
         line-height: 1;
+        text-decoration: none;
+        z-index: 10;
     }
 
     .logo-perfil {
@@ -698,7 +705,7 @@ body {
         padding: 19px 20px 8px 55px;
     }
 
-    .menu-lateral::before {
+    .seta-voltar {
         left: 20px;
         top: 30px;
     }
@@ -742,7 +749,7 @@ body {
         padding: 17px 16px 7px 49px;
     }
 
-    .menu-lateral::before {
+    .seta-voltar {
         left: 16px;
         top: 27px;
         font-size: 32px;
@@ -811,7 +818,7 @@ body {
         padding: 15px 12px 6px 43px;
     }
 
-    .menu-lateral::before {
+    .seta-voltar {
         left: 12px;
         top: 24px;
         font-size: 30px;
