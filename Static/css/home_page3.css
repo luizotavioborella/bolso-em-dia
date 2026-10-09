@@ -525,7 +525,7 @@ footer {
 
 /* TABLET - 768px até 1024px */
 
-@media (min-width: 767px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     #porque {
         background: linear-gradient(
             to bottom,
@@ -573,25 +573,20 @@ footer {
 
     .hero {
         min-height: 500px;
-        padding: 20px 4%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
+        position: relative;
     }
 
     .hero h1 {
-        width: 42%;
-        margin: 0;
+        width: 295px;
+        margin: 42px 0 0 5%;
         font-size: 38px;
         line-height: 1.2;
     }
 
     .notebook {
-        position: static;
-        width: 52%;
-        max-width: 470px;
-        transform: none;
+        width: 315px;
+        top: 310px;
+        right: 18px;
     }
 
     .celular {
@@ -713,38 +708,20 @@ footer {
     .claro {
         min-height: 620px;
         margin-top: -155px;
-        padding: 100px 5% 55px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 35px;
+        padding: 130px 6% 60px 52%;
         border-radius: 0 200px 0 0;
     }
 
-    .celulares-final {
-        width: 47%;
-        height: 430px;
-        position: relative;
-        inset: auto;
-        flex-shrink: 0;
-    }
-
     .celular-cadastro {
-        width: 255px;
-        left: 0;
-        top: 15px;
+        width: 330px;
+        left: -18px;
+        top: 105px;
     }
 
     .celular-dashboard {
-        width: 225px;
-        left: 42%;
-        top: 95px;
-    }
-
-    .conteudo-claro {
-        width: 47%;
-        position: relative;
-        z-index: 5;
+        width: 295px;
+        left: 160px;
+        top: 150px;
     }
 
     .conteudo-claro h2 {
@@ -753,15 +730,13 @@ footer {
     }
 
     .conteudo-claro p {
-        margin-top: 20px;
-        font-size: 16px;
+        font-size: 17px;
         line-height: 1.4;
     }
 
     .btn-cadastro-final {
         width: 270px;
         height: 56px;
-        margin-top: 28px;
         font-size: 15px;
     }
 
@@ -776,7 +751,7 @@ footer {
 
 /* CELULAR - regras comuns para telas abaixo de 768px */
 
-@media (max-width: 766px) {
+@media (max-width: 767px) {
     #porque {
         background: linear-gradient(
             to bottom,
@@ -1109,27 +1084,23 @@ footer {
     .claro {
         min-height: auto;
         margin-top: 0;
-        padding: 105px 24px 45px;
+        padding: 145px 30px 0;
         display: block;
         border-radius: 0 165px 0 0;
     }
 
     .conteudo-claro {
         width: 100%;
-        max-width: none;
-        margin: 0;
     }
 
     .conteudo-claro h2 {
-        width: 100%;
-        max-width: none;
+        max-width: 300px;
         font-size: 30px;
         line-height: 1.28;
     }
 
     .conteudo-claro p {
-        width: 100%;
-        max-width: none;
+        max-width: 300px;
         margin-top: 24px;
         font-size: 18px;
         line-height: 1.32;
@@ -1137,19 +1108,18 @@ footer {
 
     .btn-cadastro-final {
         width: 100%;
-        max-width: 335px;
-        height: 58px;
-        margin: 10px auto 0;
-        font-size: 21px;
+        max-width: 270px;
+        height: 62px;
+        margin-top: 35px;
+        font-size: 23px;
         border-radius: 10px;
     }
 
     .celulares-final {
-        width: 100%;
-        max-width: 360px;
-        height: 310px;
+        width: calc(100% + 60px);
+        height: 450px;
         min-height: 0;
-        margin: 24px auto 0;
+        margin: 42px -30px 0;
         position: relative;
         left: auto;
         top: auto;
@@ -1158,19 +1128,17 @@ footer {
     }
 
     .celular-cadastro {
-        width: 230px;
-        left: 50%;
+        width: 330px;
+        left: -45px;
         top: auto;
-        bottom: -18px;
-        transform: translateX(-79%);
+        bottom: -40px;
     }
 
     .celular-dashboard {
-        width: 240px;
-        left: 50%;
+        width: 315px;
+        left: 28%;
         top: auto;
-        bottom: -10px;
-        transform: translateX(-19%);
+        bottom: -15px;
     }
 
     footer {
@@ -1205,7 +1173,7 @@ footer {
 
 /* MOBILE L - até 425px */
 
-@media (min-width: 375px) and (max-width: 426px) {
+@media (min-width: 376px) and (max-width: 425px) {
     .logo-header img {
         width: 64px;
         height: 56px;
@@ -1234,57 +1202,11 @@ footer {
     .titulo-mobile-tabela strong {
         font-size: 19px;
     }
-
-    .claro {
-        padding-top: 100px;
-    }
-
-    .conteudo-claro {
-        max-width: 340px;
-    }
-
-    .btn-cadastro-final {
-        margin-top: 10px;
-    }
-
-    .celulares-final {
-        max-width: 370px;
-        height: 320px;
-        margin-top: 24px;
-    }
-
-    .celular-cadastro {
-        width: 240px;
-        left: 50%;
-        transform: translateX(-78%);
-    }
-
-    .celular-dashboard {
-        width: 250px;
-        left: 50%;
-        transform: translateX(-20%);
-    }
-
-    .linha-tabela {
-        min-height: 66px;
-        padding: 10px 7px 12px;
-    }
-
-    .linha-tabela .categoria {
-        top: auto;
-        bottom: 8px;
-    }
-
-    .escuro {
-        min-height: 410px;
-        padding: 100px 20px 35px;
-    }
-
 }
 
 /* MOBILE M - até 375px */
 
-@media (min-width: 320px) and (max-width: 374px) {
+@media (min-width: 321px) and (max-width: 375px) {
     #banner header {
         padding-left: 18px;
         padding-right: 18px;
@@ -1350,52 +1272,44 @@ footer {
 
     .claro {
         min-height: auto;
-        padding: 92px 20px 38px;
-    }
-
-    .conteudo-claro {
-        max-width: 300px;
+        padding: 170px 28px 0;
     }
 
     .conteudo-claro h2 {
-        font-size: 29px;
+        font-size: 31px;
     }
 
     .conteudo-claro p {
-        font-size: 16px;
+        font-size: 17px;
     }
 
     .btn-cadastro-final {
-        height: 54px;
-        margin: 8px auto 0;
-        font-size: 18px;
+        height: 60px;
+        font-size: 19px;
     }
 
     .celulares-final {
-        width: 100%;
-        max-width: 330px;
-        height: 285px;
-        margin: 22px auto 0;
+        width: calc(100% + 48px);
+        height: 430px;
+        margin: 38px -24px 0;
     }
 
     .celular-cadastro {
-        width: 210px;
-        left: 50%;
-        bottom: -16px;
-        transform: translateX(-78%);
+        width: 315px;
+        left: -44px;
+        bottom: -38px;
     }
 
     .celular-dashboard {
-        width: 225px;
-        left: 50%;
-        bottom: -9px;
-        transform: translateX(-20%);
+        width: 340px;
+        left: 26%;
+        bottom: -15px;
     }
 }
 
 /* MOBILE S - até 320px */
 
-@media (max-width: 321px) {
+@media (max-width: 320px) {
     #banner {
         min-height: 650px;
     }
@@ -1469,30 +1383,29 @@ footer {
     }
 
     .linha-tabela {
-        min-height: 66px;
-        padding: 8px 5px 12px;
+        min-height: 60px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .linha-tabela .data {
-        width: 34%;
+        width: 36%;
         font-size: 10px;
     }
 
     .linha-tabela .descricao-despesa {
-        width: 38%;
+        width: 41%;
         font-size: 10px;
     }
 
     .linha-tabela .valor {
-        width: 28%;
+        width: 23%;
         font-size: 10px;
-        white-space: nowrap;
     }
 
     .linha-tabela .categoria {
         left: 5px;
-        top: auto;
-        bottom: 7px;
+        top: 40px;
         padding: 2px 6px;
         font-size: 8px;
     }
@@ -1520,8 +1433,8 @@ footer {
     }
 
     .escuro {
-        min-height: 360px;
-        padding: 95px 18px 30px;
+        padding-left: 18px;
+        padding-right: 18px;
     }
 
     .conteudo-escuro h2 {
@@ -1530,63 +1443,38 @@ footer {
 
     .claro {
         min-height: auto;
-        padding: 88px 15px 34px;
+        padding: 130px 18px 0;
     }
 
-    .conteudo-claro {
-        width: 100%;
-        max-width: 280px;
-        margin: 0 auto;
+    .conteudo-claro h2 {
+        font-size: 25px;
     }
 
-    .celulares-final {
-        width: 100%;
-        max-width: 280px;
-        height: 255px;
-        margin: 20px auto 0;
-        position: relative;
-    }
-
-    .celular-cadastro {
-        width: 180px;
-        left: 0;
-        bottom: -14px;
-        transform: none;
-    }
-
-    .celular-dashboard {
-        width: 190px;
-        left: auto;
-        right: 0;
-        bottom: -8px;
-        transform: none;
+    .conteudo-claro p {
+        font-size: 15px;
     }
 
     .btn-cadastro-final {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+        height: 58px;
+        margin-top: 30px;
+        font-size: 19px;
     }
 
     .celulares-final {
-        width: 100%;
-        max-width: 295px;
-        height: 255px;
-        margin: 20px auto 0;
+        width: calc(100% + 36px);
+        height: 400px;
+        margin: 34px -18px 0;
     }
 
     .celular-cadastro {
-        width: 190px;
-        left: 50%;
-        bottom: -14px;
-        transform: translateX(-78%);
+        width: 295px;
+        left: -42px;
+        bottom: -34px;
     }
 
     .celular-dashboard {
-        width: 205px;
-        left: 50%;
-        bottom: -8px;
-        transform: translateX(-20%);
+        width: 315px;
+        left: 24%;
+        bottom: -16px;
     }
 }
-

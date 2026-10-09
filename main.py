@@ -29,7 +29,7 @@ app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 # define as informações necessárias para acessar o banco de dados
 host = "localhost"  # indica que o banco está no próprio computador
-database = r"D:\Desktop\BOLSO_EM_DIA\BANCO.FDB"  # caminho do arquivo do banco
+database = os.path.join(os.path.dirname(os.path.abspath(__file__)), "BANCO.FDB")  # banco ao lado do main.py
 user = "sysdba"  # usuário utilizado para acessar o banco Firebird
 password = "sysdba"  # senha do usuário do banco
 
@@ -563,7 +563,7 @@ def editar_usuario():
 
         # caso o usuário não utilize o metodo post (não tente editar as informações), a rota apenas carrega a página normalmente
         else:
-            return render_template("editar_perfil.html", usuario=usuario)
+            return render_template("editar.html", usuario=usuario)
 
 # caso o sistema não consiga realizar o código de try por algum erro, except será executado para mostrar o erro e redirecionar para alguma página
     except Exception as e:

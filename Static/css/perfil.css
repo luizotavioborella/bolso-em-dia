@@ -328,14 +328,15 @@ body {
     text-decoration: none;
 }
 
-@media (max-width: 1050px) {
+/* TABLET - 768px até 1024px */
+@media (min-width: 767px) and (max-width: 1024px) {
     .menu-lateral {
         width: 210px;
         padding: 22px 18px;
     }
 
     .logo-perfil {
-        width: 160px;
+        width: 155px;
         margin-bottom: 28px;
     }
 
@@ -346,13 +347,13 @@ body {
     .navegacao-perfil a,
     .sair-perfil {
         gap: 12px;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .navegacao-perfil a img,
     .sair-perfil img {
-        width: 24px;
-        height: 24px;
+        width: 23px;
+        height: 23px;
     }
 
     .conteudo-perfil {
@@ -360,161 +361,53 @@ body {
         padding: 14px 16px 20px;
     }
 
-    .dados-principais {
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .foto-perfil {
-        width: 120px;
-        flex-basis: 120px;
-    }
-
-    .foto-perfil img {
-        width: 115px;
-        height: 112px;
-    }
-
-    .configuracoes-perfil {
-        flex-wrap: wrap;
-        gap: 14px;
-    }
-
-    .configuracao {
-        width: calc(50% - 7px);
-    }
-
-    .configuracao label,
-    .configuracao h2 {
-        font-size: 15px;
-    }
-
-    .botoes-perfil button,
-    .botoes-perfil a {
-        width: 185px;
-    }
-}
-
-@media (max-width: 700px) {
-    .pagina-perfil {
-        flex-direction: column;
-    }
-
-    .menu-lateral {
-        width: 100%;
-        min-height: auto;
-        padding: 12px 14px;
-        border-right: none;
-        border-bottom: 1px solid var(--cinza-claro);
-    }
-
-    .logo-perfil {
-        width: 135px;
-        margin: 0 auto 12px;
-    }
-
-    .navegacao-perfil {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 7px 12px;
-    }
-
-    .navegacao-perfil a {
-        min-height: 29px;
-        gap: 6px;
-        font-size: 11px;
-    }
-
-    .navegacao-perfil a img {
-        width: 19px;
-        height: 19px;
-    }
-
-    .sair-perfil {
-        width: 70px;
-        min-height: 29px;
-        margin: 9px auto 0;
-        padding-top: 9px;
-        justify-content: center;
-        gap: 6px;
-        font-size: 11px;
-    }
-
-    .sair-perfil img {
-        width: 19px;
-        height: 19px;
-    }
-
-    .conteudo-perfil {
-        width: 100%;
-        padding: 10px 10px 18px;
-    }
-
     .topo-perfil {
-        height: 45px;
-    }
-
-    .usuario-logado {
-        margin-right: 2px;
+        height: 48px;
     }
 
     .usuario-logado img {
-        width: 31px;
-        height: 31px;
+        width: 32px;
+        height: 32px;
     }
 
     .usuario-logado strong {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .usuario-logado span {
-        font-size: 9px;
-    }
-
-    .titulo-perfil {
-        padding: 11px 3px 7px;
-    }
-
-    .titulo-perfil p {
-        font-size: 13px;
+        font-size: 10px;
     }
 
     .titulo-perfil h1 {
-        font-size: 26px;
+        font-size: 29px;
     }
 
     .card-perfil {
-        padding: 15px 11px;
+        padding: 18px 16px;
     }
 
     .dados-principais {
-        flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 18px;
     }
 
     .foto-perfil {
-        width: 115px;
-        flex-basis: auto;
+        width: 112px;
+        flex-basis: 112px;
     }
 
     .foto-perfil img {
-        width: 110px;
-        height: 108px;
-    }
-
-    .foto-perfil a {
-        font-size: 13px;
+        width: 108px;
+        height: 105px;
     }
 
     .configuracoes-perfil {
-        flex-direction: column;
-        gap: 11px;
+        flex-wrap: wrap;
+        gap: 13px;
     }
 
     .configuracao {
-        width: 100%;
+        width: calc(50% - 7px);
     }
 
     .configuracao label,
@@ -527,15 +420,218 @@ body {
         height: 47px;
     }
 
-    .campo-configuracao > span {
-        width: 54px;
-        flex-basis: 54px;
+    .campo-configuracao input,
+    .campo-configuracao p {
         font-size: 14px;
+    }
+
+    .campo-perfil {
+        height: 48px;
+    }
+
+    .campo-perfil input,
+    .campo-perfil p {
+        font-size: 14px;
+    }
+
+    .botoes-perfil button,
+    .botoes-perfil a {
+        width: 175px;
+        height: 47px;
+        font-size: 13px;
+    }
+}
+
+/* CELULAR - base */
+@media (max-width: 766px) {
+    body {
+        background-color: var(--branco);
+        overflow-x: hidden;
+    }
+
+    .pagina-perfil {
+        min-height: 100vh;
+        display: block;
+        background-color: var(--branco);
+    }
+
+    /* usa a própria sidebar existente como cabeçalho mobile */
+    .menu-lateral {
+        width: 100%;
+        min-height: 92px;
+        padding: 18px 18px 8px 52px;
+        display: block;
+        position: relative;
+        border-right: none;
+        border-bottom: none;
+        background-color: var(--branco);
+    }
+
+    .menu-lateral::before {
+        content: "‹";
+        position: absolute;
+        left: 18px;
+        top: 28px;
+        color: var(--azul-cinzento-escuro);
+        font-size: 34px;
+        line-height: 1;
+    }
+
+    .logo-perfil {
+        width: 120px;
+        margin: 0;
+    }
+
+    .navegacao-perfil,
+    .sair-perfil {
+        display: none;
+    }
+
+    .conteudo-perfil {
+        width: 100%;
+        min-height: auto;
+        padding: 0 18px 28px;
+        position: relative;
+        background-color: var(--branco);
+    }
+
+    /* avatar do usuário no canto superior direito */
+    .topo-perfil {
+        width: 42px;
+        height: 42px;
+        position: absolute;
+        top: -73px;
+        right: 18px;
+        display: block;
+        z-index: 5;
+    }
+
+    .usuario-logado {
+        width: 42px;
+        height: 42px;
+        margin: 0;
+        display: block;
+    }
+
+    .usuario-logado img {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+        display: none;
+    }
+
+    .usuario-logado div {
+        display: none;
+    }
+
+    .linha-topo {
+        display: none;
+    }
+
+    .titulo-perfil {
+        min-height: 72px;
+        padding: 4px 2px 8px;
+        position: relative;
+    }
+
+    .titulo-perfil p {
+        color: var(--cinza-escuro);
+        font-size: 13px;
+        line-height: 17px;
+    }
+
+    .titulo-perfil h1 {
+        margin-top: 0;
+        font-size: 28px;
+        line-height: 31px;
+    }
+
+    .card-perfil {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 12px 8px 14px;
+        position: relative;
+        border-radius: 10px;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.12);
+    }
+
+    .flash-messages {
+        max-width: 100%;
+    }
+
+    .dados-principais {
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    /* FOTO DO USUÁRIO - mantém a que já existe no HTML */
+    .foto-perfil {
+        width: 88px;
+        height: 88px;
+        position: absolute;
+        top: -96px;
+        right: 14px;
+        z-index: 4;
+        text-align: center;
+    }
+
+    .foto-perfil img {
+        width: 88px;
+        height: 88px;
+        margin: 0;
+        object-fit: cover;
+    }
+
+    .foto-perfil input {
+        width: 88px;
+        height: 88px;
+    }
+
+    .foto-perfil a {
+        display: none;
+    }
+
+    .configuracoes-perfil {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .configuracao {
+        width: 100%;
+        margin-bottom: 6px;
+    }
+
+    .configuracao label,
+    .configuracao h2 {
+        margin-bottom: 3px;
+        font-size: 16px;
+        line-height: 19px;
+        white-space: normal;
+    }
+
+    .campo-configuracao {
+        height: 38px;
+        border-radius: 7px;
+    }
+
+    .campo-configuracao > span {
+        width: 47px;
+        flex: 0 0 47px;
+        font-size: 13px;
+    }
+
+    .campo-configuracao .icone-pacote img {
+        width: 24px;
+        height: 24px;
     }
 
     .campo-configuracao input,
     .campo-configuracao p {
-        font-size: 14px;
+        padding: 0 9px;
+        font-size: 13px;
     }
 
     .dados-perfil {
@@ -543,30 +639,281 @@ body {
     }
 
     .campo-perfil {
-        height: 48px;
+        height: 33px;
+        border-radius: 6px;
     }
 
     .campo-perfil img {
-        width: 24px;
-        height: 24px;
-        margin-left: 10px;
+        width: 22px;
+        height: 22px;
+        margin-left: 9px;
         margin-right: 10px;
     }
 
     .campo-perfil input,
     .campo-perfil p {
-        font-size: 13px;
+        min-width: 0;
+        padding-right: 9px;
+        font-size: 12px;
     }
 
     .botoes-perfil {
+        margin-top: 31px;
+        display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 12px;
     }
 
     .botoes-perfil button,
     .botoes-perfil a {
         width: 100%;
-        height: 47px;
+        height: 37px;
+        border-radius: 7px;
+        font-size: 12px;
+    }
+
+    /* Perfil normal: verde primeiro, vermelho depois */
+    .botao-editar {
+        order: 1;
+    }
+
+    .botao-excluir {
+        order: 2;
+    }
+
+    /* Edição: salvar primeiro, descartar depois */
+    .botao-salvar {
+        order: 1;
+    }
+
+    .botao-descartar {
+        order: 2;
+    }
+}
+
+/* MOBILE L - 376px até 425px */
+@media (min-width: 375px) and (max-width: 424px) {
+    .menu-lateral {
+        min-height: 96px;
+        padding: 19px 20px 8px 55px;
+    }
+
+    .menu-lateral::before {
+        left: 20px;
+        top: 30px;
+    }
+
+    .usuario-logado {
+        display: none;
+    }
+
+    .logo-perfil {
+        width: 126px;
+    }
+
+    .conteudo-perfil {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .topo-perfil {
+        top: -76px;
+        right: 20px;
+    }
+
+    .foto-perfil {
+        width: 92px;
+        height: 92px;
+        top: -100px;
+        right: 14px;
+    }
+
+    .foto-perfil img,
+    .foto-perfil input {
+        width: 92px;
+        height: 92px;
+    }
+}
+
+/* MOBILE M - 321px até 375px */
+@media (min-width: 320px) and (max-width: 374px) {
+    .menu-lateral {
+        min-height: 90px;
+        padding: 17px 16px 7px 49px;
+    }
+
+    .menu-lateral::before {
+        left: 16px;
+        top: 27px;
+        font-size: 32px;
+    }
+
+    .logo-perfil {
+        width: 116px;
+    }
+
+    .conteudo-perfil {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .topo-perfil {
+        top: -71px;
+        right: 15px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .usuario-logado,
+    .usuario-logado img {
+        width: 38px;
+        height: 38px;
+        display: none;
+    }
+
+    .titulo-perfil h1 {
+        font-size: 27px;
+    }
+
+    .foto-perfil {
+        width: 82px;
+        height: 82px;
+        top: -91px;
+        right: 11px;
+    }
+
+    .foto-perfil img,
+    .foto-perfil input {
+        width: 82px;
+        height: 82px;
+    }
+
+    .configuracao label,
+    .configuracao h2 {
+        font-size: 15px;
+    }
+
+    .campo-configuracao input,
+    .campo-configuracao p {
+        font-size: 12px;
+    }
+
+    .campo-perfil input,
+    .campo-perfil p {
+        font-size: 11px;
+    }
+}
+
+/* MOBILE S - até 320px */
+@media (max-width: 319px) {
+    .menu-lateral {
+        min-height: 84px;
+        padding: 15px 12px 6px 43px;
+    }
+
+    .menu-lateral::before {
+        left: 12px;
+        top: 24px;
+        font-size: 30px;
+    }
+
+    .logo-perfil {
+        width: 106px;
+    }
+
+    .conteudo-perfil {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    .topo-perfil {
+        top: -66px;
+        right: 11px;
+        width: 34px;
+        height: 34px;
+    }
+
+    .usuario-logado,
+    .usuario-logado img {
+        width: 34px;
+        height: 34px;
+        display: none;
+    }
+
+    .titulo-perfil {
+        min-height: 64px;
+    }
+
+    .titulo-perfil p {
+        font-size: 12px;
+    }
+
+    .titulo-perfil h1 {
+        font-size: 24px;
+        line-height: 27px;
+    }
+
+    .card-perfil {
+        padding: 10px 7px 12px;
+    }
+
+    .foto-perfil {
+        width: 74px;
+        height: 74px;
+        top: -82px;
+        right: 8px;
+    }
+
+    .foto-perfil img,
+    .foto-perfil input {
+        width: 74px;
+        height: 74px;
+    }
+
+    .configuracao label,
+    .configuracao h2 {
         font-size: 14px;
+    }
+
+    .campo-configuracao {
+        height: 36px;
+    }
+
+    .campo-configuracao > span {
+        width: 43px;
+        flex-basis: 43px;
+        font-size: 12px;
+    }
+
+    .campo-configuracao input,
+    .campo-configuracao p {
+        font-size: 11px;
+    }
+
+    .campo-perfil {
+        height: 31px;
+    }
+
+    .campo-perfil img {
+        width: 20px;
+        height: 20px;
+        margin-left: 7px;
+        margin-right: 8px;
+    }
+
+    .campo-perfil input,
+    .campo-perfil p {
+        font-size: 10px;
+    }
+
+    .botoes-perfil {
+        margin-top: 26px;
+        gap: 10px;
+    }
+
+    .botoes-perfil button,
+    .botoes-perfil a {
+        height: 35px;
+        font-size: 11px;
     }
 }

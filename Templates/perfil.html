@@ -61,15 +61,10 @@
                 <div></div>
 
                 <div class="usuario-logado">
-                    <!-- verificamos se o usuário possui uma foto de perfil cadastrada no banco -->
                     {% if usuario[8] %}
-
-                        <!-- se existir uma foto cadastrada, mostramos a imagem do usuário no canto superior direito -->
                         <img src="{{ url_for('static', filename='Uploads/' + usuario[8]) }}" alt="Foto do usuário">
                     {% else %}
-
-                        <!-- caso não exista uma foto cadastrada, continuamos mostrando o ícone padrão do sistema -->
-                        <img src="{{ url_for('static', filename='uploads/perfil-usuario-topo.png') }}" alt="Foto padrão">
+                        <img src="{{ url_for('static', filename='Uploads/perfil-usuario-topo.png') }}" alt="Foto padrão">
                     {% endif %}
                     <div>
                         <!-- Exibe somente os dois primeiros nomes do usuário -->
@@ -100,18 +95,11 @@
 
                 <div class="dados-principais">
                     <div class="foto-perfil">
-
-                        <!-- verificamos se o usuário possui uma foto cadastrada no banco -->
                         {% if usuario[8] %}
-
-                            <!-- se existir uma foto cadastrada, mostramos a imagem escolhida pelo usuário -->
                             <img src="{{ url_for('static', filename='Uploads/' + usuario[8]) }}" alt="Foto de perfil">
                         {% else %}
-
-                            <!-- caso não exista uma foto cadastrada, mostramos a imagem padrão do sistema -->
                             <img src="{{ url_for('static', filename='Uploads/perfil-foto.png') }}" alt="Foto de perfil">
                         {% endif %}
-
                     </div>
 
                     <div class="configuracoes-perfil">

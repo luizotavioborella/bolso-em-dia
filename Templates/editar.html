@@ -7,6 +7,7 @@
     <link rel="icon" href="{{ url_for('static', filename='uploads/logo-escuro.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+    <script src="{{ url_for('static', filename='js/alteracao_foto.js') }}" defer></script>
 </head>
 <body>
     <div class="pagina-perfil">
@@ -61,9 +62,14 @@
                 <div></div>
 
                 <div class="usuario-logado">
-                    <img src="static/uploads/perfil-usuario-topo.png" alt="">
+                    {% if usuario[9] %}
+                        <img src="{{ url_for('static', filename='Uploads/' + usuario[9]) }}" alt="Foto do usuário">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='Uploads/perfil-usuario-topo.png') }}" alt="Foto padrão">
+                    {% endif %}
                     <div>
-                        <strong>{{ usuario[0] }}</strong>
+                        <!-- Exibe somente os dois primeiros nomes do usuário -->
+                        <strong>{{ usuario[0].split()[:2] | join(' ') }}</strong>
                         <span>{{ usuario[1] }}</span>
                     </div>
                 </div>
@@ -72,7 +78,8 @@
             <div class="linha-topo"></div>
 
             <section class="titulo-perfil">
-                <p>Olá, {{ usuario[0] }}</p>
+                <!-- Exibe somente os dois primeiros nomes do usuário -->
+                <p>Olá, {{ usuario[0].split()[:2] | join(' ') }}!</p>
                 <h1>Seu Perfil</h1>
             </section>
 
@@ -87,11 +94,17 @@
                     {% endif %}
                 {% endwith %}
 
-                <form action="{{ url_for('editar_usuario') }}" method="POST" >
+                <form action="{{ url_for('editar_usuario') }}" method="POST" enctype="multipart/form-data">
                     <div class="dados-principais">
                         <div class="foto-perfil">
-                            <input type="file" name="foto" accept=".jpg" />
-                            <img src="static/uploads/perfil-foto.png" alt="Foto de perfil">
+                            <input type="file" name="foto" accept=".jpg,.jpeg,.png,.webp" onchange="mostrarFoto(this)">
+
+                            {% if usuario[9] %}
+                                <img id="imagem-perfil" src="{{ url_for('static', filename='Uploads/' + usuario[9]) }}" alt="Foto de perfil">
+                            {% else %}
+                                <img id="imagem-perfil" src="{{ url_for('static', filename='Uploads/perfil-foto.png') }}" alt="Foto de perfil">
+                            {% endif %}
+
                             <a href="#">Editar foto</a>
                         </div>
 

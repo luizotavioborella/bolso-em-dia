@@ -149,32 +149,34 @@ form {
 .botoes .cancelar {
     width: 50%;
     height: 40px;
-    border: none;
     border-radius: 9px;
     font-size: 16px;
     font-weight: 700;
-    color: var(--branco);
 }
 
 .cancelar {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--vermelho);
-    color: var(--branco);
     margin-right: 4px;
-    text-decoration: none;
+    background-color: var(--branco);
+    color: #000000;
+    border: 1px solid var(--cinza);
+    border-radius: 8px;
 }
 
 .continuar {
-    background-color: var(--verde-escuro);
     margin-left: 4px;
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    border: none;
 }
 
 .cancelar:hover,
 .continuar:hover,
 .cadastrar:hover {
     opacity: 0.9;
+    text-decoration: none
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -388,5 +390,510 @@ input[type="date"] {
 
     .cancelar {
         order: 2;
+    }
+}
+
+/* TABLET - 767px até 1023px */
+@media (min-width: 767px) and (max-width: 1024px) {
+    main {
+        padding-top: 45px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 45px;
+    }
+
+    .passos {
+        width: 430px;
+        max-width: 90%;
+        margin-bottom: 18px;
+    }
+
+    .textos-passos {
+        margin-top: 6px;
+    }
+
+    .textos-passos p {
+        font-size: 11px;
+    }
+
+    .container {
+        width: 460px;
+        padding: 18px 28px 25px;
+        border-radius: 17px;
+    }
+
+    .logo {
+        width: 180px;
+        margin-bottom: 5px;
+    }
+
+    .container h1 {
+        font-size: 31px;
+        margin-bottom: 3px;
+    }
+
+    .subtitulo {
+        width: 300px;
+        margin: 0 auto 16px;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .campo {
+        height: 42px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+
+    .campo img {
+        width: 22px;
+        height: 22px;
+        margin-left: 13px;
+        margin-right: 14px;
+    }
+
+    .campo input {
+        font-size: 14px;
+    }
+
+    .requisitos {
+        margin-top: 4px;
+        margin-bottom: 3px;
+        font-size: 11px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial,
+    #req-numero,
+    #req-minuscula,
+    #req-maiuscula,
+    #req-caracteres {
+        font-size: 10px;
+        line-height: 14px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial {
+        margin-bottom: 12px;
+    }
+
+    .botoes {
+        display: flex;
+        flex-direction: column;
+        margin-top: 7px;
+    }
+
+    .botoes .continuar {
+        width: 100%;
+        height: 43px;
+        margin: 0;
+        order: 1;
+    }
+
+    .botoes .cancelar {
+        width: 100%;
+        height: 43px;
+        margin: 10px 0 0;
+        order: 2;
+        background-color: var(--branco);
+        color: #000000;
+        border: 1px solid var(--cinza);
+        border-radius: 8px;
+    }
+}
+
+/* MOBILE L - 375px até 424px */
+@media (min-width: 375px) and (max-width: 426px) {
+    main {
+        padding: 28px 20px 35px;
+    }
+
+    .passos {
+        width: 340px;
+        max-width: 100%;
+        margin-bottom: 14px;
+    }
+
+    .textos-passos {
+        height: 23px;
+        margin-top: 5px;
+    }
+
+    .textos-passos p {
+        font-size: 9px;
+    }
+
+    .container:not(.container-informacoes) {
+        width: 100%;
+        max-width: 366px;
+        padding: 14px 18px 20px;
+        border-radius: 16px;
+    }
+
+    .container:not(.container-informacoes) .logo {
+        width: 175px;
+        margin-bottom: 4px;
+    }
+
+    .container:not(.container-informacoes) h1 {
+        font-size: 30px;
+        margin-bottom: 2px;
+    }
+
+    .container:not(.container-informacoes) .subtitulo {
+        width: 270px;
+        max-width: 100%;
+        margin: 0 auto 14px;
+        font-size: 11px;
+        line-height: 15px;
+    }
+
+    .container:not(.container-informacoes) .campo {
+        height: 40px;
+        margin-bottom: 9px;
+        border-radius: 8px;
+    }
+
+    .container:not(.container-informacoes) .campo img {
+        width: 21px;
+        height: 21px;
+        margin-left: 12px;
+        margin-right: 13px;
+    }
+
+    .container:not(.container-informacoes) .campo input {
+        font-size: 13px;
+    }
+
+    .requisitos {
+        margin: 4px 0 3px;
+        font-size: 10px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial,
+    #req-numero,
+    #req-minuscula,
+    #req-maiuscula,
+    #req-caracteres {
+        font-size: 9px;
+        line-height: 13px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial {
+        margin-bottom: 12px;
+    }
+
+    .container:not(.container-informacoes) .botoes {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+    }
+
+    .container:not(.container-informacoes) .botoes .continuar {
+        width: 100%;
+        height: 42px;
+        margin: 0;
+        order: 1;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+
+    .container:not(.container-informacoes) .botoes .cancelar {
+        width: 100%;
+        height: 42px;
+        margin: 10px 0 0;
+        order: 2;
+        background-color: var(--branco);
+        color: #000000;
+        border: 1px solid var(--cinza);
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+}
+
+/* MOBILE M - 320px até 374px */
+@media (min-width: 321px) and (max-width: 376px) {
+    main {
+        padding: 24px 14px 32px;
+    }
+
+    .passos {
+        width: 310px;
+        max-width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .textos-passos {
+        height: 22px;
+        margin-top: 5px;
+    }
+
+    .textos-passos p {
+        font-size: 8px;
+    }
+
+    .container:not(.container-informacoes) {
+        width: 100%;
+        max-width: 342px;
+        padding: 13px 14px 18px;
+        border-radius: 15px;
+    }
+
+    .container:not(.container-informacoes) .logo {
+        width: 160px;
+        margin-bottom: 3px;
+    }
+
+    .container:not(.container-informacoes) h1 {
+        font-size: 27px;
+        margin-bottom: 2px;
+    }
+
+    .container:not(.container-informacoes) .subtitulo {
+        width: 250px;
+        max-width: 100%;
+        margin: 0 auto 13px;
+        font-size: 10px;
+        line-height: 14px;
+    }
+
+    .container:not(.container-informacoes) .campo {
+        height: 39px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+    }
+
+    .container:not(.container-informacoes) .campo img {
+        width: 20px;
+        height: 20px;
+        margin-left: 11px;
+        margin-right: 12px;
+    }
+
+    .container:not(.container-informacoes) .campo input {
+        font-size: 12px;
+    }
+
+    .requisitos {
+        margin: 3px 0 3px;
+        font-size: 9px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial,
+    #req-numero,
+    #req-minuscula,
+    #req-maiuscula,
+    #req-caracteres {
+        font-size: 8px;
+        line-height: 12px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial {
+        margin-bottom: 10px;
+    }
+
+    .container:not(.container-informacoes) .botoes {
+        display: flex;
+        flex-direction: column;
+        margin-top: 7px;
+    }
+
+    .container:not(.container-informacoes) .botoes .continuar {
+        width: 100%;
+        height: 40px;
+        margin: 0;
+        order: 1;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+
+    .container:not(.container-informacoes) .botoes .cancelar {
+        width: 100%;
+        height: 40px;
+        margin: 9px 0 0;
+        order: 2;
+        background-color: var(--branco);
+        color: #000000;
+        border: 1px solid var(--cinza);
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 700;
+    }
+}
+
+/* MOBILE S - até 319px */
+@media (max-width: 321px) {
+    main {
+        padding: 30px 9px 28px;
+    }
+
+    .requisitos {
+        margin: 4px 0 3px;
+        font-size: 10px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial,
+    #req-numero,
+    #req-minuscula,
+    #req-maiuscula,
+    #req-caracteres {
+        font-size: 9px;
+        line-height: 13px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial {
+        margin-bottom: 10px;
+    }
+
+    .passos {
+        width: 290px;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .textos-passos {
+        height: 20px;
+        margin-top: 4px;
+    }
+
+    .texto1 {
+        left: 9%;
+    }
+
+    .texto2 {
+        left: 50%;
+    }
+
+    .texto3 {
+        left: 89%;
+    }
+
+    .textos-passos p {
+        font-size: 8px;
+    }
+
+    .textos-passos p {
+        font-size: 7px;
+    }
+
+    .container:not(.container-informacoes) {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px 11px 16px;
+        border-radius: 14px;
+    }
+
+    .container:not(.container-informacoes) .logo {
+        width: 145px;
+        margin-bottom: 2px;
+    }
+
+    .container:not(.container-informacoes) h1 {
+        font-size: 24px;
+        margin-bottom: 2px;
+    }
+
+    .container:not(.container-informacoes) .subtitulo {
+        width: 225px;
+        max-width: 100%;
+        margin: 0 auto 11px;
+        font-size: 9px;
+        line-height: 12px;
+    }
+
+    .container:not(.container-informacoes) .campo {
+        height: 37px;
+        margin-bottom: 7px;
+        border-radius: 7px;
+    }
+
+    .container:not(.container-informacoes) .campo img {
+        width: 18px;
+        height: 18px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .container:not(.container-informacoes) .campo input {
+        font-size: 11px;
+    }
+
+    .requisitos {
+        margin: 3px 0 2px;
+        font-size: 8px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial,
+    #req-numero,
+    #req-minuscula,
+    #req-maiuscula,
+    #req-caracteres {
+        font-size: 7px;
+        line-height: 11px;
+        color: var(--azul-cinzento-escuro);
+    }
+
+    #req-especial {
+        margin-bottom: 9px;
+    }
+
+    .container:not(.container-informacoes) .botoes {
+        display: flex;
+        flex-direction: column;
+        margin-top: 6px;
+    }
+
+    .container:not(.container-informacoes) .botoes .continuar {
+        width: 100%;
+        height: 38px;
+        margin: 0;
+        order: 1;
+        font-size: 14px;
+        border-radius: 7px;
+    }
+
+    .container:not(.container-informacoes) .botoes .cancelar {
+        width: 100%;
+        height: 38px;
+        margin: 8px 0 0;
+        order: 2;
+        background-color: var(--branco);
+        color: #000000;
+        border: 1px solid var(--cinza);
+        border-radius: 7px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+}
+
+/* TABLET - Cadastro 2 */
+@media (min-width: 767px) and (max-width: 1023px) {
+    .container-informacoes .botoes-info {
+        display: flex;
+        flex-direction: row;
+        margin-top: 8px;
+    }
+
+    .container-informacoes .voltar,
+    .container-informacoes .cadastrar {
+        width: 50%;
+        height: 42px;
+        margin-top: 0;
+    }
+
+    .container-informacoes .voltar {
+        margin-right: 4px;
+    }
+
+    .container-informacoes .cadastrar {
+        margin-left: 4px;
     }
 }
