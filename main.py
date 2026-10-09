@@ -29,6 +29,7 @@ app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 # define as informações necessárias para acessar o banco de dados
 host = "localhost"  # indica que o banco está no próprio computador
+database = r"D:\Desktop\BOLSO_EM_DIA\BANCO.FDB"  # caminho do arquivo do banco
 user = "sysdba"  # usuário utilizado para acessar o banco Firebird
 password = "sysdba"  # senha do usuário do banco
 
