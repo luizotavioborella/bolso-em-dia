@@ -63,7 +63,8 @@
                 <div class="usuario-logado">
                     <img src="static/uploads/perfil-usuario-topo.png" alt="">
                     <div>
-                        <strong>{{ usuario[0] }}</strong>
+                        <!-- Exibe somente os dois primeiros nomes do usuário -->
+                        <strong>{{ usuario[0].split()[:2] | join(' ') }}</strong>
                         <span>{{ usuario[1] }}</span>
                     </div>
                 </div>
@@ -72,7 +73,8 @@
             <div class="linha-topo"></div>
 
             <section class="titulo-perfil">
-                <p>Olá, {{ usuario[0] }}</p>
+                <!-- Exibe somente os dois primeiros nomes do usuário -->
+                <p>Olá, {{ usuario[0].split()[:2] | join(' ') }}!</p>
                 <h1>Seu Perfil</h1>
             </section>
 
