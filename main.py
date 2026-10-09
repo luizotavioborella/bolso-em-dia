@@ -29,7 +29,6 @@ app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 # define as informações necessárias para acessar o banco de dados
 host = "localhost"  # indica que o banco está no próprio computador
-database = os.path.join(os.path.dirname(os.path.abspath(__file__)), "BANCO.FDB")  # banco ao lado do main.py
 user = "sysdba"  # usuário utilizado para acessar o banco Firebird
 password = "sysdba"  # senha do usuário do banco
 
