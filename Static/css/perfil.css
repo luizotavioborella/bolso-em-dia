@@ -81,6 +81,9 @@ body {
 .usuario-logado img {
     width: 36px;
     height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .usuario-logado div {
@@ -159,10 +162,11 @@ body {
 }
 
 .foto-perfil img {
-    width: 128px;
-    height: 125px;
-    margin: 0 auto;
-    object-fit: contain;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .foto-perfil a {

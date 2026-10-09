@@ -61,9 +61,19 @@
                 <div></div>
 
                 <div class="usuario-logado">
-                    <img src="static/uploads/perfil-usuario-topo.png" alt="">
+                    <!-- verificamos se o usuário possui uma foto de perfil cadastrada no banco -->
+                    {% if usuario[8] %}
+
+                        <!-- se existir uma foto cadastrada, mostramos a imagem do usuário no canto superior direito -->
+                        <img src="{{ url_for('static', filename='Uploads/' + usuario[8]) }}" alt="Foto do usuário">
+                    {% else %}
+
+                        <!-- caso não exista uma foto cadastrada, continuamos mostrando o ícone padrão do sistema -->
+                        <img src="{{ url_for('static', filename='uploads/perfil-usuario-topo.png') }}" alt="Foto padrão">
+                    {% endif %}
                     <div>
-                        <strong>{{ usuario[0] }}</strong>
+                        <!-- Exibe somente os dois primeiros nomes do usuário -->
+                        <strong>{{ usuario[0].split()[:2] | join(' ') }}</strong>
                         <span>{{ usuario[1] }}</span>
                     </div>
                 </div>
@@ -72,7 +82,8 @@
             <div class="linha-topo"></div>
 
             <section class="titulo-perfil">
-                <p>Olá, {{ usuario[0] }}</p>
+                <!-- Exibe somente os dois primeiros nomes do usuário -->
+                <p>Olá, {{ usuario[0].split()[:2] | join(' ') }}!</p>
                 <h1>Seu Perfil</h1>
             </section>
 
@@ -89,7 +100,18 @@
 
                 <div class="dados-principais">
                     <div class="foto-perfil">
-                        <img src="static/uploads/perfil-foto.png" alt="Foto de perfil">
+
+                        <!-- verificamos se o usuário possui uma foto cadastrada no banco -->
+                        {% if usuario[8] %}
+
+                            <!-- se existir uma foto cadastrada, mostramos a imagem escolhida pelo usuário -->
+                            <img src="{{ url_for('static', filename='Uploads/' + usuario[8]) }}" alt="Foto de perfil">
+                        {% else %}
+
+                            <!-- caso não exista uma foto cadastrada, mostramos a imagem padrão do sistema -->
+                            <img src="{{ url_for('static', filename='Uploads/perfil-foto.png') }}" alt="Foto de perfil">
+                        {% endif %}
+
                     </div>
 
                     <div class="configuracoes-perfil">

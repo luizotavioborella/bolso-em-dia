@@ -1,9 +1,17 @@
 # aqui estamos importando recursos do Flask que utilizaremos
 # redirecionar o usuário, mostrar mensagens e armazenar informações na sessão.
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 
 # importa a biblioteca que permite conectar o Python ao banco de dados Firebird
 import fdb
+
+# importamos a biblioteca os, que permite trabalhar com arquivos  e pastas do computador.
+# Vamos utilizá-la para descobrir a extensão da imagem escolhida e definir em qual pasta ela será salva.
+import os
+
+# importa 'uuid4' para gerar nomes únicos para as imagens
+# assim, dois arquivos com o mesmo nome não vão se sobrescrever
+from uuid import uuid4
 
 # importa funções para criptografar as senhas e verificar as senhas durante o login
 # diferente da forma ensinada em sala de aula, porém o grupo se adaptou melhor
@@ -11,7 +19,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 # cria a aplicação do Flask
-app = Flask(__name__)
+# static_folder informa onde estão as imagens, CSS e JavaScript
+# template_folder informa onde estão os arquivos HTML
+# static_url_path mantém o endereço /static utilizado nas páginas, evitando que  caminho das outras imagens sejam quebrados
+app = Flask(__name__, static_folder='Static', template_folder='Templates', static_url_path='/static')
 
 # define uma chave secreta utilizada pelo Flask para proteger recursos, como a session (usada para guardar informações temporariamente).
 app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
@@ -396,7 +407,7 @@ def perfil():
     # iniciamos com try para tratamento de erro (o sistema TENTA (try) fazer o código abaixo)
     try:
         # aqui buscamos todos os dados registrados do usuário através do id dele
-        cursor.execute("""SELECT NOME_COMPLETO, EMAIL, DATA_NASCIMENTO, TELEFONE, CPF, VALOR_DIARIA, ADICIONAL, MIN_PACOTES FROM USUARIO WHERE ID_USUARIO = ?""",(id_usuario,))
+        cursor.execute("""SELECT NOME_COMPLETO, EMAIL, DATA_NASCIMENTO, TELEFONE, CPF, VALOR_DIARIA, ADICIONAL, MIN_PACOTES, FOTO_PERFIL FROM USUARIO WHERE ID_USUARIO = ?""",(id_usuario,))
 
         # e salvamos a linha de busca encontrada em uma variável
         usuario = cursor.fetchone()
@@ -434,7 +445,7 @@ def editar_usuario():
     # iniciamos com try para tratamento de erro (o sistema TENTA (try) fazer o código abaixo)
     try:
         # aqui buscamos todos os dados registrados do usuário através do id dele
-        cursor.execute("""SELECT NOME_COMPLETO, EMAIL, DATA_NASCIMENTO, TELEFONE, CPF, SENHA, VALOR_DIARIA, ADICIONAL, MIN_PACOTES FROM USUARIO WHERE ID_USUARIO = ?""", (id_usuario,))
+        cursor.execute("""SELECT NOME_COMPLETO, EMAIL, DATA_NASCIMENTO, TELEFONE, CPF, SENHA, VALOR_DIARIA, ADICIONAL, MIN_PACOTES, FOTO_PERFIL FROM USUARIO WHERE ID_USUARIO = ?""", (id_usuario,))
 
         # e salvamos a linha de busca encontrada em uma variável
         usuario = cursor.fetchone()
@@ -492,6 +503,50 @@ def editar_usuario():
             else:
                 senha_cripto = usuario[5]
 
+
+            # utilizamos request.files para pegar o arquivo enviado pelo formulário HTML.
+            # o nome 'foto' precisa ser igual ao atributo name do input no HTML.
+            # usamos .get() para buscar esse arquivo sem gerar um erro caso o usuário não tenha enviado nenhuma imagem.
+            foto = request.files.get('foto')
+
+            # verificamos se existe um arquivo e se ele possui um nome.
+            # isso é necessário porque o usuário pode editar o perfil sem querer alterar a foto, mudando apenas o nome ou o e-mail.
+            if foto and foto.filename:
+
+                # utilizamos os.path.splitext() para separar o nome do arquivo da sua extensão.
+                # O [1] pega somente a extensão.
+                # por exemplo, se a imagem for chamada minha_foto.jpg, a variável extensao receberá somente '.jpg'.
+                # o .lower() transforma as letras em minúsculas,evitando problemas com extensões como '.JPG' ou '.PNG'.
+                extensao = os.path.splitext(foto.filename)[1].lower()
+
+                # verificamos se a extensão da imagem é permitida.
+                # caso não seja JPG, JPEG, PNG ou WEBP, mostramos uma mensagem e devolvemos o usuário para a página de edição.
+                # essa é uma verificação básica pela extensão do nome do arquivo.
+                if extensao not in ('.jpg', '.jpeg', '.png', '.webp'):
+                    flash('Escolha uma imagem JPG, PNG ou WEBP.', 'error')
+                    return redirect(url_for('editar_usuario'))
+
+                # criamos um nome único para a imagem utilizando o ID do usuário.
+                # utilizamos uuid4() para gerar um identificador aleatório, evitando que imagens diferentes sejam salvas com o mesmo nome.
+                # o .hex transforma esse identificador em uma sequência de letras e números.
+                # por fim, acrescentamos a extensão para manter o formato original da imagem.
+                nome_foto = f'perfil_{id_usuario}_{uuid4().hex}{extensao}'
+
+                # utilizamos foto.save() para salvar a imagem no computador.
+                # app.static_folder indica a pasta Static do projeto.
+                # os.path.join() junta o caminho da pasta com o nome da imagem.
+                # assim, o arquivo será salvo dentro de Static/Uploads.
+                foto.save(os.path.join(app.static_folder, 'Uploads', nome_foto))
+
+                # depois de salvar a imagem na pasta, precisamos registrar o nome dela no banco de dados.
+                # utilizamos UPDATE porque estamos alterando os dados de um usuário que já existe.
+                # FOTO_PERFIL é a coluna que recebe o nome da imagem.
+                # ID_USUARIO identifica qual usuário terá sua foto atualizada.
+                cursor.execute(
+                    "UPDATE USUARIO SET FOTO_PERFIL = ? WHERE ID_USUARIO = ?",
+                    (nome_foto, id_usuario)
+                )
+
             # agora, atualizamos todos os dados do usuário no banco de dados
             cursor.execute("""UPDATE USUARIO SET NOME_COMPLETO = ?, EMAIL = ?, DATA_NASCIMENTO = ?, TELEFONE = ?, CPF = ?, SENHA = ?, VALOR_DIARIA = ?, ADICIONAL = ?, MIN_PACOTES = ? WHERE ID_USUARIO = ?""",(nome, email, data_nasc, telefone, cpf, senha_cripto, valor_diaria, adicional, min_pacotes, id_usuario,))
 
@@ -508,7 +563,7 @@ def editar_usuario():
 
         # caso o usuário não utilize o metodo post (não tente editar as informações), a rota apenas carrega a página normalmente
         else:
-            return render_template("editar.html", usuario=usuario)
+            return render_template("editar_perfil.html", usuario=usuario)
 
 # caso o sistema não consiga realizar o código de try por algum erro, except será executado para mostrar o erro e redirecionar para alguma página
     except Exception as e:

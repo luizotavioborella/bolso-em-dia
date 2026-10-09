@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,7 +16,8 @@
         {% endwith %}
 
         <div class="saudacao">
-            <h1>Olá, {{ usuario }}!</h1>
+            <!-- Exibe somente os dois primeiros nomes do usuário -->
+            <p>Olá, {{ usuario[0].split()[:2] | join(' ') }}!</p>
             <p>Bem-vindo(a) ao Bolso em Dia.</p>
         </div>
 

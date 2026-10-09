@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil - Bolso em Dia</title>
+    <link rel="icon" href="{{ url_for('static', filename='uploads/logo-escuro.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+    <script src="{{ url_for('static', filename='js/alteracao_foto.js') }}" defer></script>
+</head>
+<body>
+    <div class="pagina-perfil">
+        <aside class="menu-lateral">
+            <img class="logo-perfil" src="static/uploads/logo-horizontal.png" alt="Bolso em Dia">
+
+            <nav class="navegacao-perfil">
+                <a  href="{{ url_for('dashboard') }}">
+                    <img src="static/uploads/perfil-dashboard.png" alt="">
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#">
+                    <img src="static/uploads/perfil-rendimentos.png" alt="">
+                    <span>Rendimentos</span>
+                </a>
+
+                <a href="#">
+                    <img src="static/uploads/perfil-despesas.png" alt="">
+                    <span>Despesas</span>
+                </a>
+
+                <a href="#">
+                    <img src="static/uploads/perfil-dia-trabalhado.png" alt="">
+                    <span>Dia Trabalhado</span>
+                </a>
+
+                <a href="#">
+                    <img src="static/uploads/perfil-servico-extra.png" alt="">
+                    <span>Serviço Extra</span>
+                </a>
+
+                <a href="#">
+                    <img src="static/uploads/perfil-relatorios.png" alt="">
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="#">
+                    <img src="static/uploads/perfil-historico.png" alt="">
+                    <span>Histórico Semanal</span>
+                </a>
+            </nav>
+
+            <a class="sair-perfil"  href="{{ url_for('logout') }}">
+                <img src="static/uploads/perfil-sair.png" alt="">
+                <span>Sair</span>
+            </a>
+        </aside>
+
+        <main class="conteudo-perfil">
+            <header class="topo-perfil">
+                <div></div>
+
+                <div class="usuario-logado">
+                    <!-- verificamos se o usuário possui uma foto de perfil cadastrada no banco -->
+                    {% if usuario[9] %}
+
+                        <!-- se existir uma foto cadastrada, mostramos a imagem do usuário no canto superior direito -->
+                        <img src="{{ url_for('static', filename='Uploads/' + usuario[9]) }}" alt="Foto do usuário">
+                    {% else %}
+
+                        <!-- caso não exista uma foto cadastrada, continuamos mostrando o ícone padrão do sistema -->
+                        <img src="{{ url_for('static', filename='uploads/perfil-usuario-topo.png') }}" alt="Foto padrão">
+                    {% endif %}
+                    <div>
+                        <!-- Exibe somente os dois primeiros nomes do usuário -->
+                        <strong>{{ usuario[0].split()[:2] | join(' ') }}</strong>
+                        <span>{{ usuario[1] }}</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="linha-topo"></div>
+
+            <section class="titulo-perfil">
+                <!-- Exibe somente os dois primeiros nomes do usuário -->
+                <p>Olá, {{ usuario[0].split()[:2] | join(' ') }}!</p>
+                <h1>Seu Perfil</h1>
+            </section>
+
+            <section class="card-perfil">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {%  for category, message in messages %}
+                                <div class="flash {{ category }}">{{  message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form action="{{ url_for('editar_usuario') }}" method="POST" enctype="multipart/form-data">
+                    <div class="dados-principais">
+                         <div class="foto-perfil">
+                            <!-- input do tipo file permite que o usuário selecione um arquivo que esteja salvo no seu computador. -->
+                            <!-- name="foto" identifica esse arquivo para o Flask. -->
+                            <!-- accept informa os formatos de imagem aceitos na seleção. -->
+                            <!-- onchange executa a função mostrarFoto() quando uma imagem é escolhida -->
+                            <input type="file" name="foto" accept=".jpg,.jpeg,.png,.webp" onchange="mostrarFoto(this)">
+
+                            <!-- verifica se o usuário possui uma foto cadastrada no banco -->
+                            {% if usuario[9] %}
+
+                                <!-- se existir uma foto, mostra a imagem escolhida pelo usuário -->
+                                <img id="imagem-perfil" src="{{ url_for('static', filename='Uploads/' + usuario[9]) }}" alt="Foto de perfil">
+                            {% else %}
+
+                                <!-- se não existir uma foto cadastrada, mostra a imagem padrão -->
+                                <img id="imagem-perfil" src="{{ url_for('static', filename='Uploads/perfil-foto.png') }}" alt="Foto de perfil">
+                            {% endif %}
+
+                            <!-- essa escrita é apenas visual, pois o input invisível já permite selecionar a imagem ao clicar sobre ela -->
+                            <a href="#">Editar foto</a>
+                        </div>
+
+                        <div class="configuracoes-perfil">
+                            <div class="configuracao">
+                                <label for="valor_diaria">Valor da diária</label>
+                                <div class="campo-configuracao">
+                                    <span>R$</span>
+                                    <input type="text" id="valor_diaria" name="valor_diaria" value="{{ usuario[6] }}">
+                                </div>
+                            </div>
+
+                            <div class="configuracao">
+                                <label for="min_pacotes">Mínimo de pacotes</label>
+                                <div class="campo-configuracao">
+                                    <span class="icone-pacote">
+                                        <img src="static/uploads/caixa.png" alt="">
+                                    </span>
+                                    <input type="number" id="min_pacotes" name="min_pacotes" value="{{ usuario[8] }}">
+                                </div>
+                            </div>
+
+                            <div class="configuracao">
+                                <label for="adicional">Valor do adicional</label>
+                                <div class="campo-configuracao">
+                                    <span>R$</span>
+                                    <input type="text" id="adicional" name="adicional" value="{{ usuario[7] }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dados-perfil">
+                        <div class="campo-perfil">
+                            <img src="static/uploads/perfil-usuario-campo.png" alt="">
+                            <input type="text" name="nome" value="{{ usuario[0] }}">
+                        </div>
+
+                        <div class="campo-perfil">
+                            <img src="static/uploads/mail.png" alt="">
+                            <input type="email" name="email" value="{{ usuario[1] }}">
+                        </div>
+
+                        <div class="campo-perfil">
+                            <img src="static/uploads/perfil-calendario-campo.png" alt="">
+                            <input type="data" name="data_nasc" value="{{ usuario[2] }}">
+                        </div>
+
+                        <div class="campo-perfil">
+                            <img src="static/uploads/perfil-telefone-campo.png" alt="">
+                            <input type="text" name="telefone" value="{{ usuario[3] }}">
+                        </div>
+
+                        <div class="campo-perfil">
+                            <img src="static/uploads/perfil-cpf-campo.png" alt="">
+                            <input type="text" name="cpf" value="{{ usuario[4] }}">
+                        </div>
+
+                        <div class="campo-perfil">
+                            <img src="static/uploads/perfil-cpf-campo.png" alt="">
+                            <input type="password" name="senha" placeholder="Nova Senha">
+                        </div>
+
+                        <div class="botoes-perfil">
+                            <a class="botao-descartar" href="{{ url_for('perfil') }}">Descartar Alterações</a>
+                            <button type="submit" class="botao-salvar">Salvar Alterações</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
