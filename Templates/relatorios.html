@@ -7,6 +7,9 @@
     <link rel="icon" href="{{ url_for('static', filename='uploads/logo-escuro.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/relatorios.css') }}">
+    <script id="ganhos-por-ano" type="application/json">{{ ganhos_por_ano | tojson }}</script>
+    <script id="meses" type="application/json">{{ meses | tojson }}</script>
+    <script src="{{ url_for('static', filename='js/relatorios.js') }}" defer></script>
 </head>
 
 <body class="pagina-sistema">
@@ -19,7 +22,7 @@
                 <img src="{{ url_for('static', filename='uploads/perfil-dashboard.png') }}" alt="">
                 <span>Dashboard</span>
             </a>
-            <a href="{{ url_for('rendimentos') }}" class="pagina-ativa">
+            <a href="{{ url_for('rendimentos') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-rendimentos.png') }}" alt="">
                 <span>Rendimentos</span>
             </a>
@@ -39,7 +42,7 @@
                 <img src="{{ url_for('static', filename='uploads/tag-azul.png') }}" alt="">
                 <span>Categorias</span>
             </a>
-            <a href="{{ url_for('relatorios') }}">
+            <a href="{{ url_for('relatorios') }}" class="pagina-ativa">
                 <img src="{{ url_for('static', filename='uploads/perfil-relatorios.png') }}" alt="">
                 <span>Relatórios</span>
             </a>
@@ -74,7 +77,6 @@
             </a>
         </header>
 
-
         <div class="linha-topo"></div>
 
         {% with mensagens = get_flashed_messages(with_categories=true) %}
@@ -90,34 +92,178 @@
                 <p>Acompanhe os ganhos por mês e exporte seus resultados.</p>
             </section>
 
-            <button class="baixar-relatorio" type="submit">Baixar Relatório</button>
+
+            <form action="{{ url_for('baixar_relatorio') }}" method="GET">
+                <input type="hidden" name="ano" id="ano-pdf" value="{{ ano_atual }}">
+                <button class="baixar-relatorio" type="submit">Baixar Relatório</button>
+                <button class="baixar-relatorio" type="submit" formaction="{{ url_for('baixar_previsoes') }}">Baixar Previsões</button>
+            </form>
+
         </div>
 
         <div class="aviso-relatorio">
-            <img src="{{ url_for('static', filename='uploads/star(relatorio).png') }}" alt="">
-            <div class="parte1">
+            <img src="{{ url_for('static', filename='uploads/star-verde.png') }}" alt="">
 
+            <div class="parte1">
                 <h5>Maior ganho do ano</h5>
-                <span>mes</span><!-- colocar o jinja nessa parte -->
-                <span class="valor1">valor</span><!-- colocar o jinja nessa parte -->
+                <span id="melhor-mes">{{ melhor_mes }}</span>
+                <span class="valor1" id="maior-valor">{{ "R$ {:,.2f}".format(maior_valor).replace(",", "X").replace(".", ",").replace("X", ".") }}</span>
             </div>
+
             <div class="parte2">
                 <div class="linha-vertical"></div>
-                 <img src="{{ url_for('static', filename='uploads/Trending up.png') }}" alt="">
+                <img src="{{ url_for('static', filename='uploads/trendingup-verde.png') }}" alt="">
                 <div class="linha-vertical"></div>
                 <div class="texto">
                     <h6>Este foi o seu melhor resultado no ano!</h6>
-                    <p><pan>mes</pan> teve o maior ganho entre todos os meses de <span>ano</span></p><!-- colocar o jinja nessa parte -->
+                    <p id="texto-melhor-mes">
+                        {% if maior_valor > 0 %}
+                            {{ melhor_mes }} teve o maior ganho entre todos os meses de {{ ano_atual }}.
+                        {% else %}
+                            Nenhum ganho registrado em {{ ano_atual }}.
+                        {% endif %}
+                    </p>
                 </div>
-
             </div>
         </div>
 
         <section class="meus-relatorios">
-            <h2>Ganhos por mês</h2>
+            <div class="topo-meus-relatorios">
+                <h2>Ganhos por mês</h2>
 
-            <!--Perguntar para a Laís como fazer para trazer os resultados dos meses aparecer partir do ano-->
+                <select class="filtro-ano-relatorios" id="filtro-ano">
+                    {% for ano in anos_registrados %}
+                        {% if ano == ano_atual %}
+                            <option value="{{ ano }}" selected>Ano atual ({{ ano }})</option>
+                        {% else %}
+                            <option value="{{ ano }}">{{ ano }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
 
+            <div class="grade-meses">
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 0 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Janeiro</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[0]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 1 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Fevereiro</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[1]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 2 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Março</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[2]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 3 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Abril</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[3]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 4 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Maio</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[4]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 5 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Junho</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[5]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 6 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Julho</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[6]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 7 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Agosto</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[7]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 8 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Setembro</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[8]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 9 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Outubro</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[9]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 10 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Novembro</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[10]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+
+                <div class="card-mes {% if maior_valor > 0 and ganhos_mensais.index(maior_valor) == 11 %}destaque{% endif %}">
+                    <div class="icone-mes">
+                        <img src="{{ url_for('static', filename='uploads/progresso-verde.png') }}" alt="">
+                    </div>
+                    <div class="informacoes-mes">
+                        <p>Dezembro</p>
+                        <strong class="valor-mes">{{ "R$ {:,.2f}".format(ganhos_mensais[11]).replace(",", "X").replace(".", ",").replace("X", ".") }}</strong>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 </body>
+</html>
