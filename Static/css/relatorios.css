@@ -1,3 +1,4 @@
+
 .titulo-relatorio {
     padding: 18px 10px 20px;
 }
@@ -16,6 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .baixar-relatorio {
@@ -24,7 +26,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
     background-color: var(--verde-escuro);
     color: var(--branco);
     border-radius: 8px;
@@ -32,226 +33,361 @@
     font-weight: 700;
     cursor: pointer;
     border: 1px solid var(--verde-escuro);
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.baixar-relatorio:hover {
+    opacity: 0.9;
+}
+
+.aviso-relatorio {
+    width: 100%;
+    background-color: var(--verde-clarinho);
+    border: 1px solid var(--cinza-claro);
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+    gap: 20px;
+}
+
+.aviso-relatorio > img {
+    height: 65px;
+    width: 65px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.aviso-relatorio .parte1 {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 190px;
+}
+
+.aviso-relatorio .parte1 h5 {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.aviso-relatorio .parte1 span {
+    font-size: 29px;
+    font-weight: 700;
+}
+
+.aviso-relatorio .parte1 .valor1 {
+    color: var(--verde-escuro);
+    font-size: 29px;
+}
+
+.aviso-relatorio .parte2 {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.aviso-relatorio .parte2 .linha-vertical {
+    background-color: var(--cinza-claro);
+    height: 65px;
+    width: 1px;
+    flex-shrink: 0;
+}
+
+.aviso-relatorio .parte2 > img {
+    height: 48px;
+    width: 48px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.aviso-relatorio .parte2 .texto {
+    max-width: 250px;
+}
+
+.aviso-relatorio .parte2 h6 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.aviso-relatorio .parte2 p {
+    font-size: 12px;
+    color: var(--azul-cinzento-escuro);
 }
 
 .meus-relatorios {
     width: 100%;
-    padding: 16px;
+    padding: 20px 0 30px;
+}
 
-}
-.aviso-relatorio{
-    background-color: var(--verde-clarinho);
-    border: 2px solid var(--cinza-claro);
+.topo-meus-relatorios {
     display: flex;
-    border-radius: 10px;
-    padding: 20px;
-}
-.aviso-relatorio img{
-    height: 70px;
-    width: 70px;
-
-}
-.aviso-relatorio .parte1{
-    display: grid;
-    margin-left: 20px;
-}
-.aviso-relatorio .parte1 span{
-    font-size: 38px;
-    font-weight: bold;
-}
-.aviso-relatorio .parte1 .valor1{
-    color: var(--verde-escuro);
-}
-.aviso-relatorio .parte2{
-    margin-left: auto;
-    display: flex;
-}
-.linha-vertical{
-    background-color: var(--cinza);
-    height: 90%;
-    width: 2px;
-    margin-right: 50px;
-    margin-left: 50px;
-}
-.aviso-relatorio .parte2 img{
-    margin-top: 20px;
-}
-.aviso-relatorio .parte2 .texto{
-    padding: 20px;
-}
-.aviso-relatorio .parte2 h6{
-    font-size: 15px;
-}
-.aviso-relatorio .parte2 p{
-    font-size: 15px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 0 0 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--cinza-claro);
 }
 
 .meus-relatorios h2 {
-    margin-bottom: 12px;
     color: var(--azul-cinzento-escuro);
     font-size: 20px;
+    margin: 0;
 }
 
+.filtro-ano-relatorios {
+    height: 38px;
+    padding: 0 12px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 8px;
+    color: var(--azul-cinzento-escuro);
+    font-size: 12px;
+    cursor: pointer;
+    outline: none;
+}
 
+.grade-meses {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.card-mes {
+    min-width: 0;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.icone-mes {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background-color: var(--verde-clarinho);
+}
+
+.icone-mes img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.informacoes-mes {
+    min-width: 0;
+}
+
+.informacoes-mes p {
+    font-size: 11px;
+    margin-bottom: 5px;
+    color: var(--azul-cinzento-escuro);
+}
+
+.informacoes-mes strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--azul-cinzento-escuro);
+    white-space: nowrap;
+}
+
+.card-mes.destaque {
+    background-color: var(--verde-clarinho);
+    border-color: var(--verde-escuro);
+}
+
+.card-mes.destaque .icone-mes {
+    background-color: #bff0cd;
+}
+
+.card-mes.destaque .informacoes-mes p,
+.card-mes.destaque .informacoes-mes strong {
+    color: var(--verde-escuro);
+}
 
 /* TABLET */
 
-@media  (max-width: 1023px) {
+@media (min-width: 767px) and (max-width: 1023px) {
     .titulo-relatorio h1 {
         font-size: 28px;
     }
 
-    .aviso-relatorio {
-        flex-wrap: wrap;
-
-    }
-    .aviso-relatorio .parte2{
+    .aviso-relatorio .parte2 {
         display: none;
     }
 
+    .grade-meses {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
 }
 
-/* MOBILE L */
+/* MOBILE */
 
-@media (max-width: 424px) {
-
-    .aviso-relatorio{
-       align-items: stretch;
+@media (max-width: 766px) {
+    .cabecalho-relatorios {
         flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
     }
 
-    .titulo-rendimentos {
-        padding: 5px 2px 15px;
+    .titulo-relatorio {
+        padding: 10px 2px;
     }
 
-    .titulo-rendimentos h1 {
-        font-size: 27px;
+    .titulo-relatorio h1 {
+        font-size: 28px;
     }
 
-    .adicionar-rendimento {
+    .cabecalho-relatorios form {
         width: 100%;
         margin-bottom: 15px;
     }
 
-    .btn-adicionar-rendimento {
+    .baixar-relatorio {
         width: 100%;
     }
 
-    .opcoes-rendimento {
-        width: 100%;
+    .aviso-relatorio {
+        padding: 15px;
+        gap: 15px;
     }
 
-    .filtros-rendimentos {
-        flex-wrap: wrap;
+    .aviso-relatorio > img {
+        width: 48px;
+        height: 48px;
     }
 
-    .filtros-tabela {
-        align-items: stretch;
-        flex-direction: column;
+    .aviso-relatorio .parte1 {
+        min-width: 0;
     }
 
-    .campo-busca,
-    .filtro-tabela {
-        width: 100%;
+    .aviso-relatorio .parte1 span,
+    .aviso-relatorio .parte1 .valor1 {
+        font-size: 23px;
     }
 
-    .filtro-tabela.ordenar {
-        margin-left: 0;
+    .aviso-relatorio .parte2 {
+        display: none;
     }
 
-    .meus-rendimentos {
-        padding: 12px;
+    .meus-relatorios {
+        padding: 18px 0;
+    }
+
+    .meus-relatorios h2 {
+        font-size: 18px;
+    }
+
+    .grade-meses {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .card-mes {
+        min-height: 80px;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .icone-mes {
+        width: 43px;
+        height: 43px;
+    }
+
+    .icone-mes img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .informacoes-mes strong {
+        font-size: 13px;
+    }
+}
+
+/* MOBILE L */
+
+@media (min-width: 375px) and (max-width: 424px) {
+    .grade-meses {
+        grid-template-columns: 1fr;
+    }
+
+    .card-mes {
+        min-height: 75px;
     }
 }
 
 /* MOBILE M */
 
 @media (min-width: 320px) and (max-width: 374px) {
-    .cabecalho-rendimentos {
-        align-items: stretch;
-        flex-direction: column;
-    }
-
-    .titulo-rendimentos {
-        padding: 5px 2px 15px;
-    }
-
-    .titulo-rendimentos h1 {
+    .titulo-relatorio h1 {
         font-size: 24px;
     }
 
-    .adicionar-rendimento {
-        width: 100%;
-        margin-bottom: 15px;
+    .grade-meses {
+        grid-template-columns: 1fr;
     }
 
-    .btn-adicionar-rendimento,
-    .opcoes-rendimento {
-        width: 100%;
-    }
-
-    .filtros-rendimentos {
-        flex-wrap: wrap;
-    }
-
-    .filtros-tabela {
+    .topo-meus-relatorios {
         align-items: stretch;
         flex-direction: column;
     }
 
-    .campo-busca,
-    .filtro-tabela {
+    .filtro-ano-relatorios {
         width: 100%;
-    }
-
-    .filtro-tabela.ordenar {
-        margin-left: 0;
     }
 }
 
 /* MOBILE S */
 
 @media (max-width: 319px) {
-    .cabecalho-rendimentos {
-        align-items: stretch;
-        flex-direction: column;
-    }
-
-    .titulo-rendimentos {
-        padding: 4px 1px 12px;
-    }
-
-    .titulo-rendimentos h1 {
+    .titulo-relatorio h1 {
         font-size: 21px;
     }
 
-    .adicionar-rendimento {
-        width: 100%;
-        margin-bottom: 12px;
+    .aviso-relatorio {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
-    .btn-adicionar-rendimento,
-    .opcoes-rendimento {
-        width: 100%;
+    .aviso-relatorio .parte1 span,
+    .aviso-relatorio .parte1 .valor1 {
+        font-size: 21px;
     }
 
-    .filtros-rendimentos,
-    .filtros-tabela {
+    .topo-meus-relatorios {
         align-items: stretch;
         flex-direction: column;
     }
 
-    .filtro,
-    .campo-busca,
-    .filtro-tabela {
+    .filtro-ano-relatorios {
         width: 100%;
     }
 
-    .filtro-tabela.ordenar {
-        margin-left: 0;
+    .grade-meses {
+        grid-template-columns: 1fr;
     }
+}
 
-    .meus-rendimentos {
-        padding: 10px;
+.cabecalho-relatorios form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 766px) {
+    .cabecalho-relatorios form {
+        flex-direction: column;
     }
 }
