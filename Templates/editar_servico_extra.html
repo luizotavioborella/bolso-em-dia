@@ -114,7 +114,7 @@
                     <label>Descrição da receita</label>
                     <div class="campo-descricao">
                         <img class="icone-descricao" src="{{ url_for('static', filename='uploads/document-cinza.png') }}" alt="">
-                        <textarea name="descricao" maxlength="500" placeholder="Descreva os detalhes do serviço extra...">{{ servico[3] or '' }}</textarea>
+                        <textarea name="descricao" maxlength="250" placeholder="Descreva os detalhes do serviço extra...">{{ servico[3] or '' }}</textarea>
                         <span class="contador-descricao">{{ (servico[3] or '') | length }}/250</span>
                     </div>
                 </div>
