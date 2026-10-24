@@ -126,12 +126,11 @@
                         <label>Data <span>*</span></label>
 
                         <div class="campo-data">
-                            <div class="icone-campo" onclick="document.getElementById('data-servico').showPicker()" style="cursor: pointer;">
+                            <div class="icone-campo" id="icone-data-servico" style="cursor: pointer;">
                                 <img src="{{ url_for('static', filename='uploads/calendar-cinza.png') }}" alt="">
                             </div>
                             <input type="date" name="data" id="data-servico" required>
                         </div>
-
                     </div>
                 </div>
 
@@ -155,30 +154,6 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-
-    <script>
-        {# máscara para deixar o input do valor com 0,00 #}
-        $("#valor").maskMoney({
-            thousands: ".",
-            decimal: ",",
-            precision: 2,
-            allowNegative: false,
-            allowZero: false
-        })
-
-        $("#valor").closest("form").on("submit", function() {
-            var valor = $("#valor").maskMoney("unmasked")[0]
-            $("#valor").val(valor.toFixed(2))
-        })
-
-        const descricao = document.querySelector('textarea')
-        const contador = document.querySelector('.contador-descricao')
-
-
-        // Atualiza o contador conforme o usuário digita na descrição
-        descricao.addEventListener('input', function() {
-            contador.textContent = descricao.value.length + '/250'
-        })
-    </script>
+    <script src="{{ url_for('static', filename='js/servico_extra.js') }}"></script>
 </body>
 </html>
