@@ -25,7 +25,7 @@
             <img class="logo-perfil" src="static/uploads/logo-horizontal.png" alt="Bolso em Dia">
 
             <nav class="navegacao-perfil">
-                <a  href="{{ url_for('dashboard') }}">
+                <a href="{{ url_for('dashboard') }}">
                     <img src="static/uploads/perfil-dashboard.png" alt="">
                     <span>Dashboard</span>
                 </a>
@@ -109,8 +109,8 @@
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         <div class="flash-messages">
-                            {%  for category, message in messages %}
-                                <div class="flash {{ category }}">{{  message }}</div>
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
                             {% endfor %}
                         </div>
                     {% endif %}
@@ -118,7 +118,7 @@
 
                 <form action="{{ url_for('editar_usuario') }}" method="POST" enctype="multipart/form-data">
                     <div class="dados-principais">
-                         <div class="foto-perfil">
+                        <div class="foto-perfil">
                             <!-- input do tipo file permite que o usuário selecione um arquivo que esteja salvo no seu computador. -->
                             <!-- name="foto" identifica esse arquivo para o Flask. -->
                             <!-- accept informa os formatos de imagem aceitos na seleção. -->
@@ -180,12 +180,10 @@
                             <input type="email" name="email" value="{{ usuario[1] }}">
                         </div>
 
-
                         <div class="campo-perfil">
                             <img src="static/uploads/perfil-calendario-campo.png" alt="" onclick="document.getElementById('data-nasc').showPicker()" style="cursor: pointer;">
                             <input type="date" id="data-nasc" name="data_nasc" value="{{ usuario[2] }}">
                         </div>
-
 
                         <div class="campo-perfil">
                             <img src="static/uploads/perfil-telefone-campo.png" alt="">
@@ -212,15 +210,6 @@
         </main>
     </div>
 
-    <!-- $ é uma forma abreviada de chamar o jQuery.-->
-    <!-- document representa o HTML da página.-->
-    <!-- ready() espera o HTML carregar antes de executar o código.-->
-    <!-- Seleciona os elementos com as classes e aplica as máscaras.-->
-    <script>
-        $(document).ready(function () {
-            $('#telefone').mask('(00)00000-0000');
-            $('#cpf').mask('000.000.000-00');
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/mascaras_perfil.js') }}" defer></script>
 </body>
 </html>
