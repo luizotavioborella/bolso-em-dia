@@ -66,11 +66,11 @@
             </nav>
 
             <a class="sair-perfil" href="{{ url_for('logout') }}">
-            <div class="sair-conteudo">
-                <img src="{{ url_for('static', filename='uploads/perfil-sair.png') }}" alt="">
-                <span>Sair</span>
-            </div>
-        </a>
+                <div class="sair-conteudo">
+                    <img src="{{ url_for('static', filename='uploads/perfil-sair.png') }}" alt="">
+                    <span>Sair</span>
+                </div>
+            </a>
         </aside>
 
         <main class="conteudo-perfil">
@@ -103,8 +103,8 @@
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         <div class="flash-messages">
-                            {%  for category, message in messages %}
-                                <div class="flash {{ category }}">{{  message }}</div>
+                            {% for category, message in messages %}
+                                <div class="flash {{ category }}">{{ message }}</div>
                             {% endfor %}
                         </div>
                     {% endif %}
@@ -171,11 +171,11 @@
 
                     <div class="campo-perfil somente-leitura">
                         <img src="static/uploads/perfil-cpf-campo.png" alt="">
-                        <p class="mascara-cpf" >{{ usuario[4] }}</p>
+                        <p class="mascara-cpf">{{ usuario[4] }}</p>
                     </div>
 
                     <div class="botoes-perfil">
-                        <button type="button" class="abrir-modal-exclusao botao-excluir" data-url="{{ url_for('excluir_usuario') }}" >Excluir Perfil</button>
+                        <button type="button" class="abrir-modal-exclusao botao-excluir" data-url="{{ url_for('excluir_usuario') }}">Excluir Perfil</button>
                         <a class="botao-editar" href="{{ url_for('editar_usuario') }}">Editar Perfil</a>
                     </div>
                 </div>
@@ -199,16 +199,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/modal_exclusao.js') }}"></script>
-
-    <!-- $ é uma forma abreviada de chamar o jQuery.-->
-    <!-- document representa o HTML da página.-->
-    <!-- ready() espera o HTML carregar antes de executar o código.-->
-    <!-- Seleciona os elementos com as classes e aplica as máscaras.-->
-    <script>
-        $(document).ready(function () {
-            $('.mascara-telefone').mask('(00)00000-0000');
-            $('.mascara-cpf').mask('000.000.000-00');
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/mascaras_perfil.js') }}" defer></script>
 </body>
 </html>
