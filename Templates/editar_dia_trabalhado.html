@@ -119,12 +119,7 @@
                     <label>Data <span>*</span></label>
 
                     <div class="campo-data">
-                        <input
-                            type="date"
-                            name="data"
-                            value="{{ dia_trabalhado[0].strftime('%Y-%m-%d') }}"
-                            required
-                        >
+                        <input type="date" name="data" value="{{ dia_trabalhado[0].strftime('%Y-%m-%d') }}" required>
 
                         <img src="{{ url_for('static', filename='uploads/calendario-azul-escuro.png') }}" alt="">
                     </div>
@@ -134,28 +129,16 @@
                     <label>Pacotes coletados <span>*</span></label>
 
                     <div class="campo-pacotes">
-                        <input
-                            type="number"
-                            name="pacotes_coletados"
-                            min="1"
-                            step="1"
-                            placeholder="Digite a quantidade de pacotes"
-                            value="{{ dia_trabalhado[1] }}"
-                            required
-                        >
+                        <input type="number" name="pacotes_coletados" min="1" step="1" placeholder="Digite a quantidade de pacotes" alue="{{ dia_trabalhado[1] }}" required>
 
                         <img src="{{ url_for('static', filename='uploads/caixa.png') }}" alt="">
                     </div>
                 </div>
 
                 <div class="botoes-dia">
-                    <a href="{{ url_for('rendimentos') }}" class="cancelar-dia">
-                        Cancelar
-                    </a>
+                    <a href="{{ url_for('rendimentos') }}" class="cancelar-dia">Cancelar</a>
 
-                    <button type="submit" class="registrar-dia">
-                        Salvar Alterações
-                    </button>
+                    <button type="submit" class="registrar-dia">Salvar Alterações</button>
                 </div>
 
             </form>
