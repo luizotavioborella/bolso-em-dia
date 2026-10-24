@@ -1,9 +1,11 @@
+
 body {
     background-color: var(--branco-acinzentado);
 }
 
 .titulo-dashboard {
     padding: 18px 4px 4px;
+    position: relative;
 }
 
 .titulo-dashboard p {
@@ -1065,5 +1067,42 @@ body {
     .opcoes-mais-mobile a {
         padding: 6px 10px;
         font-size: 7px;
+    }
+}
+
+.form-previsoes {
+    position: absolute;
+    right: 4px;
+    top: 27px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-baixar-previsoes {
+    height: 44px;
+    padding: 0 18px;
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    border: 1px solid var(--verde-escuro);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-baixar-previsoes:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 766px) {
+    .form-previsoes {
+        position: static;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .btn-baixar-previsoes {
+        width: 100%;
     }
 }
