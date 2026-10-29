@@ -20,7 +20,7 @@ app = Flask(__name__, static_folder='Static', template_folder='Templates', stati
 app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 host = "localhost"
-database = r"C:\Users\Aluno\Desktop\BOLSO-EM-DIA\BANCO.FDB"
+database = r"C:\Users\Aluno\Downloads\bolso-em-dia-main\BANCO.FDB"
 user = "sysdba"
 password = "sysdba"
 
@@ -2488,40 +2488,140 @@ def historico_semanal():
     id_usuario = session['id_usuario']
     cursor = con.cursor()
 
-    hoje = date.today()
-
-    # Calcula o domingo da semana atual
-    inicio_semana = hoje - timedelta(days=(hoje.weekday() + 1) % 7)
-
-    # Calcula o domingo da próxima semana
-    fim_semana = inicio_semana + timedelta(days=7)
-
     try:
         usuario = buscar_dados(id_usuario)
 
-        cursor.execute("""SELECT M.ID_MOVIMENTACAO, M.DATA_MOVIMENTACAO, C.NOME_CATEGORIA, M.DESCRICAO, M.VALOR, M.STATUS, C.COR, C.ICONE
+        hoje = date.today()
+
+        # Recebe o ano e o mês selecionados nos filtros
+        ano_selecionado = request.args.get('ano', hoje.year, type=int)
+        mes_selecionado = request.args.get('mes', hoje.month, type=int)
+
+        # Recebe a semana selecionada, quando existir
+        semana_selecionada = request.args.get('semana', type=int)
+
+        # Busca os anos que possuem movimentações cadastradas
+        cursor.execute("""SELECT DISTINCT EXTRACT(YEAR FROM M.DATA_MOVIMENTACAO)
+            FROM MOVIMENTACAO M
+            WHERE M.ID_USUARIO = ? AND M.STATUS = 1
+            ORDER BY 1 DESC""", (id_usuario,))
+
+        anos_registrados = [int(linha[0]) for linha in cursor.fetchall() if linha[0] is not None]
+
+        # Inclui o ano atual mesmo quando ainda não existem registros
+        if hoje.year not in anos_registrados:
+            anos_registrados.append(hoje.year)
+
+        anos_registrados.sort(reverse=True)
+
+        # Obtém o primeiro dia do mês selecionado
+        primeiro_dia_mes = date(ano_selecionado, mes_selecionado, 1)
+
+        # Calcula o domingo que inicia a primeira semana do mês
+        primeiro_domingo = primeiro_dia_mes - timedelta(
+            days=(primeiro_dia_mes.weekday() + 1) % 7
+        )
+
+        # Ao abrir a página, seleciona a semana atual
+        if semana_selecionada is None:
+            if ano_selecionado == hoje.year and mes_selecionado == hoje.month:
+                semana_selecionada = ((hoje - primeiro_domingo).days // 7) + 1
+            else:
+                semana_selecionada = 1
+
+        # Calcula o domingo da semana selecionada
+        inicio_semana = primeiro_domingo + timedelta(
+            days=(semana_selecionada - 1) * 7
+        )
+
+        # Calcula o domingo seguinte, que encerra a semana
+        fim_semana = inicio_semana + timedelta(days=7)
+
+        # Descobre o primeiro dia do mês seguinte
+        if mes_selecionado == 12:
+            proximo_mes = date(ano_selecionado + 1, 1, 1)
+        else:
+            proximo_mes = date(ano_selecionado, mes_selecionado + 1, 1)
+
+        # Limita o período aos dias do mês selecionado
+        data_inicio = max(inicio_semana, primeiro_dia_mes)
+        fim_periodo = min(fim_semana, proximo_mes)
+
+        # Busca as movimentações ativas do usuário no período escolhido
+        cursor.execute("""SELECT M.DATA_MOVIMENTACAO, C.NOME_CATEGORIA, M.DESCRICAO, M.VALOR, M.TIPO, C.COR, C.ICONE, M.ID_DIA_TRABALHADO, M.ID_SERVICO_EXTRA
             FROM MOVIMENTACAO M
             LEFT JOIN CATEGORIA C ON C.ID_CATEGORIA = M.ID_CATEGORIA
-            WHERE M.ID_USUARIO = ? AND M.DATA_MOVIMENTACAO >= ? AND M.DATA_MOVIMENTACAO < ?
-            ORDER BY M.DATA_MOVIMENTACAO DESC""", (id_usuario, inicio_semana, fim_semana))
-        historico = cursor.fetchall()
+            WHERE M.ID_USUARIO = ? AND M.STATUS = 1 AND M.DATA_MOVIMENTACAO >= ? AND M.DATA_MOVIMENTACAO < ?
+            ORDER BY M.DATA_MOVIMENTACAO DESC""", (id_usuario, data_inicio, fim_periodo))
 
-        cursor.execute("""SELECT cast(COALESCE(SUM(VALOR), 0) as double precision) FROM MOVIMENTACAO WHERE ID_USUARIO = ? AND TIPO = 1 AND STATUS = 1""", (id_usuario,))
-        total_despesas = cursor.fetchone()[0]
+        movimentacoes = cursor.fetchall()
 
-        cursor.execute("""SELECT COUNT(*) FROM MOVIMENTACAO WHERE ID_USUARIO = ? AND TIPO = 1 AND STATUS = 1""",(id_usuario,))
-        quantidade_despesas = cursor.fetchone()[0]
+        # Prepara os registros e os totais da semana
+        registros_semana = []
+        total_ganhos = 0
+        total_despesas = 0
+        quantidade_ganhos = 0
+        quantidade_despesas = 0
 
-        cursor.execute("""SELECT cast(COALESCE(SUM(VALOR), 0) as double precision) FROM MOVIMENTACAO WHERE ID_USUARIO = ? AND TIPO = 2 AND STATUS = 1""",(id_usuario,))
-        total_ganhos = cursor.fetchone()[0]
+        for movimentacao in movimentacoes:
 
-        cursor.execute("""SELECT COUNT(*) FROM MOVIMENTACAO WHERE ID_USUARIO = ? AND TIPO = 2 AND STATUS = 1""",(id_usuario,))
-        quantidade_ganhos = cursor.fetchone()[0]
+            # Obtém a categoria da movimentação
+            nome_categoria = movimentacao[1]
 
+            # Identifica receitas sem categoria cadastrada
+            if not nome_categoria:
+                if movimentacao[7]:
+                    nome_categoria = 'Dia Trabalhado'
+                elif movimentacao[8]:
+                    nome_categoria = 'Serviço Extra'
+                elif movimentacao[4] == 2:
+                    nome_categoria = 'Receita'
+                else:
+                    nome_categoria = 'Despesa'
+
+            valor = float(movimentacao[3])
+
+            # Adiciona a movimentação à lista do histórico
+            registros_semana.append({
+                'data': movimentacao[0].strftime('%d/%m/%Y'),
+                'categoria': nome_categoria,
+                'descricao': movimentacao[2],
+                'valor': valor,
+                'tipo': movimentacao[4],
+                'cor': movimentacao[5],
+                'icone': movimentacao[6]
+            })
+
+            # Soma os ganhos e despesas apenas da semana selecionada
+            if movimentacao[4] == 1:
+                total_despesas += valor
+                quantidade_despesas += 1
+            else:
+                total_ganhos += valor
+                quantidade_ganhos += 1
+
+        # Calcula o saldo da semana
         saldo_semana = total_ganhos - total_despesas
 
+        # Último dia exibido no período
+        data_fim = fim_periodo - timedelta(days=1)
+
         return render_template(
-            'historico_semanal.html', usuario=usuario, historico=historico, total_despesas=total_despesas, total_ganhos=total_ganhos,saldo_semana=saldo_semana, quantidade_ganhos=quantidade_ganhos, quantidade_despesas=quantidade_despesas)
+            'historico_semanal.html',
+            usuario=usuario,
+            anos_registrados=anos_registrados,
+            ano_selecionado=ano_selecionado,
+            mes_selecionado=mes_selecionado,
+            semana_selecionada=semana_selecionada,
+            data_inicio=data_inicio,
+            data_fim=data_fim,
+            registros_semana=registros_semana,
+            total_ganhos=total_ganhos,
+            total_despesas=total_despesas,
+            saldo_semana=saldo_semana,
+            quantidade_ganhos=quantidade_ganhos,
+            quantidade_despesas=quantidade_despesas
+        )
 
     except Exception as e:
         con.rollback()
@@ -2530,7 +2630,6 @@ def historico_semanal():
 
     finally:
         cursor.close()
-
 
 if __name__ == "__main__":
     app.run(debug=True)
