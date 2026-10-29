@@ -1,0 +1,233 @@
+.titulo-historico {
+    margin: 22px 0 18px;
+}
+
+.titulo-historico p {
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.titulo-historico h1 {
+    margin-bottom: 5px;
+    font-size: 25px;
+}
+
+.filtros-historico {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.filtro-item {
+    width: 220px;
+    padding: 10px 12px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 10px;
+}
+
+.filtro-item .label-padrao {
+    margin-bottom: 7px;
+    font-size: 11px;
+}
+
+.filtro-item .select-padrao {
+    min-height: 36px;
+    padding: 7px 9px;
+    font-size: 12px;
+    border-color: var(--cinza-claro);
+    border-radius: 7px;
+}
+
+.selecao-com-icone {
+    position: relative;
+    width: 100%;
+}
+
+.selecao-com-icone .icone-filtro {
+    position: absolute;
+    left: 10px;
+    top: 9px;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.selecao-com-icone .select-padrao {
+    width: 100%;
+    padding-left: 36px;
+}
+
+.resumo-semanal {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.card-resumo {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+    padding: 14px;
+    margin-bottom: 0;
+    border-radius: 10px;
+}
+
+.icone-resumo {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 9px;
+    text-align: center;
+}
+
+.icone-ganhos,
+.icone-saldo {
+    background-color: var(--verde-clarinho);
+    color: var(--verde-escuro);
+}
+
+.icone-despesas {
+    background-color: var(--vermelho-clarinho);
+    color: var(--vermelho);
+}
+
+.dados-resumo {
+    min-width: 0;
+}
+
+.dados-resumo p {
+    margin-bottom: 5px;
+    font-size: 11px;
+}
+
+.dados-resumo h2 {
+    margin: 0 0 4px;
+    font-size: 19px;
+    overflow-wrap: anywhere;
+}
+
+.dados-resumo span {
+    color: var(--cinza-escuro);
+    font-size: 10px;
+}
+
+.valor-ganhos {
+    color: var(--verde-medio);
+}
+
+.valor-despesas {
+    color: var(--vermelho);
+}
+
+.tabela-historico-container {
+    padding: 15px;
+    margin-bottom: 0;
+    border-radius: 10px;
+}
+
+.titulo-tabela {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.icone-titulo-tabela {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    background-color: var(--verde-clarinho);
+    color: var(--verde-escuro);
+}
+
+.titulo-tabela h2 {
+    margin: 0 0 4px;
+    font-size: 14px;
+}
+
+.titulo-tabela p {
+    margin: 0;
+    color: var(--cinza-escuro);
+    font-size: 10px;
+}
+
+.tabela-ajuste {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabela-historico {
+    width: 100%;
+    min-width: 500px;
+    border-collapse: collapse;
+    background-color: var(--branco);
+}
+
+.tabela-historico th {
+    height: 30px;
+    padding: 8px 10px;
+    background-color: var(--branco-acinzentado);
+    color: var(--cinza-escuro);
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tabela-historico td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--branco-acinzentado);
+    color: var(--azul-cinzento-escuro);
+    font-size: 10px;
+}
+
+.tabela-historico tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-historico tbody tr:hover {
+    background-color: var(--branco);
+}
+
+.tabela-historico th:last-child,
+.tabela-historico td:last-child {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.categoria-registro {
+    color: var(--verde-escuro);
+    font-weight: 600;
+}
+
+.valor-tabela-ganho {
+    color: var(--verde-medio);
+    font-weight: 700;
+}
+
+.valor-tabela-despesa {
+    color: var(--vermelho);
+    font-weight: 700;
+}
+
+.tabela-historico {
+    padding: 25px 10px;
+    color: var(--cinza-escuro);
+    text-align: center;
+}
