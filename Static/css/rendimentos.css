@@ -200,7 +200,8 @@
 
 .tabela-rendimentos-container {
     width: 100%;
-    overflow-x: auto;
+    overflow: auto;
+    max-height: 400px;
 }
 
 .tabela-rendimentos {
