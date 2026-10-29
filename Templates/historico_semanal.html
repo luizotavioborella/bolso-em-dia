@@ -101,35 +101,70 @@
             <p>Visualize seus ganhos e despesas ao longo do mês.</p>
         </section>
 
-        <form method="POST" action="{{ url_for('historico_semanal') }}" class="filtros-historico" id="form-filtros">
+
+        <form method="GET"
+              action="{{ url_for('historico_semanal') }}"
+              class="filtros-historico"
+              id="form-filtros">
+
             <div class="filtro-item">
-                <label for="filtro-mes" class="label-padrao">Mês</label>
+                <label for="filtro-ano" class="label-padrao">
+                    Ano
+                </label>
 
                 <div class="selecao-com-icone">
-                    <img class="icone-filtro" src="{{ url_for('static', filename='uploads/calendar-azul.png') }}" alt="">
+                    <img class="icone-filtro"
+                         src="{{ url_for('static', filename='uploads/calendar-azul.png') }}"
+                         alt="">
 
-                    <select name="mes" id="filtro-mes" class="select-padrao">
-                        {% for mes in meses %}
-                            <option value="{{ mes.numero }}" {% if mes.numero == mes_selecionado %} selected {% endif %}>
-                                {{ mes.nome }}
-                            </option>
-                        {% endfor %}
+                    <select name="ano"
+                            id="filtro-ano"
+                            class="select-padrao">
+
+                        <option value="">Selecione o ano</option>
+
                     </select>
                 </div>
             </div>
 
             <div class="filtro-item">
-                <label for="filtro-semana" class="label-padrao">Semana</label>
+                <label for="filtro-mes" class="label-padrao">
+                    Mês
+                </label>
 
                 <div class="selecao-com-icone">
-                    <img class="icone-filtro" src="{{ url_for('static', filename='uploads/calendar-azul.png') }}" alt="">
+                    <img class="icone-filtro"
+                         src="{{ url_for('static', filename='uploads/calendar-azul.png') }}"
+                         alt="">
 
-                    <select name="semana" id="filtro-semana" class="select-padrao">
-                        {% for semana in semanas %}
-                            <option value="{{ semana.numero }}" {% if semana.numero == semana_selecionada %} selected {% endif %}>
-                                {{ semana.nome }}
-                            </option>
-                        {% endfor %}
+                    <select name="mes"
+                            id="filtro-mes"
+                            class="select-padrao"
+                            disabled>
+
+                        <option value="">Selecione o mês</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="filtro-item">
+                <label for="filtro-semana" class="label-padrao">
+                    Semana
+                </label>
+
+                <div class="selecao-com-icone">
+                    <img class="icone-filtro"
+                         src="{{ url_for('static', filename='uploads/calendar-azul.png') }}"
+                         alt="">
+
+                    <select name="semana"
+                            id="filtro-semana"
+                            class="select-padrao"
+                            disabled>
+
+                        <option value="">Selecione a semana</option>
+
                     </select>
                 </div>
             </div>
@@ -194,9 +229,6 @@
 
                 <div>
                     <h2>Registros da semana</h2>
-                    <p>
-                        Dias {{ dia_inicio }} a {{ dia_fim }} de {{ meses[mes_selecionado - 1].nome }} de {{ ano }}
-                    </p>
                 </div>
             </div>
 
