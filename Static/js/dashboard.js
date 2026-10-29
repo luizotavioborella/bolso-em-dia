@@ -73,8 +73,7 @@ const grafico = new Chart(ctx, {
                     label: function(context) {
 
                         // Mostra o valor da barra em reais com duas casas decimais
-                        return 'R$ ' + context.raw.toFixed(2)
-                    }
+                        return 'R$ ' + context.raw.toFixed(2).replace('.', ',')                         }
                 }
             }
         },
@@ -115,7 +114,7 @@ function formatarDinheiro(valor) {
 
     // Converte o valor para número e mantém duas casas decimais
     // Depois adiciona R$ antes do resultado
-    return 'R$ ' + Number(valor).toFixed(2)
+    return 'R$ ' + Number(valor).toFixed(2).replace('.', ',')
 }
 
 // Função responsável por atualizar as setas e porcentagens dos indicadores
