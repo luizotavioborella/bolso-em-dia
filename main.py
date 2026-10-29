@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, send_file
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import fdb
 from fpdf import FPDF
 
@@ -20,7 +20,7 @@ app = Flask(__name__, static_folder='Static', template_folder='Templates', stati
 app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 host = "localhost"
-database = r"C:\Users\Aluno\Downloads\bolso-em-dia-main\BANCO.FDB"
+database = r"C:\Users\Aluno\Desktop\BOLSO-EM-DIA\BANCO.FDB"
 user = "sysdba"
 password = "sysdba"
 
@@ -1875,6 +1875,7 @@ def excluir_usuario():
         cursor.close()
 
 
+# ESTUDAR A PARTIR DAQUI (ALÉM DA PARTE DE ADICIONAR FOTO EM editar_usuário)
 
 @app.route('/relatorios')
 def relatorios():
@@ -2476,6 +2477,59 @@ def baixar_previsoes():
     pdf_path = f'previsoes_financeiras_{ano}_{id_usuario}.pdf'
     pdf.output(pdf_path)
     return send_file(pdf_path, as_attachment=True, mimetype='application/pdf')
+
+@app.route('/historico_semanal')
+def historico_semanal():
+
+    if 'id_usuario' not in session:
+        flash('É necessário realizar o login', 'error')
+        return redirect(url_for('pagina_login'))
+
+    id_usuario = session['id_usuario']
+    cursor = con.cursor()
+
+    hoje = date.today()
+
+    # Calcula o domingo da semana atual
+    inicio_semana = hoje - timedelta(days=(hoje.weekday() + 1) % 7)
+
+    # Calcula o domingo da próxima semana
+    fim_semana = inicio_semana + timedelta(days=7)
+
+    try:
+        usuario = buscar_dados(id_usuario)
+
+        cursor.execute("""SELECT M.ID_MOVIMENTACAO, M.DATA_MOVIMENTACAO, C.NOME_CATEGORIA, M.DESCRICAO, M.VALOR, M.STATUS, C.COR, C.ICONE
+            FROM MOVIMENTACAO M
+            LEFT JOIN CATEGORIA C ON C.ID_CATEGORIA = M.ID_CATEGORIA
+            WHERE M.ID_USUARIO = ? AND M.DATA_MOVIMENTACAO >= ? AND M.DATA_MOVIMENTACAO < ?
+            ORDER BY M.DATA_MOVIMENTACAO DESC""", (id_usuario, inicio_semana, fim_semana))
+        historico = cursor.fetchall()
+
+        cursor.execute("""SELECT cast(COALESCE(SUM(VALOR), 0) as double precision) FROM MOVIMENTACAO WHERE ID_USUARIO = ? AND TIPO = 1 AND STATUS = 1""", (id_usuario,))
+        total_despesas = cursor.fetchone()[0]
+
+        cursor.execute("""SELECT COUNT(*) FROM MOVIMENTACAO WHERE ID_USUARIO = ? AND TIPO = 1 AND STATUS = 1""",(id_usuario,))
+        quantidade_despesas = cursor.fetchone()[0]
+
+        cursor.execute("""SELECT cast(COALESCE(SUM(VALOR), 0) as double precision) FROM MOVIMENTACAO WHERE ID_USUARIO = ? AND TIPO = 2 AND STATUS = 1""",(id_usuario,))
+        total_ganhos = cursor.fetchone()[0]
+
+        cursor.execute("""SELECT COUNT(*) FROM MOVIMENTACAO WHERE ID_USUARIO = ? AND TIPO = 2 AND STATUS = 1""",(id_usuario,))
+        quantidade_ganhos = cursor.fetchone()[0]
+
+        saldo_semana = total_ganhos - total_despesas
+
+        return render_template(
+            'historico_semanal.html', usuario=usuario, historico=historico, total_despesas=total_despesas, total_ganhos=total_ganhos,saldo_semana=saldo_semana, quantidade_ganhos=quantidade_ganhos, quantidade_despesas=quantidade_despesas)
+
+    except Exception as e:
+        con.rollback()
+        flash(f'Ocorreu um erro: {e}', 'error')
+        return redirect(url_for('dashboard'))
+
+    finally:
+        cursor.close()
 
 
 if __name__ == "__main__":
