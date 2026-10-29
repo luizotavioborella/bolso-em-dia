@@ -20,7 +20,7 @@ app = Flask(__name__, static_folder='Static', template_folder='Templates', stati
 app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 host = "localhost"
-database = r"C:\Users\Aluno\Downloads\bolso-em-dia-main\BANCO.FDB"
+database = r"C:\Users\Aluno\Desktop\BOLSO-EM-DIA\BANCO.FDB"
 user = "sysdba"
 password = "sysdba"
 
@@ -2493,16 +2493,13 @@ def historico_semanal():
 
         hoje = date.today()
 
-        # Recebe o ano e o mês selecionados nos filtros
+        # Recebe os filtros selecionados pelo usuário
         ano_selecionado = request.args.get('ano', hoje.year, type=int)
-        mes_selecionado = request.args.get('mes', hoje.month, type=int)
-
-        # Recebe a semana selecionada, quando existir
+        mes_selecionado = request.args.get('mes', type=int)
         semana_selecionada = request.args.get('semana', type=int)
 
         # Busca os anos que possuem movimentações cadastradas
-        cursor.execute("""SELECT DISTINCT EXTRACT(YEAR FROM M.DATA_MOVIMENTACAO)
-            FROM MOVIMENTACAO M
+        cursor.execute("""SELECT DISTINCT EXTRACT(YEAR FROM M.DATA_MOVIMENTACAO) FROM MOVIMENTACAO M
             WHERE M.ID_USUARIO = ? AND M.STATUS = 1
             ORDER BY 1 DESC""", (id_usuario,))
 
@@ -2514,40 +2511,52 @@ def historico_semanal():
 
         anos_registrados.sort(reverse=True)
 
-        # Obtém o primeiro dia do mês selecionado
-        primeiro_dia_mes = date(ano_selecionado, mes_selecionado, 1)
+        # Ao abrir a página pela primeira vez, mostra a semana atual
+        if not request.args:
+            mes_selecionado = hoje.month
 
-        # Calcula o domingo que inicia a primeira semana do mês
-        primeiro_domingo = primeiro_dia_mes - timedelta(
-            days=(primeiro_dia_mes.weekday() + 1) % 7
-        )
+            primeiro_dia_mes = date(ano_selecionado, mes_selecionado, 1)
+            primeiro_domingo = primeiro_dia_mes - timedelta(days=(primeiro_dia_mes.weekday() + 1) % 7)
 
-        # Ao abrir a página, seleciona a semana atual
-        if semana_selecionada is None:
-            if ano_selecionado == hoje.year and mes_selecionado == hoje.month:
-                semana_selecionada = ((hoje - primeiro_domingo).days // 7) + 1
-            else:
-                semana_selecionada = 1
+            semana_selecionada = ((hoje - primeiro_domingo).days // 7) + 1
 
-        # Calcula o domingo da semana selecionada
-        inicio_semana = primeiro_domingo + timedelta(
-            days=(semana_selecionada - 1) * 7
-        )
+        # Quando somente o ano está selecionado, busca o ano inteiro
+        if mes_selecionado is None:
+            data_inicio = date(ano_selecionado, 1, 1)
+            fim_periodo = date(ano_selecionado + 1, 1, 1)
+            titulo_periodo = 'do ano'
 
-        # Calcula o domingo seguinte, que encerra a semana
-        fim_semana = inicio_semana + timedelta(days=7)
-
-        # Descobre o primeiro dia do mês seguinte
-        if mes_selecionado == 12:
-            proximo_mes = date(ano_selecionado + 1, 1, 1)
         else:
-            proximo_mes = date(ano_selecionado, mes_selecionado + 1, 1)
+            # Obtém o primeiro dia do mês selecionado
+            primeiro_dia_mes = date(ano_selecionado, mes_selecionado, 1)
 
-        # Limita o período aos dias do mês selecionado
-        data_inicio = max(inicio_semana, primeiro_dia_mes)
-        fim_periodo = min(fim_semana, proximo_mes)
+            # Descobre o primeiro dia do mês seguinte
+            if mes_selecionado == 12:
+                proximo_mes = date(ano_selecionado + 1, 1, 1)
+            else:
+                proximo_mes = date(ano_selecionado, mes_selecionado + 1, 1)
 
-        # Busca as movimentações ativas do usuário no período escolhido
+            # Quando não existe semana selecionada, busca o mês inteiro
+            if semana_selecionada is None:
+                data_inicio = primeiro_dia_mes
+                fim_periodo = proximo_mes
+                titulo_periodo = 'do mês'
+
+            else:
+                # Calcula o domingo que inicia a primeira semana do mês
+                primeiro_domingo = primeiro_dia_mes - timedelta(days=(primeiro_dia_mes.weekday() + 1) % 7)
+
+                # Calcula o início e o fim da semana selecionada
+                inicio_semana = primeiro_domingo + timedelta(days=(semana_selecionada - 1) * 7)
+
+                fim_semana = inicio_semana + timedelta(days=7)
+
+                # Limita o período aos dias do mês selecionado
+                data_inicio = max(inicio_semana, primeiro_dia_mes)
+                fim_periodo = min(fim_semana, proximo_mes)
+                titulo_periodo = 'da semana'
+
+        # Busca as movimentações ativas do período selecionado
         cursor.execute("""SELECT M.DATA_MOVIMENTACAO, C.NOME_CATEGORIA, M.DESCRICAO, M.VALOR, M.TIPO, C.COR, C.ICONE, M.ID_DIA_TRABALHADO, M.ID_SERVICO_EXTRA
             FROM MOVIMENTACAO M
             LEFT JOIN CATEGORIA C ON C.ID_CATEGORIA = M.ID_CATEGORIA
@@ -2556,7 +2565,7 @@ def historico_semanal():
 
         movimentacoes = cursor.fetchall()
 
-        # Prepara os registros e os totais da semana
+        # Prepara os registros e os totais do período
         registros_semana = []
         total_ganhos = 0
         total_despesas = 0
@@ -2565,34 +2574,20 @@ def historico_semanal():
 
         for movimentacao in movimentacoes:
 
-            # Obtém a categoria da movimentação
-            nome_categoria = movimentacao[1]
-
-            # Identifica receitas sem categoria cadastrada
-            if not nome_categoria:
-                if movimentacao[7]:
-                    nome_categoria = 'Dia Trabalhado'
-                elif movimentacao[8]:
-                    nome_categoria = 'Serviço Extra'
-                elif movimentacao[4] == 2:
-                    nome_categoria = 'Receita'
-                else:
-                    nome_categoria = 'Despesa'
-
             valor = float(movimentacao[3])
 
             # Adiciona a movimentação à lista do histórico
             registros_semana.append({
                 'data': movimentacao[0].strftime('%d/%m/%Y'),
-                'categoria': nome_categoria,
+                'categoria': movimentacao[1],
                 'descricao': movimentacao[2],
-                'valor': valor,
+                'valor': float(movimentacao[3]),
                 'tipo': movimentacao[4],
                 'cor': movimentacao[5],
                 'icone': movimentacao[6]
             })
 
-            # Soma os ganhos e despesas apenas da semana selecionada
+            # Soma os ganhos e despesas do período selecionado
             if movimentacao[4] == 1:
                 total_despesas += valor
                 quantidade_despesas += 1
@@ -2600,10 +2595,10 @@ def historico_semanal():
                 total_ganhos += valor
                 quantidade_ganhos += 1
 
-        # Calcula o saldo da semana
+        # Calcula o saldo do período
         saldo_semana = total_ganhos - total_despesas
 
-        # Último dia exibido no período
+        # Obtém a última data exibida no período
         data_fim = fim_periodo - timedelta(days=1)
 
         return render_template(
@@ -2613,6 +2608,7 @@ def historico_semanal():
             ano_selecionado=ano_selecionado,
             mes_selecionado=mes_selecionado,
             semana_selecionada=semana_selecionada,
+            titulo_periodo=titulo_periodo,
             data_inicio=data_inicio,
             data_fim=data_fim,
             registros_semana=registros_semana,
