@@ -42,7 +42,7 @@
                 <img src="{{ url_for('static', filename='uploads/perfil-relatorios.png') }}" alt="">
                 <span>Relatórios</span>
             </a>
-            <a href="{{ url_for('historico_semanal') ">
+            <a href="{{ url_for('historico_semanal') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-historico.png') }}" alt="">
                 <span>Histórico Semanal</span>
             </a>
@@ -193,12 +193,12 @@
                                 <td>
                                     {% if rendimento['tipo'] == 'dia_trabalhado' %}
                                         <div class="categoria-rendimento dia-trabalhado">
-                                            <img src="{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}" alt="">
+                                            <span class="icone-categoria-rendimento" style="background-color: var(--verde-escuro); -webkit-mask-image: url('{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}'); mask-image: url('{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}');"></span>
                                             <span>Dia Trabalhado</span>
                                         </div>
-                                    {% elif rendimento['tipo'] == 'servico_extra' %}
+                                    {% elif rendimento['tipo'] == 'servico_extra' or rendimento['categoria'] == 'Serviço Extra' %}
                                         <div class="categoria-rendimento servico-extra">
-                                            <img src="{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}" alt="">
+                                            <span class="icone-categoria-rendimento" style="background-color: #8A5B00; -webkit-mask-image: url('{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}'); mask-image: url('{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}');"></span>
                                             <span>Serviço Extra</span>
                                         </div>
                                     {% else %}
@@ -218,7 +218,7 @@
 
                                 <td>{{ rendimento['descricao'] }}</td>
 
-                                <td class="valor-rendimento">{{ "R$ %.2f"|format(rendimento['valor']) }}</td>
+                                <td class="valor-rendimento">{{ "R$ %.2f"|format(rendimento['valor'])|replace(".", ",") }}</td>
 
                                 <td>
                                     {% if rendimento['status'] == 1 %}

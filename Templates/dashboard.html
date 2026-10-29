@@ -109,7 +109,7 @@
                 <div class="informacoes-resumo">
                     <p class="titulo-card">Ganho no ano</p>
 
-                    <h2 id="ganho-ano" class="valor-card valor-verde">{{ "R$ %.2f"|format(ganho_ano) }}</h2>
+                    <h2 id="ganho-ano" class="valor-card valor-verde">{{ "R$ %.2f"|format(ganho_ano)|replace(".", ",") }}</h2>
 
                     <div class="comparacao-card">
                         {% if ganho_subiu %}
@@ -133,7 +133,7 @@
                 <div class="informacoes-resumo">
                     <p class="titulo-card">Despesas no ano</p>
 
-                    <h2 id="despesas-ano" class="valor-card valor-vermelho">{{ "R$ %.2f"|format(despesas_ano) }}</h2>
+                    <h2 id="despesas-ano" class="valor-card valor-vermelho">{{ "R$ %.2f"|format(despesas_ano)|replace(".", ",") }}</h2>
 
                     <div class="comparacao-card">
                         {% if despesas_subiram %}
@@ -157,7 +157,7 @@
                 <div class="informacoes-resumo">
                     <p class="titulo-card">Saldo atual</p>
 
-                    <h2 id="saldo-atual" class="valor-card {% if saldo_negativo %}valor-vermelho{% else %}valor-verde{% endif %}">{{ "R$ %.2f"|format(saldo_atual) }}</h2>
+                    <h2 id="saldo-atual" class="valor-card {% if saldo_negativo %}valor-vermelho{% else %}valor-verde{% endif %}">{{ "R$ %.2f"|format(saldo_atual)|replace(".", ",") }}</h2>
 
                     <div class="comparacao-card">
                         {% if saldo_subiu %}
@@ -259,7 +259,7 @@
                 <div>
                     <p>Média de ganho por dia</p>
 
-                    <h2 id="media-ganho">{{ "R$ %.2f"|format(media_ganho_dia) }}</h2>
+                    <h2 id="media-ganho">{{ "R$ %.2f"|format(media_ganho_dia)|replace(".", ",") }}</h2>
 
                     <div class="comparacao-card">
                         {% if media_subiu %}
@@ -285,7 +285,7 @@
                 <div>
                     <p>Saldo projetado mensal</p>
 
-                    <h2 id="saldo-projetado-mensal">{{ "R$ %.2f"|format(saldo_projetado_mensal) }}</h2>
+                    <h2 id="saldo-projetado-mensal">{{ "R$ %.2f"|format(saldo_projetado_mensal)|replace(".", ",") }}</h2>
 
                     <div class="comparacao-card">
                         {% if projecao_subiu %}
@@ -309,7 +309,7 @@
                 <div>
                     <p>Saldo projetado anual</p>
 
-                    <h2 id="saldo-projetado-anual">{{ "R$ %.2f"|format(saldo_projetado_anual) }}</h2>
+                    <h2 id="saldo-projetado-anual">{{ "R$ %.2f"|format(saldo_projetado_anual)|replace(".", ",") }}</h2>
 
                     <div class="comparacao-card">
                         {% if projecao_subiu %}

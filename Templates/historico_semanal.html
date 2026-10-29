@@ -144,7 +144,7 @@
                 <div class="selecao-com-icone">
                     <img src="{{ url_for('static', filename='uploads/calendar-azul.png') }}" alt="">
 
-                    <select name="semana" id="filtro-semana" data-semana="{{ semana_selecionada }}">
+                    <select name="semana" id="filtro-semana" data-semana="{{ semana_selecionada or '' }}">
                         <option value="">Selecione a semana</option>
                     </select>
                 </div>
@@ -159,7 +159,7 @@
 
                 <div class="dados-resumo">
                     <p>Total de ganhos</p>
-                    <h2 class="valor-ganhos">R$ {{ "%.2f"|format(total_ganhos) }}</h2>
+                    <h2 class="valor-ganhos">R$ {{ "%.2f"|format(total_ganhos)|replace(".", ",") }}</h2>
                     <span>{{ quantidade_ganhos }} registro(s)</span>
                 </div>
             </div>
@@ -171,7 +171,7 @@
 
                 <div class="dados-resumo">
                     <p>Total de despesas</p>
-                    <h2 class="valor-despesas">R$ {{ "%.2f"|format(total_despesas) }}</h2>
+                    <h2 class="valor-despesas">R$ {{ "%.2f"|format(total_despesas)|replace(".", ",") }}</h2>
                     <span>{{ quantidade_despesas }} registro(s)</span>
                 </div>
             </div>
@@ -182,9 +182,9 @@
                 </div>
 
                 <div class="dados-resumo">
-                    <p>Saldo da semana</p>
+                    <p>Saldo {{ titulo_periodo }}</p>
                     <h2 class="{% if saldo_semana < 0 %}valor-despesas{% else %}valor-ganhos{% endif %}">
-                        R$ {{ "%.2f"|format(saldo_semana) }}
+                        R$ {{ "%.2f"|format(saldo_semana)|replace(".", ",") }}
                     </h2>
                 </div>
             </div>
@@ -197,7 +197,7 @@
                 </div>
 
                 <div>
-                    <h2>Registros da semana <span>({{ registros_semana|length }})</span></h2>
+                    <h2>Registros {{ titulo_periodo }} <span>({{ registros_semana|length }})</span></h2>
                     <p>{{ data_inicio.strftime('%d/%m/%Y') }} a {{ data_fim.strftime('%d/%m/%Y') }}</p>
                 </div>
             </div>
@@ -206,31 +206,54 @@
                 <table class="tabela-historico">
                     <thead>
                         <tr>
-                            <th>Data</th>
+                            <th>
+                                <button type="button" class="botao-ordenacao" id="ordenar-data">
+                                    <span>Data</span>
+                                    <img src="{{ url_for('static', filename='uploads/duas-setas-cinza.png') }}" alt="">
+                                </button>
+                            </th>
+
                             <th>Categoria</th>
                             <th>Descrição</th>
-                            <th>Valor</th>
+
+                            <th>
+                                <button type="button" class="botao-ordenacao" id="ordenar-valor">
+                                    <span>Valor</span>
+                                    <img src="{{ url_for('static', filename='uploads/duas-setas-cinza.png') }}" alt="">
+                                </button>
+                            </th>
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id="tabela-historico">
                         {% for registro in registros_semana %}
-                            <tr>
+                            <tr class="item-historico" data-data="{{ registro.data }}" data-valor="{{ registro.valor }}">
                                 <td>{{ registro.data }}</td>
 
                                 <td>
-                                    {% if registro.cor %}
-                                        <span class="categoria-registro" style="background-color: #{{ registro.cor }}20; color: #{{ registro.cor }};">
-                                            {% if registro.icone %}
-                                                <span class="icone-categoria-registro" style="background-color: #{{ registro.cor }}; -webkit-mask-image: url('{{ url_for('static', filename='svg/' ~ registro.icone) }}'); mask-image: url('{{ url_for('static', filename='svg/' ~ registro.icone) }}');"></span>
-                                            {% endif %}
+                                    {% if registro.categoria == 'Dia Trabalhado' %}
+                                        <div class="categoria-registro dia-trabalhado">
+                                            <span class="icone-categoria-registro" style="background-color: var(--verde-escuro); -webkit-mask-image: url('{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}'); mask-image: url('{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}');"></span>
+                                            <span>Dia Trabalhado</span>
+                                        </div>
 
-                                            {{ registro.categoria }}
-                                        </span>
+                                    {% elif registro.categoria == 'Serviço Extra' %}
+                                        <div class="categoria-registro servico-extra">
+                                            <span class="icone-categoria-registro" style="background-color: #8A5B00; -webkit-mask-image: url('{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}'); mask-image: url('{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}');"></span>
+                                            <span>Serviço Extra</span>
+                                        </div>
+
+                                    {% elif registro.cor and registro.icone %}
+                                        <div class="categoria-registro" style="background-color: #{{ registro.cor }}20; color: #{{ registro.cor }};">
+                                            <span class="icone-categoria-registro" style="background-color: #{{ registro.cor }}; -webkit-mask-image: url('{{ url_for('static', filename='svg/' ~ registro.icone) }}'); mask-image: url('{{ url_for('static', filename='svg/' ~ registro.icone) }}');"></span>
+                                            <span>{{ registro.categoria }}</span>
+                                        </div>
+
                                     {% else %}
-                                        <span class="categoria-registro">
-                                            {{ registro.categoria }}
-                                        </span>
+                                        <div class="categoria-registro receita">
+                                            <img src="{{ url_for('static', filename='uploads/tag-azul-2.png') }}" alt="">
+                                            <span>{{ registro.categoria }}</span>
+                                        </div>
                                     {% endif %}
                                 </td>
 
@@ -239,11 +262,11 @@
                                 <td>
                                     {% if registro.tipo == 1 %}
                                         <span class="valor-tabela-despesa">
-                                            - R$ {{ "%.2f"|format(registro.valor) }}
+                                            - R$ {{ "%.2f"|format(registro.valor)|replace(".", ",") }}
                                         </span>
                                     {% else %}
                                         <span class="valor-tabela-ganho">
-                                            + R$ {{ "%.2f"|format(registro.valor) }}
+                                            + R$ {{ "%.2f"|format(registro.valor)|replace(".", ",") }}
                                         </span>
                                     {% endif %}
                                 </td>
@@ -251,7 +274,7 @@
                         {% else %}
                             <tr>
                                 <td colspan="4" class="sem-registros">
-                                    Nenhuma movimentação encontrada nesta semana.
+                                    Nenhuma movimentação encontrada neste período.
                                 </td>
                             </tr>
                         {% endfor %}

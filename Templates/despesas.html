@@ -49,7 +49,7 @@
                 <span>Relatórios</span>
             </a>
 
-            <a href="{{ url_for('historico_semanal') ">
+            <a href="{{ url_for('historico_semanal') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-historico.png') }}" alt="">
                 <span>Histórico Semanal</span>
             </a>
@@ -112,7 +112,7 @@
 
                 <div>
                     <p>Total de despesas</p>
-                    <h2 class="valor-despesa">{{ "R$ %.2f"|format(total_despesas) }}</h2>
+                    <h2 class="valor-despesa">{{ "R$ %.2f"|format(total_despesas)|replace(".", ",") }}</h2>
                 </div>
             </div>
 
@@ -123,7 +123,7 @@
 
                 <div>
                     <p>Despesas este mês</p>
-                    <h2 class="valor-despesa">{{ "R$ %.2f"|format(despesas_mes) }}</h2>
+                    <h2 class="valor-despesa">{{ "R$ %.2f"|format(despesas_mes)|replace(".", ",") }}</h2>
                 </div>
             </div>
 
@@ -242,7 +242,7 @@
 
                                 <td>{{ despesa[3] }}</td>
 
-                                <td class="valor-tabela">{{ "R$ %.2f"|format(despesa[4]) }}</td>
+                                <td class="valor-tabela">{{ "R$ %.2f"|format(despesa[4])|replace(".", ",") }}</td>
 
                                 <td>
                                     {% if despesa[5] == 1 %}

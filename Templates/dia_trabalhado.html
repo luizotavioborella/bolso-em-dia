@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dia_trabalhado.css') }}">
 </head>
-<body class="pagina-sistema">
+<body class="pagina-sistema pagina-cadastro-dia">
     <aside class="menu-lateral">
         <a href="{{ url_for('dashboard') }}" class="seta-voltar">‹</a>
         <img class="logo-perfil" src="{{ url_for('static', filename='uploads/logo-horizontal.png') }}" alt="Bolso em Dia">
@@ -18,31 +18,38 @@
                 <img src="{{ url_for('static', filename='uploads/perfil-dashboard.png') }}" alt="">
                 <span>Dashboard</span>
             </a>
+
             <a href="{{ url_for('rendimentos') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-rendimentos.png') }}" alt="">
                 <span>Rendimentos</span>
             </a>
+
             <a href="{{ url_for('despesas') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-despesas.png') }}" alt="">
                 <span>Despesas</span>
             </a>
+
             <a href="{{ url_for('dia_trabalhado') }}" class="pagina-ativa">
                 <img src="{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}" alt="">
                 <span>Dia Trabalhado</span>
             </a>
+
             <a href="{{ url_for('servico_extra') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}" alt="">
                 <span>Serviço Extra</span>
             </a>
+
             <a href="{{ url_for('todas_categorias') }}">
                 <img src="{{ url_for('static', filename='uploads/tag-azul.png') }}" alt="">
                 <span>Categorias</span>
             </a>
+
             <a href="{{ url_for('relatorios') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-relatorios.png') }}" alt="">
                 <span>Relatórios</span>
             </a>
-            <a href="{{ url_for('historico_semanal') ">
+
+            <a href="{{ url_for('historico_semanal') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-historico.png') }}" alt="">
                 <span>Histórico Semanal</span>
             </a>
@@ -66,6 +73,7 @@
                 {% else %}
                     <img src="{{ url_for('static', filename='Uploads/perfil-usuario-topo.png') }}" alt="Foto padrão">
                 {% endif %}
+
                 <div>
                     <strong>{{ usuario[0].split()[:2] | join(' ') }}</strong>
                     <span>{{ usuario[1] }}</span>
@@ -101,20 +109,38 @@
 
             <form action="{{ url_for('cadastrar_dia_trabalhado') }}" method="POST">
                 <div class="grupo-dia">
-                    <label>Data <span>*</span></label>
+                    <label for="data-dia">Data <span>*</span></label>
 
                     <div class="campo-data">
-                        <input type="date" name="data" required>
-                        <img src="{{ url_for('static', filename='uploads/calendario-azul-escuro.png') }}" alt="">
+                        <div class="icone-campo" id="icone-data-dia">
+                            <img src="{{ url_for('static', filename='uploads/calendar-cinza.png') }}" alt="">
+                        </div>
+
+                        <input type="date" name="data" id="data-dia" required>
                     </div>
                 </div>
 
                 <div class="grupo-dia">
-                    <label>Pacotes coletados <span>*</span></label>
+                    <label for="pacotes-coletados">Pacotes coletados <span>*</span></label>
 
                     <div class="campo-pacotes">
-                        <input type="number" name="pacotes_coletados" min="1" step="1" placeholder="Digite a quantidade de pacotes" required>
-                        <img src="{{ url_for('static', filename='uploads/caixa.png') }}" alt="">
+                        <div class="icone-campo">
+                            <img src="{{ url_for('static', filename='uploads/caixa.png') }}" alt="">
+                        </div>
+
+                        <input type="number" name="pacotes_coletados" id="pacotes-coletados" min="1" step="1" placeholder="Digite a quantidade de pacotes" data-valor-diaria="{{ usuario[6] or 0 }}" data-adicional="{{ usuario[7] or 0 }}" data-min-pacotes="{{ usuario[8] or 0 }}" required>
+                    </div>
+                </div>
+
+                <div class="grupo-dia">
+                    <label>Valor total a receber</label>
+
+                    <div class="campo-valor-total">
+                        <div class="icone-campo">
+                            <img src="{{ url_for('static', filename='uploads/mala-verde.png') }}" alt="">
+                        </div>
+
+                        <strong id="valor-total">R$ 0,00</strong>
                     </div>
                 </div>
 
@@ -125,5 +151,7 @@
             </form>
         </section>
     </main>
+
+    <script src="{{ url_for('static', filename='js/dia_trabalhado.js') }}"></script>
 </body>
 </html>
