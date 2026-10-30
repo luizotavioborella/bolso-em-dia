@@ -172,6 +172,18 @@ body {
     object-fit: contain;
 }
 
+.icone-colorido-categoria {
+    width: 27px;
+    height: 27px;
+    display: block;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
+
 .dados-categoria {
     min-width: 0;
     display: flex;
@@ -871,5 +883,19 @@ body {
     .adicionar-mobile {
         width: 43px;
         height: 43px;
+    }
+}
+
+@media (max-width: 766px) {
+    .icone-colorido-categoria {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 319px) {
+    .icone-colorido-categoria {
+        width: 22px;
+        height: 22px;
     }
 }

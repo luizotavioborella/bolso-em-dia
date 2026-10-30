@@ -201,6 +201,7 @@
 .tabela-rendimentos-container {
     width: 100%;
     overflow: auto;
+    overflow-x: hidden;
     max-height: 400px;
 }
 
@@ -274,7 +275,6 @@
     font-weight: 600;
 }
 
-
 .categoria-rendimento img {
     width: 13px;
     height: 13px;
@@ -343,6 +343,12 @@
 }
 
 .acoes-rendimento a,
+.acoes-rendimento button,
+.acoes-rendimento form {
+    flex-shrink: 0;
+}
+
+.acoes-rendimento a,
 .acoes-rendimento button {
     padding: 0;
     display: flex;
@@ -388,6 +394,144 @@
 
 .menu-mobile-rendimentos {
     display: none;
+}
+
+/* LAPTOP */
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .meus-rendimentos {
+        padding: 12px;
+    }
+
+    .filtros-tabela {
+        gap: 6px;
+    }
+
+    .campo-busca {
+        width: 33%;
+        min-width: 0;
+        padding: 0 9px;
+    }
+
+    .campo-busca input {
+        min-width: 0;
+        font-size: 10px;
+    }
+
+    .filtro-tabela {
+        min-width: 0;
+        padding: 0 6px;
+        gap: 4px;
+    }
+
+    .filtro-tabela > img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .filtro-tabela select {
+        min-width: 0;
+        max-width: 100%;
+        font-size: 9px;
+    }
+
+    .tabela-rendimentos-container {
+        max-height: 400px;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .tabela-rendimentos {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .tabela-rendimentos th,
+    .tabela-rendimentos td {
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 10px;
+    }
+
+    .tabela-rendimentos th:nth-child(1) {
+        width: 12%;
+    }
+
+    .tabela-rendimentos th:nth-child(2) {
+        width: 18%;
+    }
+
+    .tabela-rendimentos th:nth-child(3) {
+        width: 25%;
+    }
+
+    .tabela-rendimentos th:nth-child(4) {
+        width: 16%;
+    }
+
+    .tabela-rendimentos th:nth-child(5) {
+        width: 9%;
+    }
+
+    .tabela-rendimentos th:nth-child(6) {
+        width: 20%;
+    }
+
+    .tabela-rendimentos td:nth-child(1),
+    .tabela-rendimentos td:nth-child(4),
+    .tabela-rendimentos td:nth-child(5) {
+        white-space: nowrap;
+    }
+
+    .tabela-rendimentos td:nth-child(3) {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        overflow-wrap: anywhere;
+        line-height: 15px;
+    }
+
+    .tabela-rendimentos td:nth-child(6) {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .categoria-rendimento {
+        max-width: 100%;
+        padding: 4px 5px;
+        gap: 3px;
+        font-size: 9px;
+        white-space: nowrap;
+    }
+
+    .categoria-rendimento img,
+    .icone-categoria-rendimento {
+        width: 11px;
+        height: 11px;
+    }
+
+    .status-rendimento {
+        font-size: 9px;
+    }
+
+    .acoes-rendimento {
+        display: flex;
+        gap: 6px;
+    }
+
+    .acoes-rendimento img {
+        width: 17px;
+        height: 17px;
+    }
+
+    .acoes-rendimento .inativar-rendimento,
+    .acoes-rendimento .ativar-rendimento {
+        height: 30px;
+        padding: 0 6px;
+        font-size: 9px;
+    }
+
+    .acoes-rendimento-mobile {
+        display: none;
+    }
 }
 
 /* TABLET */
@@ -437,15 +581,107 @@
         min-width: 140px;
     }
 
-    .tabela-rendimentos {
-        min-width: 680px;
+    .tabela-rendimentos-container {
+        max-height: none;
+        overflow: visible;
     }
 
-    .tabela-rendimentos th,
+    .tabela-rendimentos,
+    .tabela-rendimentos tbody,
+    .tabela-rendimentos thead {
+        width: 100%;
+        min-width: 0;
+        display: block;
+    }
+
+    .tabela-rendimentos thead {
+        background-color: transparent;
+        margin-bottom: 5px;
+    }
+
+    .tabela-rendimentos thead tr {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    .tabela-rendimentos thead th {
+        display: none;
+    }
+
+    .tabela-rendimentos thead th:first-child,
+    .tabela-rendimentos thead th:nth-child(4) {
+        height: 32px;
+        padding: 0 12px;
+        display: flex;
+        align-items: center;
+        background-color: var(--cinza-claro);
+        border-radius: 6px;
+    }
+
+    .tabela-rendimentos tr.item-rendimento {
+        width: 100%;
+        min-height: 95px;
+        padding: 12px 4px;
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto 20px;
+        grid-template-rows: auto auto auto;
+        align-items: center;
+        column-gap: 10px;
+        row-gap: 7px;
+        border-bottom: 1px solid var(--cinza-claro);
+    }
+
     .tabela-rendimentos td {
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 10px;
+        width: auto;
+        height: auto;
+        min-width: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+        line-height: 15px;
+        border: none;
+    }
+
+    .tabela-rendimentos td:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+        white-space: nowrap;
+    }
+
+    .tabela-rendimentos td:nth-child(2) {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .tabela-rendimentos td:nth-child(3) {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        display: block;
+        overflow-wrap: anywhere;
+    }
+
+    .tabela-rendimentos td:nth-child(4) {
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: flex-end;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .tabela-rendimentos td:nth-child(5) {
+        grid-column: 2;
+        grid-row: 2;
+        justify-content: flex-end;
+    }
+
+    .tabela-rendimentos td:nth-child(6) {
+        grid-column: 3;
+        grid-row: 1 / 3;
+        justify-content: center;
+        overflow: visible;
     }
 
     .categoria-rendimento {
@@ -453,23 +689,102 @@
     }
 
     .status-rendimento {
+        margin-top: 0;
         font-size: 9px;
     }
 
     .acoes-rendimento {
-        gap: 8px;
+        display: none;
     }
 
-    .acoes-rendimento img {
-        width: 18px;
+    .acoes-rendimento-mobile {
+        display: block;
+        position: relative;
+    }
+
+    .acoes-rendimento-mobile summary {
+        width: 20px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        cursor: pointer;
+    }
+
+    .acoes-rendimento-mobile summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .acoes-rendimento-mobile summary img {
+        width: 4px;
         height: 18px;
+        object-fit: contain;
     }
 
-    .acoes-rendimento .inativar-rendimento,
-    .acoes-rendimento .ativar-rendimento {
-        height: 31px;
-        padding: 0 8px;
-        font-size: 9px;
+    .menu-acoes-mobile {
+        width: 160px;
+        padding: 6px;
+        position: absolute;
+        top: 0;
+        right: 22px;
+        z-index: 30;
+        background-color: var(--branco);
+        border: 1px solid var(--cinza-claro);
+        border-radius: 7px;
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.18);
+    }
+
+    .menu-acoes-mobile form {
+        width: 100%;
+        margin: 0;
+    }
+
+    .menu-acoes-mobile a,
+    .menu-acoes-mobile button {
+        width: 100%;
+        min-height: 33px;
+        padding: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: none;
+        border: none;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 10px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .menu-acoes-mobile a {
+        color: var(--azul);
+    }
+
+    .menu-acoes-mobile button {
+        color: var(--vermelho);
+    }
+
+    .menu-acoes-mobile .ativar-rendimento {
+        color: var(--verde-escuro);
+        font-weight: 700;
+    }
+
+    .menu-acoes-mobile .inativar-rendimento {
+        color: var(--vermelho);
+        font-weight: 700;
+    }
+
+    .menu-acoes-mobile a:hover,
+    .menu-acoes-mobile button:hover {
+        background-color: var(--branco-acinzentado);
+        text-decoration: none;
+    }
+
+    .menu-acoes-mobile img {
+        width: 16px;
+        height: 16px;
+        object-fit: contain;
     }
 }
 
@@ -477,7 +792,7 @@
 @media (max-width: 766px) {
     body {
         padding-bottom: 58px;
-        overflow-x: hidden;
+        overflow-x: auto;
         background-color: var(--branco);
     }
 
@@ -616,6 +931,7 @@
     }
 
     .tabela-rendimentos-container {
+        max-height: none;
         overflow: visible;
     }
 
@@ -631,14 +947,15 @@
 
     .tabela-rendimentos tr {
         width: 100%;
-        min-height: 70px;
-        padding: 9px 3px;
+        min-height: 95px;
+        padding: 12px 2px;
         position: relative;
         display: grid;
-        grid-template-columns: 100px minmax(0, 1fr) auto 16px;
-        grid-template-rows: auto auto;
-        column-gap: 7px;
-        row-gap: 4px;
+        grid-template-columns: minmax(0, 1fr) auto 18px;
+        grid-template-rows: auto auto auto;
+        align-items: center;
+        column-gap: 8px;
+        row-gap: 7px;
         border-bottom: 1px solid var(--cinza-claro);
     }
 
@@ -651,51 +968,63 @@
         align-items: center;
         color: var(--cinza-escuro);
         font-size: 10px;
-        line-height: 13px;
+        line-height: 14px;
         border: none;
     }
 
     .tabela-rendimentos td:nth-child(1) {
         grid-column: 1;
         grid-row: 1;
-        align-self: end;
         font-size: 11px;
+        white-space: nowrap;
     }
 
     .tabela-rendimentos td:nth-child(2) {
         grid-column: 1;
         grid-row: 2;
-        align-self: start;
-        flex-direction: column;
         align-items: flex-start;
-        gap: 2px;
+        flex-direction: column;
     }
 
     .tabela-rendimentos td:nth-child(3) {
-        grid-column: 2;
-        grid-row: 1 / 3;
-        align-self: center;
+        grid-column: 1 / -1;
+        grid-row: 3;
+        display: block;
+        color: var(--cinza-escuro);
         font-size: 10px;
-        line-height: 13px;
+        line-height: 14px;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .tabela-rendimentos td:nth-child(4) {
-        grid-column: 3;
-        grid-row: 1 / 3;
-        align-self: center;
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: flex-end;
+        text-align: right;
         font-size: 12px;
+        white-space: nowrap;
     }
 
     .tabela-rendimentos td:nth-child(5) {
-        grid-column: 4;
+        grid-column: 2;
+        grid-row: 2;
+        justify-content: flex-end;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .tabela-rendimentos td:nth-child(6) {
+        grid-column: 3;
         grid-row: 1 / 3;
         align-self: center;
         justify-content: center;
+        position: relative;
         overflow: visible;
     }
 
     .categoria-rendimento {
-        max-width: 98px;
+        max-width: 120px;
         padding: 3px 5px;
         gap: 3px;
         border-radius: 4px;
@@ -712,7 +1041,8 @@
 
     .status-rendimento {
         margin-top: 0;
-        font-size: 7px;
+        font-size: 9px;
+        line-height: 13px;
     }
 
     .acoes-rendimento {
@@ -725,8 +1055,8 @@
     }
 
     .acoes-rendimento-mobile summary {
-        width: 16px;
-        height: 28px;
+        width: 18px;
+        height: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -748,8 +1078,8 @@
         width: 160px;
         padding: 6px;
         position: absolute;
-        top: -5px;
-        right: 14px;
+        top: 0;
+        right: 20px;
         z-index: 30;
         background-color: var(--branco);
         border: 1px solid var(--cinza-claro);
@@ -886,10 +1216,6 @@
         cursor: pointer;
     }
 
-    .mais-mobile summary::-webkit-details-marker {
-        display: none;
-    }
-
     .opcoes-mais-mobile {
         width: 145px;
         padding: 8px 0;
@@ -943,7 +1269,9 @@
     }
 
     .tabela-rendimentos tr {
-        grid-template-columns: 106px minmax(0, 1fr) auto 16px;
+        min-height: 98px;
+        column-gap: 9px;
+        row-gap: 7px;
     }
 
     .tabela-rendimentos td:nth-child(1) {
@@ -951,7 +1279,8 @@
     }
 
     .tabela-rendimentos td:nth-child(3) {
-        font-size: 10px;
+        font-size: 11px;
+        line-height: 15px;
     }
 
     .tabela-rendimentos td:nth-child(4) {
@@ -959,11 +1288,11 @@
     }
 
     .categoria-rendimento {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .status-rendimento {
-        font-size: 7px;
+        font-size: 9px;
     }
 }
 
@@ -1008,9 +1337,9 @@
     }
 
     .tabela-rendimentos tr {
-        min-height: 68px;
-        grid-template-columns: 92px minmax(0, 1fr) auto 15px;
-        column-gap: 5px;
+        min-height: 94px;
+        column-gap: 6px;
+        row-gap: 6px;
     }
 
     .tabela-rendimentos td:nth-child(1) {
@@ -1018,8 +1347,8 @@
     }
 
     .tabela-rendimentos td:nth-child(3) {
-        font-size: 9px;
-        line-height: 12px;
+        font-size: 10px;
+        line-height: 14px;
     }
 
     .tabela-rendimentos td:nth-child(4) {
@@ -1027,12 +1356,12 @@
     }
 
     .categoria-rendimento {
-        max-width: 90px;
-        font-size: 7px;
+        max-width: 110px;
+        font-size: 8px;
     }
 
     .status-rendimento {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .menu-mobile-rendimentos {
@@ -1141,10 +1470,11 @@
     }
 
     .tabela-rendimentos tr {
-        min-height: 63px;
-        padding: 7px 1px;
-        grid-template-columns: 82px minmax(0, 1fr) auto 14px;
+        min-height: 90px;
+        padding: 10px 1px;
+        grid-template-columns: minmax(0, 1fr) auto 14px;
         column-gap: 4px;
+        row-gap: 5px;
     }
 
     .tabela-rendimentos td:nth-child(1) {
@@ -1152,8 +1482,8 @@
     }
 
     .tabela-rendimentos td:nth-child(3) {
-        font-size: 8px;
-        line-height: 11px;
+        font-size: 9px;
+        line-height: 12px;
     }
 
     .tabela-rendimentos td:nth-child(4) {
@@ -1161,9 +1491,9 @@
     }
 
     .categoria-rendimento {
-        max-width: 80px;
+        max-width: 100px;
         padding: 2px 4px;
-        font-size: 6px;
+        font-size: 7px;
     }
 
     .categoria-rendimento img,
@@ -1174,7 +1504,11 @@
     }
 
     .status-rendimento {
-        font-size: 6px;
+        font-size: 7px;
+    }
+
+    .acoes-rendimento-mobile summary {
+        width: 14px;
     }
 
     .menu-acoes-mobile {

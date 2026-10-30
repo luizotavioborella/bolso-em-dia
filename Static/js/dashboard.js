@@ -1,4 +1,4 @@
- // Seleciona o canvas onde o gráfico de ganhos mensais será exibido
+// Seleciona o canvas onde o gráfico de ganhos mensais será exibido
 const ctx = document.getElementById('myChart')
 
 // Seleciona o campo responsável pela escolha do ano
@@ -72,8 +72,9 @@ const grafico = new Chart(ctx, {
                 callbacks: {
                     label: function(context) {
 
-                        // Mostra o valor da barra em reais com duas casas decimais
-                        return 'R$ ' + context.raw.toFixed(2).replace('.', ',')                         }
+                        // Mostra o valor da barra em reais com separador de milhares
+                        return formatarDinheiro(context.raw)
+                    }
                 }
             }
         },
@@ -91,8 +92,8 @@ const grafico = new Chart(ctx, {
                 ticks: {
                     callback: function(valor) {
 
-                        // Adiciona R$ antes de cada valor
-                        return 'R$ ' + valor
+                        // Formata os valores do eixo em reais
+                        return formatarDinheiro(valor)
                     }
                 }
             },
@@ -112,10 +113,26 @@ const grafico = new Chart(ctx, {
 // Função responsável por formatar os valores em dinheiro
 function formatarDinheiro(valor) {
 
-    // Converte o valor para número e mantém duas casas decimais
-    // Depois adiciona R$ antes do resultado
-    return 'R$ ' + Number(valor).toFixed(2).replace('.', ',')
+    // Formata o valor em reais, com pontos nos milhares e vírgula nos centavos
+    return Number(valor).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    })
 }
+
+// Obtém os indicadores do ano selecionado inicialmente
+const dadosIniciais = dadosPorAno[anoAtual]
+
+// Formata os valores financeiros exibidos ao carregar a página
+document.getElementById('ganho-ano').textContent = formatarDinheiro(dadosIniciais.ganho_ano)
+document.getElementById('despesas-ano').textContent = formatarDinheiro(dadosIniciais.despesas_ano)
+document.getElementById('saldo-atual').textContent = formatarDinheiro(dadosIniciais.saldo_atual)
+document.getElementById('media-ganho').textContent = formatarDinheiro(dadosIniciais.media_ganho_dia)
+document.getElementById('saldo-projetado-mensal').textContent = formatarDinheiro(dadosIniciais.saldo_projetado_mensal)
+document.getElementById('saldo-projetado-anual').textContent = formatarDinheiro(dadosIniciais.saldo_projetado_anual)
+
+// Formata a quantidade de pacotes coletados ao carregar a página
+document.getElementById('pacotes-coletados').textContent = Number(dadosIniciais.pacotes_ano).toLocaleString('pt-BR')
 
 // Função responsável por atualizar as setas e porcentagens dos indicadores
 // Recebe os IDs dos elementos, a informação de aumento ou queda,
@@ -212,7 +229,7 @@ filtroAno.addEventListener('change', function() {
     document.getElementById('dias-trabalhados').textContent = dados.dias_trabalhados_ano
 
     // Atualiza a quantidade de pacotes coletados no ano
-    document.getElementById('pacotes-coletados').textContent = dados.pacotes_ano
+    document.getElementById('pacotes-coletados').textContent = Number(dados.pacotes_ano).toLocaleString('pt-BR')
 
     // Atualiza a média de ganho por dia
     document.getElementById('media-ganho').textContent = formatarDinheiro(dados.media_ganho_dia)

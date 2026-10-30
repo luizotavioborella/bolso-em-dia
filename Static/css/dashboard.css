@@ -1,4 +1,3 @@
-
 body {
     background-color: var(--branco-acinzentado);
 }
@@ -1047,7 +1046,7 @@ body {
     .adicionar-mobile {
         width: 34px;
         height: 34px;
-        flex-basis: 34px;
+        flex: 0 0 34px;
     }
 
     .adicionar-mobile img {
@@ -1070,6 +1069,8 @@ body {
     }
 }
 
+/* BOTÃO BAIXAR PREVISÕES */
+
 .form-previsoes {
     position: absolute;
     right: 4px;
@@ -1085,6 +1086,7 @@ body {
     color: var(--branco);
     border: 1px solid var(--verde-escuro);
     border-radius: 8px;
+    font-family: inherit;
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
@@ -1095,14 +1097,65 @@ body {
     opacity: 0.9;
 }
 
+/* BOTÃO - TABLET E TELAS MENORES DE DESKTOP */
+
+@media (min-width: 767px) and (max-width: 1199px) {
+    .form-previsoes {
+        position: static;
+        width: 100%;
+        margin-top: 12px;
+        justify-content: flex-end;
+    }
+
+    .btn-baixar-previsoes {
+        height: 40px;
+        padding: 0 16px;
+        font-size: 12px;
+    }
+}
+
+/* BOTÃO - CELULAR */
+
 @media (max-width: 766px) {
     .form-previsoes {
         position: static;
         width: 100%;
         margin-top: 12px;
+        margin-bottom: 6px;
+        justify-content: stretch;
     }
 
     .btn-baixar-previsoes {
         width: 100%;
+        height: 40px;
+        padding: 0 14px;
+        border-radius: 7px;
+        font-size: 12px;
+    }
+}
+
+/* BOTÃO - MOBILE M */
+
+@media (min-width: 320px) and (max-width: 374px) {
+    .form-previsoes {
+        margin-top: 10px;
+    }
+
+    .btn-baixar-previsoes {
+        height: 38px;
+        font-size: 11px;
+    }
+}
+
+/* BOTÃO - MOBILE S */
+
+@media (max-width: 319px) {
+    .form-previsoes {
+        margin-top: 8px;
+    }
+
+    .btn-baixar-previsoes {
+        height: 36px;
+        font-size: 10px;
     }
 }

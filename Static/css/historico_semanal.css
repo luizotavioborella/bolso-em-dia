@@ -61,6 +61,7 @@
     color: var(--azul-cinzento-escuro);
     border: 1px solid var(--cinza-claro);
     border-radius: 8px;
+    font-family: inherit;
     font-size: 12px;
     outline: none;
     cursor: pointer;
@@ -185,6 +186,7 @@
 
 .titulo-tabela h2 {
     margin-bottom: 4px;
+    color: var(--azul-cinzento-escuro);
     font-size: 19px;
 }
 
@@ -207,7 +209,6 @@
 
 .tabela-historico {
     width: 100%;
-    min-width: 620px;
     border-collapse: collapse;
 }
 
@@ -289,8 +290,8 @@
 .categoria-registro img {
     width: 13px;
     height: 13px;
-    object-fit: contain;
     flex-shrink: 0;
+    object-fit: contain;
 }
 
 .icone-categoria-registro {
@@ -343,6 +344,240 @@
     display: none;
 }
 
+/* LAPTOP */
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .titulo-historico {
+        padding: 16px 4px 20px;
+    }
+
+    .titulo-historico h1 {
+        font-size: 29px;
+    }
+
+    .titulo-historico p {
+        font-size: 12px;
+    }
+
+    .filtros-historico {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .resumo-semanal {
+        gap: 8px;
+    }
+
+    .card-resumo-historico {
+        min-height: 100px;
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .icone-resumo-historico {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+    }
+
+    .icone-resumo-historico img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .dados-resumo p {
+        font-size: 11px;
+    }
+
+    .dados-resumo h2 {
+        font-size: 19px;
+        line-height: 23px;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .dados-resumo span {
+        font-size: 10px;
+    }
+
+    .tabela-historico-container {
+        padding: 12px;
+    }
+
+    .tabela-historico {
+        table-layout: fixed;
+    }
+
+    .tabela-historico th,
+    .tabela-historico td {
+        padding-left: 9px;
+        padding-right: 9px;
+        font-size: 11px;
+    }
+
+    .tabela-historico th:nth-child(1) {
+        width: 16%;
+    }
+
+    .tabela-historico th:nth-child(2) {
+        width: 23%;
+    }
+
+    .tabela-historico th:nth-child(3) {
+        width: 40%;
+    }
+
+    .tabela-historico th:nth-child(4) {
+        width: 21%;
+    }
+
+    .tabela-historico td:nth-child(3) {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        overflow-wrap: anywhere;
+        line-height: 16px;
+    }
+
+    .categoria-registro {
+        max-width: 100%;
+        font-size: 9px;
+    }
+
+    .categoria-registro span:last-child {
+        overflow-wrap: anywhere;
+    }
+
+    .botao-ordenacao {
+        font-size: 11px;
+    }
+}
+
+/* TABELA RESPONSIVA PARA TABLET E CELULAR */
+@media (max-width: 1023px) {
+    .tabela-ajuste {
+        width: 100%;
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .tabela-historico,
+    .tabela-historico thead,
+    .tabela-historico tbody {
+        width: 100%;
+        min-width: 0;
+        display: block;
+    }
+
+    .tabela-historico thead {
+        margin-bottom: 5px;
+        background-color: transparent;
+    }
+
+    .tabela-historico thead tr {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    .tabela-historico th {
+        display: none;
+    }
+
+    .tabela-historico th:first-child,
+    .tabela-historico th:last-child {
+        height: 32px;
+        padding: 0 12px;
+        display: flex;
+        align-items: center;
+        background-color: var(--cinza-claro);
+        border-radius: 6px;
+    }
+
+    .botao-ordenacao {
+        font-size: 10px;
+    }
+
+    .botao-ordenacao img {
+        width: 9px;
+        height: 14px;
+    }
+
+    .tabela-historico tr.item-historico {
+        width: 100%;
+        min-height: 95px;
+        padding: 12px 4px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto auto auto;
+        align-items: center;
+        column-gap: 12px;
+        row-gap: 7px;
+        border-bottom: 1px solid var(--cinza-claro);
+    }
+
+    .tabela-historico td {
+        width: auto;
+        height: auto;
+        min-width: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+        line-height: 15px;
+        border: none;
+    }
+
+    .tabela-historico td:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+        white-space: nowrap;
+    }
+
+    .tabela-historico td:nth-child(2) {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .tabela-historico td:nth-child(3) {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        display: block;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .tabela-historico td:nth-child(4) {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        align-self: center;
+        justify-content: flex-end;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .categoria-registro {
+        max-width: 100%;
+        font-size: 9px;
+    }
+
+    .categoria-registro span:last-child {
+        overflow-wrap: anywhere;
+    }
+
+    .tabela-historico tbody > tr:not(.item-historico) {
+        display: block;
+    }
+
+    .tabela-historico td.sem-registros {
+        width: 100%;
+        min-height: 75px;
+        padding: 20px 5px;
+        display: block;
+        text-align: center;
+    }
+}
+
 /* TABLET */
 @media (min-width: 767px) and (max-width: 1023px) {
     .titulo-historico {
@@ -362,61 +597,81 @@
         gap: 10px;
     }
 
+    .filtro-item label {
+        font-size: 11px;
+    }
+
     .selecao-com-icone select {
         height: 38px;
+        padding-left: 35px;
         font-size: 10px;
+    }
+
+    .selecao-com-icone img {
+        width: 16px;
+        height: 16px;
+        left: 10px;
+    }
+
+    .resumo-semanal {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
     }
 
     .card-resumo-historico {
         min-height: 95px;
         padding: 10px;
-        gap: 8px;
+        gap: 10px;
+    }
+
+    .card-resumo-historico:last-child {
+        grid-column: 1 / -1;
     }
 
     .icone-resumo-historico {
-        width: 42px;
-        height: 42px;
-        flex-basis: 42px;
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
     }
 
     .icone-resumo-historico img {
-        width: 26px;
-        height: 26px;
+        width: 27px;
+        height: 27px;
     }
 
     .dados-resumo p {
-        font-size: 10px;
+        font-size: 11px;
     }
 
     .dados-resumo h2 {
-        font-size: 17px;
-        line-height: 22px;
+        font-size: 20px;
+        line-height: 24px;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .dados-resumo span {
-        font-size: 9px;
-    }
-
-    .tabela-historico th,
-    .tabela-historico td {
-        padding-left: 10px;
-        padding-right: 10px;
         font-size: 10px;
     }
 
-    .botao-ordenacao {
-        font-size: 10px;
+    .tabela-historico-container {
+        padding: 12px;
     }
 
-    .categoria-registro {
-        font-size: 9px;
+    .titulo-tabela h2 {
+        font-size: 18px;
+    }
+
+    .titulo-tabela p {
+        font-size: 10px;
     }
 }
 
-/* CELULAR */
+/* CELULAR - BASE */
 @media (max-width: 766px) {
     body {
-        padding-bottom: 58px;
+        padding-bottom: 70px;
         overflow-x: hidden;
         background-color: var(--branco);
     }
@@ -525,6 +780,8 @@
         margin-bottom: 1px;
         font-size: 19px;
         line-height: 23px;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .dados-resumo span {
@@ -565,25 +822,37 @@
         font-size: 9px;
     }
 
-    .tabela-historico {
-        min-width: 540px;
+    .tabela-historico th:first-child,
+    .tabela-historico th:last-child {
+        height: 30px;
+        padding: 0 9px;
     }
 
-    .tabela-historico th {
-        height: 36px;
-        font-size: 10px;
+    .tabela-historico tr.item-historico {
+        min-height: 90px;
+        padding: 11px 2px;
+        column-gap: 8px;
+        row-gap: 6px;
     }
 
     .tabela-historico td {
-        height: 50px;
         font-size: 10px;
+        line-height: 14px;
     }
 
-    .botao-ordenacao {
-        font-size: 10px;
+    .tabela-historico td:nth-child(1) {
+        font-size: 11px;
+    }
+
+    .tabela-historico td:nth-child(4) {
+        font-size: 12px;
     }
 
     .categoria-registro {
+        max-width: 100%;
+        padding: 3px 5px;
+        gap: 3px;
+        border-radius: 4px;
         font-size: 9px;
     }
 
@@ -591,6 +860,10 @@
     .icone-categoria-registro {
         width: 11px;
         height: 11px;
+    }
+
+    .icone-categoria-registro {
+        flex-basis: 11px;
     }
 
     .menu-mobile-historico {
@@ -604,6 +877,7 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
+        overflow: visible;
         background-color: var(--branco);
         border-top: 1px solid var(--cinza-claro);
     }
@@ -629,7 +903,11 @@
     }
 
     .item-menu-mobile span {
-        font-size: 7px;
+        font-size: 8px;
+    }
+
+    .item-menu-mobile:hover {
+        text-decoration: none;
     }
 
     .adicionar-mobile {
@@ -663,12 +941,19 @@
         display: none;
     }
 
+    .mais-mobile > summary {
+        background-color: var(--verde-clarinho);
+        color: var(--verde-escuro);
+        font-weight: 700;
+    }
+
     .opcoes-mais-mobile {
         width: 145px;
         padding: 8px 0;
         position: absolute;
         right: -4px;
         bottom: 57px;
+        z-index: 1001;
         background-color: var(--branco);
         border: 1px solid var(--cinza-claro);
         border-radius: 8px;
@@ -676,10 +961,10 @@
     }
 
     .opcoes-mais-mobile a {
-        padding: 7px 12px;
+        padding: 8px 12px;
         display: block;
         color: var(--azul-cinzento-escuro);
-        font-size: 9px;
+        font-size: 10px;
         text-decoration: none;
     }
 
@@ -691,7 +976,27 @@
     }
 }
 
-@media (max-width: 374px) {
+/* MOBILE L */
+@media (min-width: 375px) and (max-width: 424px) {
+    .titulo-historico h1 {
+        font-size: 26px;
+    }
+
+    .dados-resumo h2 {
+        font-size: 19px;
+    }
+
+    .tabela-historico td:nth-child(4) {
+        font-size: 12px;
+    }
+}
+
+/* MOBILE M */
+@media (min-width: 320px) and (max-width: 374px) {
+    body {
+        padding-bottom: 68px;
+    }
+
     .menu-lateral {
         padding-left: 16px;
         padding-right: 16px;
@@ -708,18 +1013,275 @@
 
     .titulo-historico h1 {
         font-size: 23px;
+        line-height: 27px;
+    }
+
+    .titulo-historico p {
+        font-size: 10px;
+    }
+
+    .filtros-historico {
+        padding: 9px;
     }
 
     .dados-resumo h2 {
         font-size: 17px;
+        line-height: 21px;
+    }
+
+    .tabela-historico-container {
+        padding: 8px;
+    }
+
+    .titulo-tabela h2 {
+        font-size: 14px;
+    }
+
+    .titulo-tabela p {
+        font-size: 9px;
+    }
+
+    .tabela-historico tr.item-historico {
+        min-height: 86px;
+        column-gap: 6px;
+        row-gap: 5px;
+    }
+
+    .tabela-historico td:nth-child(1) {
+        font-size: 10px;
+    }
+
+    .tabela-historico td:nth-child(3) {
+        font-size: 9px;
+        line-height: 13px;
+    }
+
+    .tabela-historico td:nth-child(4) {
+        font-size: 11px;
+    }
+
+    .categoria-registro {
+        font-size: 8px;
     }
 
     .menu-mobile-historico {
+        height: 56px;
         padding: 3px 5px;
     }
 
-    .item-menu-mobile,
+    .item-menu-mobile {
+        width: 46px;
+        height: 48px;
+    }
+
+    .item-menu-mobile img {
+        width: 21px;
+        height: 21px;
+    }
+
+    .item-menu-mobile span {
+        font-size: 7px;
+    }
+
+    .adicionar-mobile {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .adicionar-mobile img {
+        width: 22px;
+        height: 22px;
+    }
+
     .mais-mobile {
         width: 46px;
+    }
+
+    .opcoes-mais-mobile {
+        width: 140px;
+        bottom: 55px;
+    }
+
+    .opcoes-mais-mobile a {
+        font-size: 9px;
+    }
+}
+
+/* MOBILE S */
+@media (max-width: 319px) {
+    body {
+        padding-bottom: 66px;
+    }
+
+    .menu-lateral {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .conteudo-sistema {
+        padding: 0 12px 66px;
+    }
+
+    .topo-perfil {
+        right: 12px;
+    }
+
+    .titulo-historico h1 {
+        font-size: 21px;
+        line-height: 25px;
+    }
+
+    .titulo-historico p {
+        font-size: 9px;
+    }
+
+    .filtros-historico {
+        padding: 8px;
+    }
+
+    .filtro-item label {
+        font-size: 9px;
+    }
+
+    .selecao-com-icone select {
+        height: 36px;
+        font-size: 10px;
+    }
+
+    .card-resumo-historico {
+        min-height: 66px;
+        padding: 8px;
+    }
+
+    .icone-resumo-historico {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+
+    .icone-resumo-historico img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .dados-resumo p {
+        font-size: 9px;
+    }
+
+    .dados-resumo h2 {
+        font-size: 15px;
+        line-height: 19px;
+    }
+
+    .dados-resumo span {
+        font-size: 8px;
+    }
+
+    .tabela-historico-container {
+        padding: 7px;
+    }
+
+    .icone-titulo-tabela {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .icone-titulo-tabela img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .titulo-tabela h2 {
+        font-size: 13px;
+    }
+
+    .titulo-tabela h2 span {
+        font-size: 10px;
+    }
+
+    .titulo-tabela p {
+        font-size: 8px;
+    }
+
+    .tabela-historico tr.item-historico {
+        min-height: 82px;
+        padding: 9px 1px;
+        column-gap: 4px;
+    }
+
+    .tabela-historico td:nth-child(1) {
+        font-size: 9px;
+    }
+
+    .tabela-historico td:nth-child(3) {
+        font-size: 8px;
+        line-height: 12px;
+    }
+
+    .tabela-historico td:nth-child(4) {
+        font-size: 10px;
+    }
+
+    .categoria-registro {
+        padding: 2px 4px;
+        font-size: 7px;
+    }
+
+    .categoria-registro img,
+    .icone-categoria-registro {
+        width: 9px;
+        height: 9px;
+    }
+
+    .icone-categoria-registro {
+        flex-basis: 9px;
+    }
+
+    .menu-mobile-historico {
+        height: 54px;
+        padding: 2px 3px;
+    }
+
+    .item-menu-mobile {
+        width: 43px;
+        height: 46px;
+        padding: 2px;
+        gap: 1px;
+    }
+
+    .item-menu-mobile img {
+        width: 19px;
+        height: 19px;
+    }
+
+    .item-menu-mobile span {
+        font-size: 6px;
+    }
+
+    .adicionar-mobile {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+
+    .adicionar-mobile img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .mais-mobile {
+        width: 43px;
+    }
+
+    .opcoes-mais-mobile {
+        width: 132px;
+        bottom: 53px;
+    }
+
+    .opcoes-mais-mobile a {
+        padding: 6px 10px;
+        font-size: 8px;
     }
 }

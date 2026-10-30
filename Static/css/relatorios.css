@@ -1,4 +1,3 @@
-
 .titulo-relatorio {
     padding: 18px 10px 20px;
 }
@@ -20,6 +19,14 @@
     gap: 20px;
 }
 
+.cabecalho-relatorios form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .baixar-relatorio {
     height: 46px;
     padding: 0 16px;
@@ -28,12 +35,13 @@
     justify-content: center;
     background-color: var(--verde-escuro);
     color: var(--branco);
+    border: 1px solid var(--verde-escuro);
     border-radius: 8px;
+    font-family: inherit;
     font-size: 13px;
     font-weight: 700;
-    cursor: pointer;
-    border: 1px solid var(--verde-escuro);
     white-space: nowrap;
+    cursor: pointer;
     transition: 0.3s;
 }
 
@@ -43,27 +51,27 @@
 
 .aviso-relatorio {
     width: 100%;
-    background-color: var(--verde-clarinho);
-    border: 1px solid var(--cinza-claro);
+    padding: 20px;
     display: flex;
     align-items: center;
-    border-radius: 10px;
-    padding: 20px;
     gap: 20px;
+    background-color: var(--verde-clarinho);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 10px;
 }
 
 .aviso-relatorio > img {
-    height: 65px;
     width: 65px;
-    object-fit: contain;
+    height: 65px;
     flex-shrink: 0;
+    object-fit: contain;
 }
 
 .aviso-relatorio .parte1 {
+    min-width: 190px;
     display: flex;
     flex-direction: column;
     gap: 3px;
-    min-width: 190px;
 }
 
 .aviso-relatorio .parte1 h5 {
@@ -89,17 +97,17 @@
 }
 
 .aviso-relatorio .parte2 .linha-vertical {
-    background-color: var(--cinza-claro);
-    height: 65px;
     width: 1px;
+    height: 65px;
     flex-shrink: 0;
+    background-color: var(--cinza-claro);
 }
 
 .aviso-relatorio .parte2 > img {
-    height: 48px;
     width: 48px;
-    object-fit: contain;
+    height: 48px;
     flex-shrink: 0;
+    object-fit: contain;
 }
 
 .aviso-relatorio .parte2 .texto {
@@ -107,14 +115,14 @@
 }
 
 .aviso-relatorio .parte2 h6 {
+    margin-bottom: 8px;
     font-size: 13px;
     font-weight: 700;
-    margin-bottom: 8px;
 }
 
 .aviso-relatorio .parte2 p {
-    font-size: 12px;
     color: var(--azul-cinzento-escuro);
+    font-size: 12px;
 }
 
 .meus-relatorios {
@@ -123,34 +131,36 @@
 }
 
 .topo-meus-relatorios {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    padding: 0 0 18px;
     margin-bottom: 20px;
+    padding: 0 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
     border-bottom: 1px solid var(--cinza-claro);
 }
 
 .meus-relatorios h2 {
+    margin: 0;
     color: var(--azul-cinzento-escuro);
     font-size: 20px;
-    margin: 0;
 }
 
 .filtro-ano-relatorios {
     height: 38px;
     padding: 0 12px;
     background-color: var(--branco);
+    color: var(--azul-cinzento-escuro);
     border: 1px solid var(--cinza-claro);
     border-radius: 8px;
-    color: var(--azul-cinzento-escuro);
+    font-family: inherit;
     font-size: 12px;
-    cursor: pointer;
     outline: none;
+    cursor: pointer;
 }
 
 .grade-meses {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 18px;
@@ -159,24 +169,24 @@
 .card-mes {
     min-width: 0;
     min-height: 90px;
+    padding: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
     background-color: var(--branco);
     border: 1px solid var(--cinza-claro);
     border-radius: 8px;
-    padding: 12px;
 }
 
 .icone-mes {
     width: 52px;
     height: 52px;
-    flex-shrink: 0;
+    flex: 0 0 52px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 9px;
     background-color: var(--verde-clarinho);
+    border-radius: 9px;
 }
 
 .icone-mes img {
@@ -190,15 +200,15 @@
 }
 
 .informacoes-mes p {
-    font-size: 11px;
     margin-bottom: 5px;
     color: var(--azul-cinzento-escuro);
+    font-size: 11px;
 }
 
 .informacoes-mes strong {
+    color: var(--azul-cinzento-escuro);
     font-size: 15px;
     font-weight: 700;
-    color: var(--azul-cinzento-escuro);
     white-space: nowrap;
 }
 
@@ -216,57 +226,146 @@
     color: var(--verde-escuro);
 }
 
-/* TABLET */
-
-@media (min-width: 767px) and (max-width: 1023px) {
-    .titulo-relatorio h1 {
-        font-size: 28px;
-    }
-
-    .aviso-relatorio .parte2 {
-        display: none;
-    }
-
-    .grade-meses {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-    }
+.menu-mobile-relatorios {
+    display: none;
 }
 
-/* MOBILE */
-
-@media (max-width: 766px) {
+/* LAPTOP */
+@media (min-width: 1024px) and (max-width: 1279px) {
     .cabecalho-relatorios {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+        gap: 12px;
     }
 
     .titulo-relatorio {
-        padding: 10px 2px;
+        padding: 16px 4px 20px;
+    }
+
+    .titulo-relatorio h1 {
+        font-size: 29px;
+    }
+
+    .titulo-relatorio p {
+        font-size: 12px;
+    }
+
+    .cabecalho-relatorios form {
+        gap: 7px;
+    }
+
+    .baixar-relatorio {
+        height: 42px;
+        padding: 0 11px;
+        font-size: 11px;
+    }
+
+    .aviso-relatorio {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .aviso-relatorio > img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .aviso-relatorio .parte1 {
+        min-width: 150px;
+    }
+
+    .aviso-relatorio .parte1 span,
+    .aviso-relatorio .parte1 .valor1 {
+        font-size: 25px;
+    }
+
+    .aviso-relatorio .parte2 {
+        gap: 12px;
+    }
+
+    .aviso-relatorio .parte2 > img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .aviso-relatorio .parte2 .texto {
+        max-width: 190px;
+    }
+
+    .aviso-relatorio .parte2 h6 {
+        font-size: 11px;
+    }
+
+    .aviso-relatorio .parte2 p {
+        font-size: 10px;
+    }
+
+    .grade-meses {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .card-mes {
+        min-height: 85px;
+        padding: 10px;
+        gap: 9px;
+    }
+
+    .icone-mes {
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+    }
+
+    .icone-mes img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .informacoes-mes strong {
+        font-size: 13px;
+    }
+}
+
+/* TABLET */
+@media (min-width: 767px) and (max-width: 1023px) {
+    .cabecalho-relatorios {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .titulo-relatorio {
+        padding: 16px 4px 10px;
     }
 
     .titulo-relatorio h1 {
         font-size: 28px;
+    }
+
+    .titulo-relatorio p {
+        font-size: 12px;
     }
 
     .cabecalho-relatorios form {
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 14px;
+        justify-content: stretch;
     }
 
     .baixar-relatorio {
-        width: 100%;
+        height: 42px;
+        flex: 1;
+        padding: 0 12px;
+        font-size: 11px;
     }
 
     .aviso-relatorio {
-        padding: 15px;
+        padding: 17px;
         gap: 15px;
     }
 
     .aviso-relatorio > img {
-        width: 48px;
-        height: 48px;
+        width: 55px;
+        height: 55px;
     }
 
     .aviso-relatorio .parte1 {
@@ -275,7 +374,7 @@
 
     .aviso-relatorio .parte1 span,
     .aviso-relatorio .parte1 .valor1 {
-        font-size: 23px;
+        font-size: 25px;
     }
 
     .aviso-relatorio .parte2 {
@@ -283,11 +382,16 @@
     }
 
     .meus-relatorios {
-        padding: 18px 0;
+        padding: 18px 0 25px;
+    }
+
+    .topo-meus-relatorios {
+        margin-bottom: 16px;
+        padding-bottom: 14px;
     }
 
     .meus-relatorios h2 {
-        font-size: 18px;
+        font-size: 19px;
     }
 
     .grade-meses {
@@ -296,19 +400,20 @@
     }
 
     .card-mes {
-        min-height: 80px;
+        min-height: 85px;
         padding: 10px;
         gap: 10px;
     }
 
     .icone-mes {
-        width: 43px;
-        height: 43px;
+        width: 46px;
+        height: 46px;
+        flex-basis: 46px;
     }
 
     .icone-mes img {
-        width: 24px;
-        height: 24px;
+        width: 25px;
+        height: 25px;
     }
 
     .informacoes-mes strong {
@@ -316,11 +421,295 @@
     }
 }
 
-/* MOBILE L */
+/* CELULAR - BASE */
+@media (max-width: 766px) {
+    body {
+        padding-bottom: 70px;
+        overflow-x: hidden;
+        background-color: var(--branco);
+    }
 
-@media (min-width: 375px) and (max-width: 424px) {
+    .cabecalho-relatorios {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .titulo-relatorio {
+        padding: 7px 0 10px;
+    }
+
+    .titulo-relatorio h1 {
+        margin: 0;
+        font-size: 27px;
+        line-height: 31px;
+    }
+
+    .titulo-relatorio p {
+        margin-top: 2px;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .cabecalho-relatorios form {
+        width: 100%;
+        margin-bottom: 14px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .baixar-relatorio {
+        width: 100%;
+        height: 40px;
+        padding: 0 12px;
+        border-radius: 7px;
+        font-size: 12px;
+    }
+
+    .aviso-relatorio {
+        min-width: 0;
+        padding: 14px;
+        align-items: center;
+        gap: 12px;
+        border-radius: 8px;
+    }
+
+    .aviso-relatorio > img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .aviso-relatorio .parte1 {
+        min-width: 0;
+        gap: 3px;
+    }
+
+    .aviso-relatorio .parte1 h5 {
+        font-size: 11px;
+    }
+
+    .aviso-relatorio .parte1 span {
+        font-size: 22px;
+    }
+
+    .aviso-relatorio .parte1 .valor1 {
+        font-size: 22px;
+        overflow-wrap: anywhere;
+    }
+
+    .aviso-relatorio .parte2 {
+        display: none;
+    }
+
+    .meus-relatorios {
+        padding: 18px 0 25px;
+    }
+
+    .topo-meus-relatorios {
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+        gap: 10px;
+    }
+
+    .meus-relatorios h2 {
+        font-size: 18px;
+    }
+
+    .filtro-ano-relatorios {
+        height: 36px;
+        padding: 0 9px;
+        font-size: 11px;
+    }
+
+    .grade-meses {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .card-mes {
+        min-height: 78px;
+        padding: 9px;
+        gap: 8px;
+        border-radius: 7px;
+    }
+
+    .icone-mes {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+        border-radius: 7px;
+    }
+
+    .icone-mes img {
+        width: 23px;
+        height: 23px;
+    }
+
+    .informacoes-mes p {
+        margin-bottom: 4px;
+        font-size: 10px;
+    }
+
+    .informacoes-mes strong {
+        font-size: 12px;
+    }
+
+    .menu-mobile-relatorios {
+        width: 100%;
+        height: 58px;
+        padding: 3px 8px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        overflow: visible;
+        background-color: var(--branco);
+        border-top: 1px solid var(--cinza-claro);
+    }
+
+    .item-menu-mobile {
+        width: 50px;
+        height: 50px;
+        padding: 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        color: var(--azul-cinzento-escuro);
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .item-menu-mobile img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+    }
+
+    .item-menu-mobile span {
+        font-size: 8px;
+    }
+
+    .item-menu-mobile.ativo {
+        background-color: var(--verde-clarinho);
+        color: var(--verde-escuro);
+        font-weight: 700;
+    }
+
+    .item-menu-mobile:hover {
+        text-decoration: none;
+    }
+
+    .adicionar-mobile {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--verde-escuro);
+        border-radius: 50%;
+    }
+
+    .adicionar-mobile img {
+        width: 23px;
+        height: 23px;
+        object-fit: contain;
+    }
+
+    .mais-mobile {
+        width: 50px;
+        position: relative;
+    }
+
+    .mais-mobile summary {
+        list-style: none;
+        cursor: pointer;
+    }
+
+    .mais-mobile summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .opcoes-mais-mobile {
+        width: 145px;
+        padding: 8px 0;
+        position: absolute;
+        right: -4px;
+        bottom: 57px;
+        z-index: 1001;
+        background-color: var(--branco);
+        border: 1px solid var(--cinza-claro);
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+    }
+
+    .opcoes-mais-mobile a {
+        padding: 8px 12px;
+        display: block;
+        color: var(--azul-cinzento-escuro);
+        font-size: 10px;
+        text-decoration: none;
+    }
+
+    .opcoes-mais-mobile a:hover,
+    .opcoes-mais-mobile a.opcao-ativa {
+        background-color: var(--verde-clarinho);
+        color: var(--verde-escuro);
+        text-decoration: none;
+    }
+}
+
+/* CELULAR PEQUENO */
+@media (max-width: 574px) {
     .grade-meses {
         grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .card-mes {
+        min-height: 72px;
+        padding: 10px;
+        gap: 12px;
+    }
+
+    .icone-mes {
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+    }
+
+    .icone-mes img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .informacoes-mes p {
+        font-size: 11px;
+    }
+
+    .informacoes-mes strong {
+        font-size: 15px;
+    }
+}
+
+/* MOBILE L */
+@media (min-width: 375px) and (max-width: 424px) {
+    .titulo-relatorio h1 {
+        font-size: 27px;
+    }
+
+    .aviso-relatorio .parte1 span,
+    .aviso-relatorio .parte1 .valor1 {
+        font-size: 22px;
+    }
+
+    .meus-relatorios h2 {
+        font-size: 18px;
     }
 
     .card-mes {
@@ -329,41 +718,47 @@
 }
 
 /* MOBILE M */
-
 @media (min-width: 320px) and (max-width: 374px) {
+    body {
+        padding-bottom: 68px;
+    }
+
     .titulo-relatorio h1 {
         font-size: 24px;
+        line-height: 28px;
     }
 
-    .grade-meses {
-        grid-template-columns: 1fr;
+    .titulo-relatorio p {
+        font-size: 11px;
+        line-height: 15px;
     }
 
-    .topo-meus-relatorios {
-        align-items: stretch;
-        flex-direction: column;
-    }
-
-    .filtro-ano-relatorios {
-        width: 100%;
-    }
-}
-
-/* MOBILE S */
-
-@media (max-width: 319px) {
-    .titulo-relatorio h1 {
-        font-size: 21px;
+    .baixar-relatorio {
+        height: 38px;
+        font-size: 11px;
     }
 
     .aviso-relatorio {
-        align-items: flex-start;
-        flex-direction: column;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .aviso-relatorio > img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .aviso-relatorio .parte1 h5 {
+        font-size: 10px;
     }
 
     .aviso-relatorio .parte1 span,
     .aviso-relatorio .parte1 .valor1 {
-        font-size: 21px;
+        font-size: 20px;
+    }
+
+    .meus-relatorios h2 {
+        font-size: 16px;
     }
 
     .topo-meus-relatorios {
@@ -375,19 +770,190 @@
         width: 100%;
     }
 
-    .grade-meses {
-        grid-template-columns: 1fr;
+    .card-mes {
+        min-height: 72px;
+    }
+
+    .informacoes-mes strong {
+        font-size: 14px;
+    }
+
+    .menu-mobile-relatorios {
+        height: 56px;
+        padding: 3px 5px;
+    }
+
+    .item-menu-mobile {
+        width: 46px;
+        height: 48px;
+    }
+
+    .item-menu-mobile img {
+        width: 21px;
+        height: 21px;
+    }
+
+    .item-menu-mobile span {
+        font-size: 7px;
+    }
+
+    .adicionar-mobile {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .adicionar-mobile img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .mais-mobile {
+        width: 46px;
+    }
+
+    .opcoes-mais-mobile {
+        width: 140px;
+        bottom: 55px;
+    }
+
+    .opcoes-mais-mobile a {
+        font-size: 9px;
     }
 }
 
-.cabecalho-relatorios form {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
+/* MOBILE S */
+@media (max-width: 319px) {
+    body {
+        padding-bottom: 66px;
+    }
 
-@media (max-width: 766px) {
-    .cabecalho-relatorios form {
+    .titulo-relatorio h1 {
+        font-size: 21px;
+        line-height: 25px;
+    }
+
+    .titulo-relatorio p {
+        font-size: 10px;
+        line-height: 13px;
+    }
+
+    .baixar-relatorio {
+        height: 36px;
+        font-size: 10px;
+    }
+
+    .aviso-relatorio {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .aviso-relatorio > img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .aviso-relatorio .parte1 h5 {
+        font-size: 9px;
+    }
+
+    .aviso-relatorio .parte1 span,
+    .aviso-relatorio .parte1 .valor1 {
+        font-size: 18px;
+    }
+
+    .meus-relatorios {
+        padding: 14px 0 20px;
+    }
+
+    .meus-relatorios h2 {
+        font-size: 15px;
+    }
+
+    .topo-meus-relatorios {
+        align-items: stretch;
         flex-direction: column;
+        gap: 8px;
+    }
+
+    .filtro-ano-relatorios {
+        width: 100%;
+        height: 34px;
+        font-size: 10px;
+    }
+
+    .grade-meses {
+        gap: 7px;
+    }
+
+    .card-mes {
+        min-height: 65px;
+        padding: 8px;
+        gap: 9px;
+    }
+
+    .icone-mes {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+    }
+
+    .icone-mes img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .informacoes-mes p {
+        font-size: 9px;
+    }
+
+    .informacoes-mes strong {
+        font-size: 13px;
+    }
+
+    .menu-mobile-relatorios {
+        height: 54px;
+        padding: 2px 3px;
+    }
+
+    .item-menu-mobile {
+        width: 43px;
+        height: 46px;
+        padding: 2px;
+        gap: 1px;
+    }
+
+    .item-menu-mobile img {
+        width: 19px;
+        height: 19px;
+    }
+
+    .item-menu-mobile span {
+        font-size: 6px;
+    }
+
+    .adicionar-mobile {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+
+    .adicionar-mobile img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .mais-mobile {
+        width: 43px;
+    }
+
+    .opcoes-mais-mobile {
+        width: 132px;
+        bottom: 53px;
+    }
+
+    .opcoes-mais-mobile a {
+        padding: 6px 10px;
+        font-size: 8px;
     }
 }
