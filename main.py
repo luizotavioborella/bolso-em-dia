@@ -20,7 +20,7 @@ app = Flask(__name__, static_folder='Static', template_folder='Templates', stati
 app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 host = "localhost"
-database = r"C:\Users\Aluno\Desktop\BOLSO-EM-DIA\BANCO.FDB"
+database = r"C:\Users\Aluno\Downloads\bolso-em-dia-main\BANCO.FDB"
 user = "sysdba"
 password = "sysdba"
 
