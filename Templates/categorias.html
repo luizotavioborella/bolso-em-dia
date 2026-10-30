@@ -12,40 +12,49 @@
     <aside class="menu-lateral">
         <a href="{{ url_for('dashboard') }}" class="seta-voltar">‹</a>
         <img class="logo-perfil" src="{{ url_for('static', filename='uploads/logo-horizontal.png') }}" alt="Bolso em Dia">
+
         <nav class="navegacao-perfil">
             <a href="{{ url_for('dashboard') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-dashboard.png') }}" alt="">
                 <span>Dashboard</span>
             </a>
+
             <a href="{{ url_for('rendimentos') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-rendimentos.png') }}" alt="">
                 <span>Rendimentos</span>
             </a>
+
             <a href="{{ url_for('despesas') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-despesas.png') }}" alt="">
                 <span>Despesas</span>
             </a>
+
             <a href="{{ url_for('dia_trabalhado') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}" alt="">
                 <span>Dia Trabalhado</span>
             </a>
+
             <a href="{{ url_for('servico_extra') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}" alt="">
                 <span>Serviço Extra</span>
             </a>
+
             <a href="{{ url_for('todas_categorias') }}" class="pagina-ativa">
                 <img src="{{ url_for('static', filename='uploads/tag.png') }}" alt="">
                 <span>Categorias</span>
             </a>
+
             <a href="{{ url_for('relatorios') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-relatorios.png') }}" alt="">
                 <span>Relatórios</span>
             </a>
-            <a href="{{  url_for('historico_semanal') }}">
+
+            <a href="{{ url_for('historico_semanal') }}">
                 <img src="{{ url_for('static', filename='uploads/perfil-historico.png') }}" alt="">
                 <span>Histórico Semanal</span>
             </a>
         </nav>
+
         <a class="sair-perfil" href="{{ url_for('logout') }}">
             <div class="sair-conteudo">
                 <img src="{{ url_for('static', filename='uploads/perfil-sair.png') }}" alt="">
@@ -53,50 +62,61 @@
             </div>
         </a>
     </aside>
+
     <main class="conteudo-sistema">
         <header class="topo-perfil">
             <div></div>
+
             <a href="{{ url_for('perfil') }}" class="usuario-logado">
                 {% if usuario[9] %}
                     <img src="{{ url_for('static', filename='Uploads/' + usuario[9]) }}" alt="Foto do usuário">
                 {% else %}
                     <img src="{{ url_for('static', filename='Uploads/perfil-usuario-topo.png') }}" alt="Foto padrão">
                 {% endif %}
+
                 <div>
                     <strong>{{ usuario[0].split()[:2] | join(' ') }}</strong>
                     <span>{{ usuario[1] }}</span>
                 </div>
             </a>
         </header>
+
         <div class="linha-topo"></div>
+
         <section class="titulo-categorias">
             <p>Olá, {{ usuario[0].split()[:2] | join(' ') }}!</p>
             <h1>Categorias</h1>
             <p>Visualize e gerencie suas categorias cadastradas.</p>
         </section>
+
         {% with mensagens = get_flashed_messages(with_categories=true) %}
             {% for categoria_mensagem, mensagem in mensagens %}
                 <p class="mensagem {{ categoria_mensagem }}">{{ mensagem }}</p>
             {% endfor %}
         {% endwith %}
+
         <section class="card-categorias">
             <div class="topo-categorias">
                 <div class="cabecalho-categorias">
                     <div class="icone-categorias">
                         <img src="{{ url_for('static', filename='uploads/tag.png') }}" alt="">
                     </div>
+
                     <div>
                         <h2>Minhas Categorias</h2>
                         <p>Gerencie suas categorias cadastradas.</p>
                     </div>
                 </div>
+
                 <a href="{{ url_for('nova_categoria') }}" class="nova-categoria">+ Nova Categoria</a>
             </div>
+
             <div class="filtros-categorias">
                 <div class="filtro-categoria filtro-busca-categoria">
                     <label>Buscar categoria</label>
                     <input type="text" id="buscar-categoria" placeholder="Digite o nome da categoria">
                 </div>
+
                 <div class="filtro-categoria">
                     <label>Tipo</label>
                     <select id="filtro-tipo">
@@ -105,6 +125,7 @@
                         <option value="2">Receita</option>
                     </select>
                 </div>
+
                 <div class="filtro-categoria">
                     <label>Status</label>
                     <select id="filtro-status">
@@ -114,6 +135,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="lista-categorias">
                 {% if categoria %}
                     {% for item in categoria %}
@@ -121,24 +143,30 @@
                             <div class="informacoes-categoria">
                                 <div class="icone-item-categoria" style="background-color: #{{ item[3] }}20;">
                                     {% if item[0] == 1 %}
-                                        <img src="{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}" alt="Serviço Extra">
+                                        <span class="icone-colorido-categoria" style="background-color: #8A5B00; -webkit-mask-image: url('{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}'); mask-image: url('{{ url_for('static', filename='uploads/perfil-servico-extra.png') }}');"></span>
+
                                     {% elif item[0] == 2 %}
-                                        <img src="{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}" alt="Dia Trabalhado">
+                                        <span class="icone-colorido-categoria" style="background-color: var(--verde-escuro); -webkit-mask-image: url('{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}'); mask-image: url('{{ url_for('static', filename='uploads/perfil-dia-trabalhado.png') }}');"></span>
+
                                     {% elif item[4] %}
-                                        <img src="{{ url_for('static', filename='svg/' ~ item[4]) }}" alt="">
+                                        <span class="icone-colorido-categoria" style="background-color: #{{ item[3] }}; -webkit-mask-image: url('{{ url_for('static', filename='svg/' ~ item[4]) }}'); mask-image: url('{{ url_for('static', filename='svg/' ~ item[4]) }}');"></span>
+
                                     {% else %}
-                                        <img src="{{ url_for('static', filename='uploads/tag-azul.png') }}" alt="">
+                                        <span class="icone-colorido-categoria" style="background-color: #{{ item[3] }}; -webkit-mask-image: url('{{ url_for('static', filename='uploads/tag-azul.png') }}'); mask-image: url('{{ url_for('static', filename='uploads/tag-azul.png') }}');"></span>
                                     {% endif %}
                                 </div>
+
                                 <div class="dados-categoria">
                                     <div class="nome-tipo-categoria">
                                         <strong>{{ item[1] }}</strong>
+
                                         {% if item[2] == 1 %}
                                             <span class="tipo-categoria despesa">Despesa</span>
                                         {% elif item[2] == 2 %}
                                             <span class="tipo-categoria receita">Receita</span>
                                         {% endif %}
                                     </div>
+
                                     {% if item[5] == 1 %}
                                         <span class="status-categoria ativo">Ativa</span>
                                     {% else %}
@@ -146,6 +174,7 @@
                                     {% endif %}
                                 </div>
                             </div>
+
                             <div class="acoes-categoria">
                                 {% if item[0] not in [1, 2] %}
                                     {% if item[5] == 1 %}
@@ -154,6 +183,7 @@
                                             <span>Editar</span>
                                         </a>
                                     {% endif %}
+
                                     <form action="{{ url_for('inativar_categoria', id=item[0]) }}" method="POST">
                                         {% if item[5] == 1 %}
                                             <input type="hidden" name="ativar" value="0">
@@ -180,36 +210,43 @@
             </div>
         </section>
     </main>
+
     <nav class="menu-mobile-categorias">
         <a href="{{ url_for('dashboard') }}" class="item-menu-mobile">
             <img src="{{ url_for('static', filename='uploads/perfil-dashboard.png') }}" alt="">
             <span>Dashboard</span>
         </a>
+
         <a href="{{ url_for('rendimentos') }}" class="item-menu-mobile">
             <img src="{{ url_for('static', filename='uploads/perfil-rendimentos.png') }}" alt="">
             <span>Rendimentos</span>
         </a>
+
         <a href="{{ url_for('movimentacao') }}" class="adicionar-mobile">
             <img src="{{ url_for('static', filename='uploads/mais-branco.png') }}" alt="">
         </a>
+
         <a href="{{ url_for('despesas') }}" class="item-menu-mobile">
             <img src="{{ url_for('static', filename='uploads/perfil-despesas.png') }}" alt="">
             <span>Despesas</span>
         </a>
+
         <details class="mais-mobile">
             <summary class="item-menu-mobile ativo">
                 <img src="{{ url_for('static', filename='uploads/mais.png') }}" alt="">
                 <span>Mais</span>
             </summary>
+
             <div class="opcoes-mais-mobile">
                 <a href="{{ url_for('dia_trabalhado') }}">Dia Trabalhado</a>
                 <a href="{{ url_for('servico_extra') }}">Serviço Extra</a>
                 <a href="{{ url_for('todas_categorias') }}" class="pagina-mais-ativa">Categorias</a>
-                <a href="#">Relatórios</a>
-                <a href="#">Histórico Semanal</a>
+                <a href="{{ url_for('relatorios') }}">Relatórios</a>
+                <a href="{{ url_for('historico_semanal') }}">Histórico Semanal</a>
             </div>
         </details>
     </nav>
-    <script src="{{ url_for('static', filename='js/filtro_categorias.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/filtro.js') }}"></script>
 </body>
 </html>

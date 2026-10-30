@@ -92,13 +92,11 @@
                 <p>Acompanhe os ganhos por mês e exporte seus resultados.</p>
             </section>
 
-
             <form action="{{ url_for('baixar_relatorio') }}" method="GET">
                 <input type="hidden" name="ano" id="ano-pdf" value="{{ ano_atual }}">
                 <button class="baixar-relatorio" type="submit">Baixar Relatório</button>
                 <button class="baixar-relatorio" type="submit" formaction="{{ url_for('baixar_previsoes') }}">Baixar Previsões</button>
             </form>
-
         </div>
 
         <div class="aviso-relatorio">
@@ -265,5 +263,41 @@
             </div>
         </section>
     </main>
+
+    <nav class="menu-mobile-relatorios">
+        <a href="{{ url_for('dashboard') }}" class="item-menu-mobile">
+            <img src="{{ url_for('static', filename='uploads/perfil-dashboard.png') }}" alt="">
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('rendimentos') }}" class="item-menu-mobile">
+            <img src="{{ url_for('static', filename='uploads/perfil-rendimentos.png') }}" alt="">
+            <span>Rendimentos</span>
+        </a>
+
+        <a href="{{ url_for('movimentacao') }}" class="adicionar-mobile">
+            <img src="{{ url_for('static', filename='uploads/mais-branco.png') }}" alt="">
+        </a>
+
+        <a href="{{ url_for('despesas') }}" class="item-menu-mobile">
+            <img src="{{ url_for('static', filename='uploads/perfil-despesas.png') }}" alt="">
+            <span>Despesas</span>
+        </a>
+
+        <details class="mais-mobile">
+            <summary class="item-menu-mobile ativo">
+                <img src="{{ url_for('static', filename='uploads/mais.png') }}" alt="">
+                <span>Mais</span>
+            </summary>
+
+            <div class="opcoes-mais-mobile">
+                <a href="{{ url_for('dia_trabalhado') }}">Dia Trabalhado</a>
+                <a href="{{ url_for('servico_extra') }}">Serviço Extra</a>
+                <a href="{{ url_for('todas_categorias') }}">Categorias</a>
+                <a href="{{ url_for('relatorios') }}" class="opcao-ativa">Relatórios</a>
+                <a href="{{ url_for('historico_semanal') }}">Histórico Semanal</a>
+            </div>
+        </details>
+    </nav>
 </body>
 </html>
