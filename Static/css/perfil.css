@@ -3,7 +3,6 @@
     display: flex;
 }
 
-
 .conteudo-perfil {
     width: calc(100% - 250px);
     min-height: 100vh;
@@ -94,22 +93,23 @@
     position: relative;
 }
 
-.foto-perfil input:hover {
-    cursor: pointer;
-}
-
 .foto-perfil input {
     position: absolute;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .foto-perfil img {
+    display: block;
     width: 120px;
     height: 120px;
+    margin: 0 auto;
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
@@ -122,6 +122,24 @@
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
+}
+
+.foto-perfil .botao-excluir {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 8px auto 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+    color: var(--vermelho);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    box-shadow: none;
+    appearance: none;
 }
 
 .configuracoes-perfil {
@@ -351,6 +369,11 @@
         height: 105px;
     }
 
+    .foto-perfil input {
+        width: 108px;
+        height: 105px;
+    }
+
     .configuracoes-perfil {
         flex-wrap: wrap;
         gap: 13px;
@@ -422,7 +445,6 @@
         position: absolute;
         left: 18px;
         top: 28px;
-
         color: var(--azul-cinzento-escuro);
         font-size: 34px;
         line-height: 1;
@@ -518,7 +540,7 @@
         margin-bottom: 16px;
     }
 
-    /* FOTO DO USUÁRIO - mantém a que já existe no HTML */
+    /* FOTO DO USUÁRIO */
     .foto-perfil {
         width: 88px;
         height: 88px;
@@ -545,11 +567,16 @@
         display: none;
     }
 
+    .foto-perfil .botao-excluir {
+        margin-top: 6px;
+    }
+
     .configuracoes-perfil {
         width: 100%;
         display: flex;
         flex-direction: column;
         gap: 0;
+        padding-top: 20px;
     }
 
     .configuracao {
@@ -871,7 +898,72 @@
     }
 }
 
-
 .campo-perfil input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
+}
+
+
+.fundo-modal-exclusao {
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-exclusao {
+    width: 90%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 12px;
+    background-color: var(--branco);
+    text-align: center;
+}
+
+.modal-exclusao h2 {
+    margin-bottom: 12px;
+    color: var(--azul-cinzento-escuro);
+    font-size: 21px;
+}
+
+.modal-exclusao p {
+    margin-bottom: 22px;
+    color: var(--cinza-escuro);
+    font-size: 15px;
+}
+
+.botoes-modal-exclusao {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.botoes-modal-exclusao form {
+    margin: 0;
+}
+
+.botoes-modal-exclusao button {
+    min-width: 120px;
+    height: 42px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.confirmar-exclusao {
+    background-color: var(--vermelho);
+    color: var(--branco);
+}
+
+.cancelar-exclusao {
+    background-color: var(--cinza-claro);
+    color: var(--azul-cinzento-escuro);
 }
