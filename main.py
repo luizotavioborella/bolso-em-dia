@@ -20,7 +20,7 @@ app = Flask(__name__, static_folder='Static', template_folder='Templates', stati
 app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 host = "localhost"
-database = r"C:\Users\Aluno\Downloads\bolso-em-dia-main\BANCO.FDB"
+database = r"C:\Users\Borella\Downloads\bolso-em-dia-main\BANCO.FDB"
 user = "sysdba"
 password = "sysdba"
 
@@ -653,6 +653,34 @@ def editar_usuario():
         usuario = buscar_dados(id_usuario)
 
         if request.method == 'POST':
+
+            if 'excluir_foto' in request.form:
+                nome_foto = usuario[9]
+
+                if nome_foto:
+                    nome_arquivo = os.path.basename(nome_foto)
+                    caminho_foto = os.path.join(app.static_folder, 'Uploads', nome_arquivo)
+
+                    cursor.execute(
+                        "UPDATE USUARIO SET FOTO_PERFIL = NULL WHERE ID_USUARIO = ?",
+                        (id_usuario,)
+                    )
+
+                    con.commit()
+
+                    if nome_arquivo.startswith(f'perfil_{id_usuario}_') and os.path.isfile(caminho_foto):
+                        try:
+                            os.remove(caminho_foto)
+                        except OSError:
+                            pass
+
+                    flash('Foto de perfil excluída com sucesso!', 'success')
+
+                else:
+                    flash('Você não possui uma foto de perfil para excluir.', 'error')
+
+                return redirect(url_for('editar_usuario'))
+
             nome = request.form['nome'].strip()
 
             if not nome:
@@ -734,20 +762,17 @@ def editar_usuario():
                 # assim, o arquivo será salvo dentro de Static/Uploads.
                 foto.save(os.path.join(app.static_folder, 'Uploads', nome_foto))
 
-                # depois de salvar a imagem na pasta, precisamos registrar o nome dela no banco de dados.
-                # utilizamos UPDATE porque estamos alterando os dados de um usuário que já existe.
-                # FOTO_PERFIL é a coluna que recebe o nome da imagem.
-                # ID_USUARIO identifica qual usuário terá sua foto atualizada.
+                # depois de salvar a imagem, registramos o nome dela no banco de dados.
                 cursor.execute(
                     "UPDATE USUARIO SET FOTO_PERFIL = ? WHERE ID_USUARIO = ?",
                     (nome_foto, id_usuario)
                 )
 
             # agora, atualizamos todos os dados do usuário no banco de dados
-            cursor.execute("""UPDATE USUARIO SET NOME_COMPLETO = ?, EMAIL = ?, DATA_NASCIMENTO = ?, TELEFONE = ?, CPF = ?, SENHA = ?, VALOR_DIARIA = ?, ADICIONAL = ?, MIN_PACOTES = ? WHERE ID_USUARIO = ?""",(nome, email, data_nasc, telefone, cpf, senha_cripto, valor_diaria, adicional, min_pacotes, id_usuario,))
+            cursor.execute("""UPDATE USUARIO SET NOME_COMPLETO = ?, EMAIL = ?, DATA_NASCIMENTO = ?, TELEFONE = ?, CPF = ?, SENHA = ?, VALOR_DIARIA = ?, ADICIONAL = ?, MIN_PACOTES = ? WHERE ID_USUARIO = ?""", (nome, email, data_nasc, telefone, cpf, senha_cripto, valor_diaria, adicional, min_pacotes, id_usuario,))
 
             if senha_nova:
-                cursor.execute("""INSERT INTO HISTORICO_SENHA (ID_USUARIO, SENHA) VALUES (?, ?)""",(id_usuario, senha_cripto,))
+                cursor.execute("""INSERT INTO HISTORICO_SENHA (ID_USUARIO, SENHA) VALUES (?, ?)""", (id_usuario, senha_cripto,))
 
             con.commit()
 
@@ -764,7 +789,6 @@ def editar_usuario():
 
     finally:
         cursor.close()
-
 
 
 @app.route('/todas_categorias', methods=['GET'])
