@@ -10,10 +10,11 @@
     <script src="{{ url_for('static', filename='js/alteracao_foto.js') }}" defer></script>
 
     <!-- Importa o jQuery e o plugin de máscaras, que permite formatar
-     automaticamente os dados digitados nos campos, como datas,
-     telefones e CPF. O defer faz o segundo script esperar
-     o HTML ser carregado antes de ser executado. -->
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    automaticamente os dados digitados nos campos, como datas,
+    telefones e CPF. O defer faz o segundo script esperar
+    o HTML ser carregado antes de ser executado. -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"
+            integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/jquery.mask.min.js') }}" defer></script>
 </head>
 <body>
@@ -79,18 +80,13 @@
                 <div></div>
 
                 <div class="usuario-logado">
-                    <!-- verificamos se o usuário possui uma foto de perfil cadastrada no banco -->
                     {% if usuario[9] %}
-
-                        <!-- se existir uma foto cadastrada, mostramos a imagem do usuário no canto superior direito -->
                         <img src="{{ url_for('static', filename='Uploads/' + usuario[9]) }}" alt="Foto do usuário">
                     {% else %}
-
-                        <!-- caso não exista uma foto cadastrada, continuamos mostrando o ícone padrão do sistema -->
                         <img src="{{ url_for('static', filename='uploads/perfil-usuario-topo.png') }}" alt="Foto padrão">
                     {% endif %}
+
                     <div>
-                        <!-- Exibe somente os dois primeiros nomes do usuário -->
                         <strong>{{ usuario[0].split()[:2] | join(' ') }}</strong>
                         <span>{{ usuario[1] }}</span>
                     </div>
@@ -100,7 +96,6 @@
             <div class="linha-topo"></div>
 
             <section class="titulo-perfil">
-                <!-- Exibe somente os dois primeiros nomes do usuário -->
                 <p>Olá, {{ usuario[0].split()[:2] | join(' ') }}!</p>
                 <h1>Seu Perfil</h1>
             </section>
@@ -119,25 +114,24 @@
                 <form action="{{ url_for('editar_usuario') }}" method="POST" enctype="multipart/form-data">
                     <div class="dados-principais">
                         <div class="foto-perfil">
-                            <!-- input do tipo file permite que o usuário selecione um arquivo que esteja salvo no seu computador. -->
-                            <!-- name="foto" identifica esse arquivo para o Flask. -->
-                            <!-- accept informa os formatos de imagem aceitos na seleção. -->
-                            <!-- onchange executa a função mostrarFoto() quando uma imagem é escolhida -->
+                            <!-- O input fica limitado à imagem para não bloquear o botão de excluir -->
                             <input type="file" name="foto" accept=".jpg,.jpeg,.png,.webp" onchange="mostrarFoto(this)">
 
-                            <!-- verifica se o usuário possui uma foto cadastrada no banco -->
                             {% if usuario[9] %}
-
-                                <!-- se existir uma foto, mostra a imagem escolhida pelo usuário -->
-                                <img id="imagem-perfil" src="{{ url_for('static', filename='Uploads/' + usuario[9]) }}" alt="Foto de perfil">
+                                <img id="imagem-perfil" src="{{ url_for('static', filename='Uploads/' + usuario[9]) }}"
+                                     alt="Foto de perfil">
                             {% else %}
-
-                                <!-- se não existir uma foto cadastrada, mostra a imagem padrão -->
-                                <img id="imagem-perfil" src="{{ url_for('static', filename='Uploads/perfil-foto.png') }}" alt="Foto de perfil">
+                                <img id="imagem-perfil" src="{{ url_for('static', filename='Uploads/perfil-foto.png') }}"
+                                     alt="Foto de perfil">
                             {% endif %}
 
-                            <!-- essa escrita é apenas visual, pois o input invisível já permite selecionar a imagem ao clicar sobre ela -->
                             <a href="#">Editar foto</a>
+
+                            {% if usuario[9] %}
+                                <button type="button" class="botao-excluir abrir-modal-exclusao" data-url="{{ url_for('editar_usuario') }}">
+                                    Excluir foto
+                                </button>
+                            {% endif %}
                         </div>
 
                         <div class="configuracoes-perfil">
@@ -181,7 +175,8 @@
                         </div>
 
                         <div class="campo-perfil">
-                            <img src="static/uploads/perfil-calendario-campo.png" alt="" onclick="document.getElementById('data-nasc').showPicker()" style="cursor: pointer;">
+                            <img src="static/uploads/perfil-calendario-campo.png" alt=""
+                                 onclick="document.getElementById('data-nasc').showPicker()" style="cursor: pointer;">
                             <input type="date" id="data-nasc" name="data_nasc" value="{{ usuario[2] }}">
                         </div>
 
@@ -210,6 +205,41 @@
         </main>
     </div>
 
+    <div class="fundo-modal-exclusao" id="modal-exclusao">
+        <div class="modal-exclusao">
+            <h2>Confirmar Exclusão</h2>
+            <p>Tem certeza que deseja excluir sua foto de perfil?</p>
+
+            <div class="botoes-modal-exclusao">
+                <form id="form-exclusao" method="POST">
+                    <input type="hidden" name="excluir_foto" value="1">
+                    <button type="submit" class="confirmar-exclusao">Confirmar</button>
+                </form>
+
+                <button type="button" class="cancelar-exclusao" id="cancelar-exclusao">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/mascaras_perfil.js') }}" defer></script>
+
+    <script>
+        var botoesExcluir = document.querySelectorAll(".abrir-modal-exclusao")
+        var modalExclusao = document.querySelector("#modal-exclusao")
+        var cancelarExclusao = document.querySelector("#cancelar-exclusao")
+        var formExclusao = document.querySelector("#form-exclusao")
+
+        botoesExcluir.forEach(function (botao) {
+
+            botao.addEventListener("click", function () {
+                formExclusao.action = botao.dataset.url
+                modalExclusao.style.display = "flex"
+            })
+        })
+
+        cancelarExclusao.addEventListener("click", function () {
+            modalExclusao.style.display = "none"
+        })
+    </script>
 </body>
 </html>
