@@ -30,12 +30,6 @@ This project was created during the Systems Development course at SENAI and is s
 ![CSS](https://img.shields.io/badge/-CSS-292D3E?style=flat&logo=css&logoColor=663399)
 ![SQL](https://img.shields.io/badge/-SQL-292D3E?style=flat&logo=database&logoColor=white)
 
-## 🚧 Status
-
-Project currently under development.
-
-The interface and registration flow are currently being developed, with backend integration and financial features being added gradually.
-
 ## 🎓 Context
 
 Project developed during the Systems Development course at SENAI.
