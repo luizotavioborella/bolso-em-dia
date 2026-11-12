@@ -1963,6 +1963,7 @@ def relatorios():
 
 
 
+
 @app.route('/relatorios/pdf', methods=['GET'])
 def baixar_relatorio():
     if 'id_usuario' not in session:
@@ -2128,8 +2129,7 @@ def baixar_relatorio():
     colunas = [
         (18, 40, 'MÊS', 'L'),
         (65, 47, 'GANHOS', 'R'),
-        (116, 29, '% DO ANO', 'R'),
-        (151, 39, 'DESEMPENHO', 'L')
+        (116, 29, '% DO ANO', 'R')
     ]
 
     for x, largura, nome, alinhamento in colunas:
@@ -2162,13 +2162,6 @@ def baixar_relatorio():
         percentual = valor / total * 100 if total > 0 else 0
         pdf.cell(29, 5, f'{percentual:.1f}%'.replace('.', ','), align='R')
 
-        pdf.set_fill_color(226, 236, 230)
-        pdf.rect(151, y + 2.3, 39, 2.5, 'F')
-
-        if maior_valor > 0 and valor > 0:
-            pdf.set_fill_color(20, 168, 73)
-            pdf.rect(151, y + 2.3, 39 * valor / maior_valor, 2.5, 'F')
-
     pdf.set_fill_color(8, 69, 45)
     pdf.rect(14, 243, 182, 11, 'F')
 
@@ -2179,11 +2172,6 @@ def baixar_relatorio():
 
     pdf.set_xy(110, 245.5)
     pdf.cell(80, 6, dinheiro(total), align='R')
-
-    pdf.set_font('Arial', '', 8)
-    pdf.set_text_color(107, 123, 114)
-    pdf.set_xy(14, 257)
-    pdf.cell(182, 5, 'Barras proporcionais ao mês com maior ganho no período.')
 
     pdf.set_draw_color(213, 223, 216)
     pdf.line(14, 273, 196, 273)
@@ -2344,7 +2332,6 @@ def baixar_relatorio():
     pdf.output(pdf_path)
 
     return send_file(pdf_path, as_attachment=True, mimetype='application/pdf')
-
 
 
 @app.route('/relatorios/previsoes/pdf', methods=['GET'])
