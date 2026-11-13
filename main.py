@@ -20,7 +20,7 @@ app = Flask(__name__, static_folder='Static', template_folder='Templates', stati
 app.config['SECRET_KEY'] = 'chave_secreta_bolso_em_dia'
 
 host = "localhost"
-database = r"C:\Users\Borella\Downloads\bolso-em-dia-main\BANCO.FDB"
+database = r"C:\Users\Aluno\Downloads\bolso-em-dia-main\BANCO.FDB"
 user = "sysdba"
 password = "sysdba"
 
@@ -638,6 +638,7 @@ def perfil():
     finally:
         cursor.close()
 
+
 @app.route('/editar_usuario', methods=['GET','POST'])
 def editar_usuario():
 
@@ -653,33 +654,6 @@ def editar_usuario():
         usuario = buscar_dados(id_usuario)
 
         if request.method == 'POST':
-
-            if 'excluir_foto' in request.form:
-                nome_foto = usuario[9]
-
-                if nome_foto:
-                    nome_arquivo = os.path.basename(nome_foto)
-                    caminho_foto = os.path.join(app.static_folder, 'Uploads', nome_arquivo)
-
-                    cursor.execute(
-                        "UPDATE USUARIO SET FOTO_PERFIL = NULL WHERE ID_USUARIO = ?",
-                        (id_usuario,)
-                    )
-
-                    con.commit()
-
-                    if nome_arquivo.startswith(f'perfil_{id_usuario}_') and os.path.isfile(caminho_foto):
-                        try:
-                            os.remove(caminho_foto)
-                        except OSError:
-                            pass
-
-                    flash('Foto de perfil excluída com sucesso!', 'success')
-
-                else:
-                    flash('Você não possui uma foto de perfil para excluir.', 'error')
-
-                return redirect(url_for('editar_usuario'))
 
             nome = request.form['nome'].strip()
 
@@ -789,6 +763,41 @@ def editar_usuario():
 
     finally:
         cursor.close()
+
+
+@app.route('/excluir_foto', methods=['POST'])
+def excluir_foto():
+
+    if 'id_usuario' not in session:
+        flash('É necessário realizar o login', 'error')
+        return redirect(url_for('pagina_login'))
+
+    id_usuario = session['id_usuario']
+
+    # pegamos o nome da foto atual do usuário, que fica na posição 9
+    usuario = buscar_dados(id_usuario)
+    nome_foto = usuario[9]
+
+    if nome_foto:
+        # montamos o caminho da imagem dentro de Static/Uploads
+        caminho_foto = os.path.join(app.static_folder, 'Uploads', nome_foto)
+
+        # se o arquivo existir na pasta, apagamos ele
+        if os.path.exists(caminho_foto):
+            os.remove(caminho_foto)
+
+        # removemos a foto do banco de dados
+        cursor = con.cursor()
+        cursor.execute("UPDATE USUARIO SET FOTO_PERFIL = NULL WHERE ID_USUARIO = ?", (id_usuario,))
+        con.commit()
+        cursor.close()
+
+        flash('Foto de perfil excluída com sucesso!', 'success')
+
+    else:
+        flash('Você não possui uma foto de perfil para excluir.', 'error')
+
+    return redirect(url_for('editar_usuario'))
 
 
 @app.route('/todas_categorias', methods=['GET'])
