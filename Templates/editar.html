@@ -128,9 +128,7 @@
                             <a href="#">Editar foto</a>
 
                             {% if usuario[9] %}
-                                <button type="button" class="botao-excluir abrir-modal-exclusao" data-url="{{ url_for('editar_usuario') }}">
-                                    Excluir foto
-                                </button>
+                                <button type="button" class="botao-excluir abrir-modal-exclusao" data-url="{{ url_for('excluir_foto') }}">Excluir foto</button>
                             {% endif %}
                         </div>
 
@@ -212,7 +210,6 @@
 
             <div class="botoes-modal-exclusao">
                 <form id="form-exclusao" method="POST">
-                    <input type="hidden" name="excluir_foto" value="1">
                     <button type="submit" class="confirmar-exclusao">Confirmar</button>
                 </form>
 
